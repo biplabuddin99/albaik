@@ -8,6 +8,7 @@ use App\Models\Upazila;
 use App\Models\Billing;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\StockEntry;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -62,6 +63,8 @@ class CheckoutController extends Controller
                         $orderdetails->product_id=$cart_item->id;
                         $orderdetails->product_qty=$cart_item->qty;
                         $orderdetails->product_price=$cart_item->price;
+                        StockEntry::findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
+                        // DB::table('db_stockentry')->findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
                         if($orderdetails->save()){
                             // Toastr::success('Your Order placed successfully!!!!','Success');
                             // return redirect()->route('home');
