@@ -36,7 +36,6 @@ Route::get('product-all',[ProductController::class,'index'])->name('product.inde
 Route::get('/product-list/{childcategory_id}', [ProductController::class,'productList'])->name('product.list');
 Route::get('/product_details/{id}', [ProductController::class,'singleProduct'])->name('product_details.singleProduct');
 
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to.cart');
 Route::get('/shopping-cart',[CartController::class,'cartPage'])->name('cart.page');
 
 
@@ -47,6 +46,7 @@ Route::get('/customer',[CustomerAuthController::class,'SingUpForm'])->name('regi
 Route::post('register',[CustomerAuthController::class,'signUpStore'])->name('customer.store');
 Route::get('/login',[CustomerAuthController::class,'SinInForm'])->name('login');
 Route::post('/login',[CustomerAuthController::class,'customerLoginCheck'])->name('login.check');
+Route::post('/customer-profile',[CustomerAuthController::class,'ProfileImg'])->name('customer-profile');
 Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
     /*AJAX Call */
@@ -54,9 +54,9 @@ Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
 Route::group(['middleware'=>isCustomer::class],function(){
     Route::prefix('customer')->group(function(){
-        Route::get('dashboard',[FrontendController::class,'index'])->name('customer.dashboard');
+        Route::get('dashboard',[FrontendController::class,'CustomerDansboard'])->name('customer.dashboard');
 
-
+        Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to.cart');
         /*Checkout Page */
         Route::get('checkout', [CheckoutController::class, 'checkoutPage'])->name('customer.checkoutpage');
         Route::post('placeorder', [CheckoutController::class, 'placeOrder'])->name('customer.placeorder');

@@ -30,6 +30,11 @@ class FrontendController extends Controller
         return view('home',compact('faq','slide','offer','product','offer_product'));
     }
 
+    public function CustomerDansboard()
+    {
+        return view('product.customer_dashboard');
+    }
+
     public function subCategory($category_id)
     {
         $show_subcategory = SubCategory::where('category_id',$category_id)->get();

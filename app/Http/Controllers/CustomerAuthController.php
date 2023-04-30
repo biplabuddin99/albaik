@@ -41,6 +41,17 @@ class CustomerAuthController extends Controller
         }
     }
 
+    public function ProfileImg(Request $request, $id)
+    {
+        try {
+            $user=CustomerAuth::findOrFail($id);
+            $user->save();
+        } catch (Exception $e) {
+            Toastr::info('Please try Again!');
+            dd($e);
+        }
+    }
+
     public function SinInForm(){
         return view('authentication.login');
     }
@@ -69,8 +80,11 @@ class CustomerAuthController extends Controller
                 [
                     'userId'=>$customer->id,
                     'userName'=>$customer->first_name." ".$customer->last_name,
+                    'userEmail'=>$customer->email,
+                    'shippingAddress'=>$customer->shipping_address,
+                    'Phone'=>$customer->contact,
                     'language'=>$customer->language,
-                    'image'=>$customer->image?$customer->image:'no-image.png'
+                    'Image'=>$customer->image?$customer->image:'no-image.png'
                 ]
             );
     }
