@@ -73,11 +73,11 @@
                           />
                         </td>
                         <td>{{ $item->product->item_name }}</td>
-                        <td>${{ $item->product_price}}</td>
+                        <td>৳{{ $item->product_price}}</td>
                         <td>
                             <strong class="ps-2">{{ $item->product_qty }}</strong>
                         </td>
-                        <td>${{ $item->product_qty*$item->product_price   }}</td>
+                        <td>৳{{ $item->product_qty*$item->product_price   }}</td>
                       </tr>
                     @empty
 
