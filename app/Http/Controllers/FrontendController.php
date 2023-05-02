@@ -8,10 +8,12 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\ChildCategory;
 use App\Models\Product;
+use App\Models\Order;
 use App\Models\HeaderSlider;
 use App\Models\OurOffer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class FrontendController extends Controller
 {
@@ -32,7 +34,9 @@ class FrontendController extends Controller
 
     public function CustomerDansboard()
     {
-        return view('product.customer_dashboard');
+        $order=Order::where('user_id',Session::get('userId'))->with(['billing','orderdetails'])->get();
+        // return $order;
+        return view('product.customer_dashboard',['order_details' =>$order]);
     }
 
     public function subCategory($category_id)

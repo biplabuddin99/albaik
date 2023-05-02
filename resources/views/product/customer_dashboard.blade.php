@@ -59,34 +59,30 @@
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Subtotal</th>
-                    <th class="col">Remove</th>
                   </tr>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($carts as $cartitem)
+                  @foreach ($order_details as $order)
+                    @forelse ($order->orderDetails as $item)
                     <tr>
                         <td>
                           <img
                             class="img-fluid"
-                            src="{{ asset('./../POS/') }}/{{ $cartitem->options->product_image }}"
+                            src="{{ asset('./../POS/') }}/{{ $item->product->item_image }}"
                             alt=""
                           />
                         </td>
-                        <td>{{ $cartitem->name }}</td>
-                        <td>${{ $cartitem->price }}</td>
+                        <td>{{ $item->product->item_name }}</td>
+                        <td>${{ $item->product_price}}</td>
                         <td>
-                            <strong class="ps-2">{{ $cartitem->qty }}</strong>
+                            <strong class="ps-2">{{ $item->product_qty }}</strong>
                         </td>
-                        <td>${{ $cartitem->price*$cartitem->qty  }}</td>
-                        <td>
-                            <a href="{{ route('removefrom.cart',['cart_id' => $cartitem->rowId]) }}">
-                                <i class="ms-3 text-danger bi bi-x-circle-fill"></i>
-                            </a>
-                        </td>
+                        <td>${{ $item->product_qty*$item->product_price   }}</td>
                       </tr>
                     @empty
 
-                    @endforelse --}}
+                    @endforelse
+                    @endforeach
 
                 </tbody>
               </table>
