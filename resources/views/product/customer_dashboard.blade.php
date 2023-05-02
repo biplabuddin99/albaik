@@ -13,18 +13,17 @@
     <div class="row">
         <div class="col-sm-4 p-3">
             <div class="rounded bg-white my-3 shadow">
-            <div class="cart-detaits p-3">
+            <div class="cart-detaits p-3" style="height:200px; !important">
                 <p>Personal Profile</p>
                 <hr />
                 <a href="{{route('customer-profile',Session::get('userId'))}}"><i class="bi bi-pencil-square"></i></a>
-                <p class="text-center"><img height="70px" src="{{ asset('uploads/customer_img') }}/{{ Session::get('Image') }}" alt=""></p>
-                <hr />
+                <p class="text-center mt-0 mb-0"><img height="80px" src="{{ asset('uploads/customer_img') }}/{{ Session::get('Image') }}" alt=""></p>
             </div>
             </div>
         </div>
         <div class="col-sm-4 p-3">
             <div class="rounded bg-white my-3 shadow">
-            <div class="cart-detaits p-3">
+            <div class="cart-detaits p-3"  style="height:200px; !important">
                 <p>DEFAULT Information</p>
                 <hr />
 
@@ -36,7 +35,7 @@
         </div>
         <div class="col-sm-4 p-3">
             <div class="rounded bg-white my-3 shadow">
-            <div class="cart-detaits p-3">
+            <div class="cart-detaits p-3"  style="height:200px; !important">
                 <p>Address Book</p>
                 <hr />
                 <p>Address :<b>{{ Session::get('shippingAddress') }}</b></p>

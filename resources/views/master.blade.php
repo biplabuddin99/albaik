@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/child-category.css" />
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/cart.css" />
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/single.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" referrerpolicy="no-referrer" />
     <!-- Bootstrp 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -201,4 +202,8 @@ crossorigin="anonymous"
 <!-- Apps JS -->
 <script src="{{ asset('assets/resource') }}/js/apps.js"></script>
 <script src="{{ asset('assets/resource') }}/js/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"referrerpolicy="no-referrer"></script>
+<script>
+    $('.dropify').dropify();
+</script>
 @stack('scripts')

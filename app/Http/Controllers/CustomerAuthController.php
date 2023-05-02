@@ -28,6 +28,7 @@ class CustomerAuthController extends Controller
             $customer->contact=$request->contact;
             $customer->shipping_address=$request->shipping_address;
             $customer->email=$request->email;
+            $customer->image='avater.jpg';
             $customer->password=Crypt::encryptString($request->password);
             $customer->check_me_out=$request->check_me_out;
             if($customer->save()){
@@ -41,11 +42,36 @@ class CustomerAuthController extends Controller
         }
     }
 
-    public function ProfileImg(Request $request, $id)
+    public function ProfileEdit($id)
+    {
+       $customer=CustomerAuth::findOrFail($id);
+    //    return $customer;
+       return view('authentication.customer_update',compact('customer'));
+    }
+
+    public function update(Request $request, $id)
     {
         try {
-            $user=CustomerAuth::findOrFail($id);
-            $user->save();
+            $customer=CustomerAuth::findOrFail($id);
+            $customer->first_name=$request->first_name;
+            $customer->last_name=$request->last_name;
+            $customer->contact=$request->contact;
+            $customer->shipping_address=$request->shipping_address;
+            if($request->hasFile('image')){
+                $imageName = rand(111,999).time().'.'.$request->image->extension();
+                $request->image->move(public_path('uploads/customer_img'), $imageName);
+                $customer->image=$imageName;
+            }
+            $customer->save();
+            request()->session()->put(
+                [
+                    'userId'=>$customer->id,
+                    'userName'=>$customer->first_name." ".$customer->last_name,
+                    'shippingAddress'=>$customer->shipping_address,
+                    'Phone'=>$customer->contact,
+                    'Image'=>$customer->image?$customer->image:'avater.jpg'
+                ]);
+            return redirect()->route('customer.dashboard');
         } catch (Exception $e) {
             Toastr::info('Please try Again!');
             dd($e);
