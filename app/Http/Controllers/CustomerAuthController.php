@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomerSigninRequest;
 use App\Http\Requests\CustomerSignupRequest;
 use App\Models\CustomerAuth;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Crypt;
@@ -47,6 +48,12 @@ class CustomerAuthController extends Controller
        $customer=CustomerAuth::findOrFail($id);
     //    return $customer;
        return view('authentication.customer_update',compact('customer'));
+    }
+
+    public function AllOrderList($id)
+    {
+       $allorder=Order::where('user_id',$id)->get();;
+       return view('product.allorder_list',compact('allorder'));
     }
 
     public function update(Request $request, $id)

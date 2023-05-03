@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('coupon_name')->nullable();
             // $table->decimal('total', 8, 2);
             $table->string('total');
+            $table->string('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

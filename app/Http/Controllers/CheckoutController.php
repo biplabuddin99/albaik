@@ -53,6 +53,7 @@ class CheckoutController extends Controller
                 $order->discount_amount=Session::get('coupon')['discount_amount']?? 0;
                 $order->coupon_name=Session::get('coupon')['name']?? '';
                 $order->total=Session::get('coupon')['balance']?? Cart::subtotal();
+                $order->status=0;
                 if($order->save()){
 
                     //Order details table data insert using cart_items helpers
