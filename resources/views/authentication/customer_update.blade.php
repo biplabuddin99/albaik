@@ -1,4 +1,4 @@
-@extends('master')
+@extends('customer_master')
 
 @section('content')
 <div class="col right-side" style="padding: 0">

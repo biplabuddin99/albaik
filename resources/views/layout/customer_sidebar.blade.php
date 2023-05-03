@@ -21,12 +21,12 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a
-            class="nav-link categorybutton" href="{{ route('home') }}"
+            class="nav-link categorybutton" href="{{route('customer-profile',Session::get('userId'))}}"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Profile
+            Profile Update
           </a>
         </li>
         <li class="nav-item">

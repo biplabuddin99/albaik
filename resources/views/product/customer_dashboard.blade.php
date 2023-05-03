@@ -16,7 +16,7 @@
             <div class="cart-detaits p-3" style="height:200px; !important">
                 <p>Personal Profile</p>
                 <hr />
-                <a href="{{route('customer-profile',Session::get('userId'))}}"><i class="bi bi-pencil-square"></i></a>
+                {{--  <a href="{{route('customer-profile',Session::get('userId'))}}"><i class="bi bi-pencil-square"></i></a>  --}}
                 <p class="text-center mt-0 mb-0"><img height="80px" src="{{ asset('uploads/customer_img') }}/{{ Session::get('Image') }}" alt=""></p>
             </div>
             </div>
@@ -55,6 +55,7 @@
                 <thead>
                   <tr>
                     <th scope="col">Image</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Product</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
@@ -72,6 +73,7 @@
                             alt=""
                           />
                         </td>
+                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
                         <td>{{ $item->product->item_name }}</td>
                         <td>৳{{ $item->product_price}}</td>
                         <td>
