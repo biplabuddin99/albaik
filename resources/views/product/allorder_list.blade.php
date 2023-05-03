@@ -6,13 +6,13 @@
     <div class="cart p-4">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-list"><a href="{{ route('home') }}">Home</a></li>
+          <li class="breadcrumb-list"><a href="{{ route('home') }}">Home/</a></li>
           <li class="breadcrumb-item active" aria-current="page">Order List</li>
         </ol>
       </nav>
       <div class="prorduct-table">
         <div class="row">
-            <p>Recent Product You Have Order</p>
+            <p class="text-center">Recent Product You Have Order</p>
             <hr />
           <div class="col-sm-12 p-3">
             <div class="rounded bg-white my-3 shadow p-2">

@@ -116,7 +116,7 @@
                     <a class="" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
                     </a>
-                    <ul class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"  style="background-color: #FFFF66;">
                     <li><a class="dropdown-item" href="{{ route('register') }}">Registration</a></li>
                     <li><a class="dropdown-item" href="#">Profile</a></li>
                     <li><a class="dropdown-item" href="#">Order</a></li>
