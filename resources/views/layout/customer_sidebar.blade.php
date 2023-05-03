@@ -21,7 +21,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a
-            class="nav-link dropdown-toggle"
+            class="nav-link categorybutton" href="{{ route('home') }}"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -53,3 +53,16 @@
     </div>
   </div>
 </div>
+@push('scripts')
+<script>
+  $('.categorybutton').each(function(e){
+          $(this).addClass("show");
+          $(this).next('ul').addClass("show");
+  })
+
+  $('.categorybutton').click(function(){
+      window.location=$(this).attr('href');
+  })
+</script>
+
+@endpush
