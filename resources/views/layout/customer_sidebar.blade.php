@@ -21,7 +21,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a
-            class="nav-link categorybutton" href="{{route('customer-profile',Session::get('userId'))}}"
+            class="nav-link profileup" href="{{route('customer-profile',Session::get('userId'))}}"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -31,17 +31,17 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link dropdown-toggle"
+            class="nav-link allorder"  href="#"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Order List
+            All Order
           </a>
         </li>
         <li class="nav-item">
           <a
-            class="nav-link dropdown-toggle"
+            class="nav-link"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -55,12 +55,19 @@
 </div>
 @push('scripts')
 <script>
-  $('.categorybutton').each(function(e){
+  $('.profileup').each(function(e){
+          $(this).addClass("show");
+          $(this).next('ul').addClass("show");
+  })
+  $('.allorder').each(function(e){
           $(this).addClass("show");
           $(this).next('ul').addClass("show");
   })
 
-  $('.categorybutton').click(function(){
+  $('.profileup').click(function(){
+      window.location=$(this).attr('href');
+  })
+  $('.allorder').click(function(){
       window.location=$(this).attr('href');
   })
 </script>
