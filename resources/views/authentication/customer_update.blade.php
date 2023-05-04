@@ -7,7 +7,7 @@
         <p>Profile Update</p>
         <hr />
         <div class="m-auto my-3 w-50">
-          <form action="{{route('customer.update',$customer->id)}}" method='post' enctype="multipart/form-data">
+          <form action="{{route('customer.update')}}" method='post' enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 <div class="mb-3">

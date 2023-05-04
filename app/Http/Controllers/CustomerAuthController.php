@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Crypt;
 use Exception;
+use Session;
 
 class CustomerAuthController extends Controller
 {
@@ -43,8 +44,9 @@ class CustomerAuthController extends Controller
         }
     }
 
-    public function ProfileEdit($id)
+    public function ProfileEdit()
     {
+        $id=Session::get('userId');
        $customer=CustomerAuth::findOrFail($id);
     //    return $customer;
        return view('authentication.customer_update',compact('customer'));
@@ -56,9 +58,10 @@ class CustomerAuthController extends Controller
        return view('product.allorder_list',compact('allorder'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         try {
+            $id=Session::get('userId');
             $customer=CustomerAuth::findOrFail($id);
             $customer->first_name=$request->first_name;
             $customer->last_name=$request->last_name;
@@ -81,7 +84,7 @@ class CustomerAuthController extends Controller
             return redirect()->route('customer.dashboard');
         } catch (Exception $e) {
             Toastr::info('Please try Again!');
-            dd($e);
+            // dd($e);
         }
     }
 

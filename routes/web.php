@@ -46,9 +46,9 @@ Route::get('/customer',[CustomerAuthController::class,'SingUpForm'])->name('regi
 Route::post('register',[CustomerAuthController::class,'signUpStore'])->name('customer.store');
 Route::get('/login',[CustomerAuthController::class,'SinInForm'])->name('login');
 Route::post('/login',[CustomerAuthController::class,'customerLoginCheck'])->name('login.check');
-Route::get('/customer-profile/{id}',[CustomerAuthController::class,'ProfileEdit'])->name('customer-profile');
+Route::get('/customer-profile',[CustomerAuthController::class,'ProfileEdit'])->name('customer-profile');
 Route::get('/allorder-list/{id}',[CustomerAuthController::class,'AllOrderList'])->name('allorder');
-Route::post('/customer_update/{id}',[CustomerAuthController::class,'update'])->name('customer.update');
+Route::post('/customer_update',[CustomerAuthController::class,'update'])->name('customer.update');
 Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
     /*AJAX Call */

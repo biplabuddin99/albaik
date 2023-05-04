@@ -21,7 +21,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a
-            class="nav-link profileup" href="{{route('customer-profile',Session::get('userId'))}}"
+            class="nav-link profileup" href="{{route('customer-profile')}}"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
