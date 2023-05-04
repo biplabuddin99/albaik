@@ -52,8 +52,9 @@ class CustomerAuthController extends Controller
        return view('authentication.customer_update',compact('customer'));
     }
 
-    public function AllOrderList($id)
+    public function AllOrderList()
     {
+        $id=Session::get('userId');
        $allorder=Order::where('user_id',$id)->get();;
        return view('product.allorder_list',compact('allorder'));
     }
