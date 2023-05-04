@@ -41,7 +41,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link wishlist" href="{{route('wishlist.list')}}"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -63,11 +63,18 @@
           $(this).addClass("show");
           $(this).next('ul').addClass("show");
   })
+  $('.wishlist').each(function(e){
+          $(this).addClass("show");
+          $(this).next('ul').addClass("show");
+  })
 
   $('.profileup').click(function(){
       window.location=$(this).attr('href');
   })
   $('.allorder').click(function(){
+      window.location=$(this).attr('href');
+  })
+  $('.wishlist').click(function(){
       window.location=$(this).attr('href');
   })
 </script>

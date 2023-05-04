@@ -50,6 +50,7 @@ Route::get('/customer-profile',[CustomerAuthController::class,'ProfileEdit'])->n
 Route::get('/allorder-list',[CustomerAuthController::class,'AllOrderList'])->name('allorder');
 Route::post('/customer_update',[CustomerAuthController::class,'update'])->name('customer.update');
 Route::get('/wishlist-add/{id}',[CustomerAuthController::class,'WishlistAdd'])->name('addwishlist');
+Route::get('/wishlist-index',[CustomerAuthController::class,'WishlistIndex'])->name('wishlist.list');
 Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
     /*AJAX Call */

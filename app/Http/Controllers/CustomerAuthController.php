@@ -59,6 +59,7 @@ class CustomerAuthController extends Controller
        $allorder=Order::where('user_id',$id)->get();
        return view('product.allorder_list',compact('allorder'));
     }
+
     public function WishlistAdd($id)
     {
         $user_id=Session::get('userId');
@@ -73,6 +74,13 @@ class CustomerAuthController extends Controller
        }else{
         return redirect()->route('login');
        }
+    }
+
+    public function WishlistIndex()
+    {
+        $id=Session::get('userId');
+       $wish=Wishlist::where('user_id',$id)->get();
+       return view('product.wishlist-index',compact('wish'));
     }
 
     public function update(Request $request)
