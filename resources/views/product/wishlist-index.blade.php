@@ -28,20 +28,28 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{--  @foreach ($allorder as $list)
+                  @foreach ($wish as $list)
                     <tr>
                       <td>{{ ++$loop->index }}</td>
                       <td>{{ $list->created_at->format('d/m/Y') }}</td>
-                      <td>0000{{ $list->billing_id }}</td>
-                      <td>৳{{ $list->total}}</td>
-                      <td>@if($list->status==0) Processing
-                          @elseif($list->status==1) Shipped
-                          @elseif($list->status==2) Delivered
-                          @endif
+                      <td>
+                        <img
+                          class="img-fluid"
+                          src="{{ asset('./../POS/') }}/{{ $list->product->item_image }}"
+                          alt=""
+                        />
                       </td>
-                      <td><a href="#">View</a></td>
+                      <td>৳{{ $list->product->price}}</td>
+                      <td><a href="{{ route('product_details.singleProduct',$list->product->id) }}">{{ $list->product->item_name}}</a></td>
+                      <td>
+                        <form id="form{{$list->id}}" action="{{ route('wishlist.destroy',$list->id) }}" method="POST">
+                            @csrf
+                            @method('post')
+                            <button class="btn p-0 show_confirm" data-toggle="tooltip" type="submit"><i class='bi bi-trash-fill' style='color:red'></i></button>
+                        </form>
+                    </td>
                     </tr>
-                  @endforeach  --}}
+                  @endforeach
 
                 </tbody>
               </table>

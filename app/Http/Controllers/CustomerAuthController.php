@@ -82,6 +82,12 @@ class CustomerAuthController extends Controller
        $wish=Wishlist::where('user_id',$id)->get();
        return view('product.wishlist-index',compact('wish'));
     }
+    public function WishlistDelete($id)
+    { 
+        $wishlist=Wishlist::findOrFail($id);
+        $wishlist->delete();
+        return redirect()->back();
+    }
 
     public function update(Request $request)
     {

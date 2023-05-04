@@ -51,6 +51,7 @@ Route::get('/allorder-list',[CustomerAuthController::class,'AllOrderList'])->nam
 Route::post('/customer_update',[CustomerAuthController::class,'update'])->name('customer.update');
 Route::get('/wishlist-add/{id}',[CustomerAuthController::class,'WishlistAdd'])->name('addwishlist');
 Route::get('/wishlist-index',[CustomerAuthController::class,'WishlistIndex'])->name('wishlist.list');
+Route::post('/wishlist-delete/{id}',[CustomerAuthController::class,'WishlistDelete'])->name('wishlist.destroy');
 Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
     /*AJAX Call */
