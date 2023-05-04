@@ -6,6 +6,7 @@ use App\Http\Requests\CustomerSigninRequest;
 use App\Http\Requests\CustomerSignupRequest;
 use App\Models\CustomerAuth;
 use App\Models\Order;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Crypt;
@@ -55,8 +56,23 @@ class CustomerAuthController extends Controller
     public function AllOrderList()
     {
         $id=Session::get('userId');
-       $allorder=Order::where('user_id',$id)->get();;
+       $allorder=Order::where('user_id',$id)->get();
        return view('product.allorder_list',compact('allorder'));
+    }
+    public function WishlistAdd($id)
+    {
+        $user_id=Session::get('userId');
+        if(Session::get('userId')){
+           $wishlist= new Wishlist;
+           $wishlist->product_id=$id;
+           $wishlist->user_id=$user_id;
+           $wishlist->save();
+           return redirect()->back();
+           
+           
+       }else{
+        return redirect()->route('login');
+       }
     }
 
     public function update(Request $request)

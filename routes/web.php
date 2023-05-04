@@ -49,6 +49,7 @@ Route::post('/login',[CustomerAuthController::class,'customerLoginCheck'])->name
 Route::get('/customer-profile',[CustomerAuthController::class,'ProfileEdit'])->name('customer-profile');
 Route::get('/allorder-list',[CustomerAuthController::class,'AllOrderList'])->name('allorder');
 Route::post('/customer_update',[CustomerAuthController::class,'update'])->name('customer.update');
+Route::get('/wishlist-add/{id}',[CustomerAuthController::class,'WishlistAdd'])->name('addwishlist');
 Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
     /*AJAX Call */

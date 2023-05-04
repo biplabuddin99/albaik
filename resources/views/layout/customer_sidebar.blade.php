@@ -31,7 +31,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link allorder"  href="{{route('allorder')}}"
+            class="nav-link allorder" href="{{route('allorder')}}"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
