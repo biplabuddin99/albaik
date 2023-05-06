@@ -32,7 +32,7 @@
                     <tr>
                       <td>{{ ++$loop->index }}</td>
                       {{--  <td>{{ $list->created_at->format('d/m/Y') }}</td>  --}}
-                      <td>0000{{ $list->billing_id }}</td>
+                      <td>{{ str_pad($list->billing_id,4,'0',STR_PAD_LEFT) }}</td>
                       <td>৳{{ $list->total}}</td>
                       <td>@if($list->status==0) Processing
                           @elseif($list->status==1) Shipped
