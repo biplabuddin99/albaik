@@ -189,7 +189,7 @@
                         <div class="email"><a href="{{ $order->billing->email }}"> <i class="fa fa-envelope" aria-hidden="true"></i> {{ $order->billing->email }}</a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">INVOICE #00{{ $order->billing->id }}</h1>
+                        <h1 class="invoice-id">INVOICE #{{ str_pad($order->billing->id,3,'0',STR_PAD_LEFT) }}</h1>
                         <div class="date">Date of Invoice: {{ $order->created_at->format('d/m/Y') }}</div>
                         <div class="date">Due Date: {{ $order->created_at->format('d/m/Y') }}</div>
                     </div>
