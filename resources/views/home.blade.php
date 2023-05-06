@@ -165,7 +165,7 @@
                         <p class="card-title text-center">{{ $off->item_name }}</p>
                         <p class="card-title text-center m-0 p-0">{{ $off->sales_price .' '.'TK' }}</p>
                         <div class="card-button">
-                          <a href="#">+ Add to Card</a>
+                          <a href="{{ route('product_details.singleProduct',$p->id) }}">+ Add to Card</a>
                           <a href="#"><i class="bi bi-heart-fill"></i></a>
                         </div>
                       </div>
@@ -183,7 +183,7 @@
                             <p class="card-title text-center">Beef Bone In ± 50 gm</p>
                             <div class="card-button">
                             <a href="#">+ Add to Card</a>
-                            <a href="#"><i class="bi bi-heart-fill"></i></a>
+                            <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>
                             </div>
                         </div>
                         </div>

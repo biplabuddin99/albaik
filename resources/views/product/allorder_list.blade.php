@@ -39,7 +39,7 @@
                           @elseif($list->status==2) Delivered
                           @endif
                       </td>
-                      <td><a href="#">View</a></td>
+                      <td><a href="{{ route('invoice',$list->id) }}">View</a></td>
                     </tr>
                   @endforeach
 
