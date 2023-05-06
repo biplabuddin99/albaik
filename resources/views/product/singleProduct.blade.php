@@ -41,8 +41,8 @@
             </div>
             <div class="col-sm-6 p-specification">
             <div class="p-price d-flex">
-                <p><del>${{ $show_product->sales_price }}</del></p>
-                <p>$ 6.77</p>
+                <p><del>৳{{ $show_product->sales_price+($show_product->sales_price*29/100) }}</del></p>
+                <p>৳ {{ $show_product->sales_price }}</p>
             </div>
             <span>In Stock</span>
             <p class="p-short-specification">{{ $show_product->description }} </p>
