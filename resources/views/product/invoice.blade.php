@@ -162,82 +162,94 @@
             <header>
                 <div class="row">
                     <div class="col">
-                        <a target="_blank" href="#">
-                            <img src="{{ asset('assets/frontend/images/logo.png') }}" data-holder-rendered="true" />
+                        <a target="_blank" href="{{ route('home') }}">
+                            <img src="{{ asset('assets/resource') }}/img/logo1-01.png" height="60px" width="120px" data-holder-rendered="true" />
                             </a>
                     </div>
                     <div class="col company-details">
                         <h2 class="name">
-                            <a target="_blank" href="#">
+                            <a target="_blank" href="{{ route('home') }}">
                                 Albaik
                             </a>
                         </h2>
-                        <div>Ecommerce store address</div>
-                        <div>Ecommerce store mobile number</div>
-                        <div>company@example.com</div>
+                        <div>khatunganj,Chittagong</div>
+                        <div>0170000000</div>
+                        <div>albaik@gmail.com</div>
                     </div>
                 </div>
             </header>
             <main>
+                @foreach ($order_details as $order)
                 <div class="row contacts">
                     <div class="col invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
-                        <h2 class="to">kamal</h2>
-                        <div class="address"> <i class="fa fa-home" aria-hidden="true"></i> ctg</div>
-                        <div class="phoneNumber"> <i class="fa fa-mobile" aria-hidden="true"></i> 01762726907</div>
-                        <div class="email"><a href="mailto:john@example.com"> <i class="fa fa-envelope" aria-hidden="true"></i> example@email.com</a></div>
+                        <h2 class="to">{{ $order->billing->name }}</h2>
+                        <div class="address"> <i class="fa fa-home" aria-hidden="true"></i> {{ $order->billing->address }}</div>
+                        <div class="phoneNumber"> <i class="fa fa-mobile" aria-hidden="true"></i> {{ $order->billing->phone_number }}</div>
+                        <div class="email"><a href="{{ $order->billing->email }}"> <i class="fa fa-envelope" aria-hidden="true"></i> {{ $order->billing->email }}</a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">INVOICE 3-2-1</h1>
-                        <div class="date">Date of Invoice: </div>
-                        <div class="date">Due Date: </div>
+                        <h1 class="invoice-id">INVOICE #00{{ $order->billing->id }}</h1>
+                        <div class="date">Date of Invoice: {{ $order->created_at->format('d/m/Y') }}</div>
+                        <div class="date">Due Date: {{ $order->created_at->format('d/m/Y') }}</div>
                     </div>
                 </div>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th class="text-left">DESCRIPTION</th>
+                            <th>#SL</th>
+                            {{--  <th class="text-right">IMAGE</th>  --}}
+                            <th class="text-left">PRODUCT NAME</th>
                             <th class="text-right">QUANTITY</th>
                             <th class="text-right">UNIT PRICE</th>
                             <th class="text-right">SUBTOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($order->orderDetails as $item)
                         <tr>
-                            <td class="no">1</td>
+                            <td class="no">{{ $loop->index+1 }}</td>
+                            {{--  <td class="qty">
+                                <img
+                                  class="img-fluid" height="50px" width="30px"
+                                  src="{{ asset('./../POS/') }}/{{ $item->product->item_image }}"
+                                  alt=""
+                                />
+                            </td>  --}}
                             <td class="text-left">
                                 <h3>
-                                Honey
+                                    {{ $item->product->item_name }}
                                 </h3>
                             </td>
-                            <td class="unit">5</td>
-                            <td class="qty">৳100</td>
-                            <td class="total">৳100</td>
+                            <td class="unit">{{ $item->product_qty }}</td>
+                            <td class="qty">৳{{ $item->product_price }}</td>
+                            <td class="total">৳{{ $item->product_qty*$item->product_price }}</td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="2"></td>
-                            <td colspan="2">Discount coupon_name</td>
-                            <td>-৳20</td>
+                            <td colspan="2">Discount ({{ $order->coupon_name }})</td>
+                            <td>-৳{{ $order->discount_amount }}</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">SUBTOTAL</td>
-                            <td>৳120</td>
+                            <td>৳{{ $order->total }}</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">GRAND TOTAL</td>
-                            <td>৳100</td>
+                            <td>৳{{ $order->total }}</td>
                         </tr>
                     </tfoot>
                 </table>
+                @endforeach
                 <div class="thanks">Thank you!</div>
             </main>
             <footer>
-                Invoice was created on a computer and is valid without the signature and seal.
+                Invoice was created on a computer and is invalid without the signature and seal.
             </footer>
         </div>
         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
