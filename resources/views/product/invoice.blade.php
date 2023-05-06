@@ -84,7 +84,7 @@
     font-size: 1.2em
 }
 .invoice table .no {
-    color: #fff;
+    color: #130202;
     font-size: 1.6em;
     background: #3989c6
 }
@@ -93,7 +93,7 @@
 }
 .invoice table .total {
     background: #3989c6;
-    color: #fff
+    color: #140202
 }
 .invoice table tbody tr:last-child td {
     border: none
@@ -153,7 +153,7 @@
     <div class="toolbar hidden-print">
         <div class="text-right">
             <button id="printInvoice" class="btn btn-info no-print"><i class="fa fa-print"></i> Print</button>
-            <button class="btn btn-info no-print"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+            <a class="btn btn-info no-print" href="{{route('allorder')}}">Back</a>
         </div>
         <hr>
     </div>
