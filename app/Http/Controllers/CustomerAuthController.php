@@ -62,7 +62,9 @@ class CustomerAuthController extends Controller
 
     public function InvoiceShow($id)
     {
-
+        $order=Order::where('id',$id)->with(['billing','orderdetails'])->get();
+        // return $order;
+        return view('product.invoice',['order_details' =>$order]);
     }
 
     public function WishlistAdd($id)

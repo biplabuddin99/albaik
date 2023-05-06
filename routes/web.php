@@ -52,7 +52,7 @@ Route::post('/customer_update',[CustomerAuthController::class,'update'])->name('
 Route::get('/wishlist-add/{id}',[CustomerAuthController::class,'WishlistAdd'])->name('addwishlist');
 Route::get('/wishlist-index',[CustomerAuthController::class,'WishlistIndex'])->name('wishlist.list');
 Route::post('/wishlist-delete/{id}',[CustomerAuthController::class,'WishlistDelete'])->name('wishlist.destroy');
-Route::post('/invoice-show/{id}',[CustomerAuthController::class,'InvoiceShow'])->name('invoice');
+Route::get('/invoice-show/{id}',[CustomerAuthController::class,'InvoiceShow'])->name('invoice');
 Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
     /*AJAX Call */
