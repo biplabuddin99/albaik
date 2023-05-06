@@ -20,7 +20,7 @@
                 <thead>
                   <tr>
                     <th scope="col"> #SL</th>
-                    <th scope="col">Date</th>
+                    {{--  <th scope="col">Date</th>  --}}
                     <th scope="col">Bill Id</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
@@ -31,7 +31,7 @@
                   @foreach ($allorder as $list)
                     <tr>
                       <td>{{ ++$loop->index }}</td>
-                      <td>{{ $list->created_at->format('d/m/Y') }}</td>
+                      {{--  <td>{{ $list->created_at->format('d/m/Y') }}</td>  --}}
                       <td>0000{{ $list->billing_id }}</td>
                       <td>৳{{ $list->total}}</td>
                       <td>@if($list->status==0) Processing
