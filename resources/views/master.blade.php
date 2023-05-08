@@ -117,10 +117,13 @@
                         <i class="bi bi-person-circle"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #FFFF66;">
-                    <li><a class="dropdown-item" href="{{ route('register') }}">Registration</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Order</a></li>
-                    <li><a class="dropdown-item" href="{{ route('logOut') }}">Logout</a></li>
+                        @if(Session::get('userId'))                       
+                        <li><a class="dropdown-item" href="{{ route('customer.dashboard') }}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logOut') }}">Logout</a></li>
+                        @else
+                        <li><a class="dropdown-item" href="{{ route('register') }}">Registration</a></li>
+                        <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                        @endif
                     </ul>
                     <a href="#"><i class="bi bi-truck"></i></a>
                     <a href="#"><i class="bi bi-heart"></i></a>
