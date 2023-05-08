@@ -22,7 +22,7 @@
             </nav>
             <p class="p-title">{{ $show_product->item_name }}</p>
             <div class="d-flex top-display-2">
-            <p><span>Unit :</span>{{ $unit->unit_name }}</p>
+            <p><span>Unit :</span>{{ $unit?->unit_name }}</p>
             {{--  <p><span>Review :</span>5 <i class="bi bi-star-half"></i></p>  --}}
             <p><span>SKU :</span>{{ $show_product->sku }}</p>
             </div>
@@ -74,14 +74,14 @@
             <div class="p-short-point">
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                    <i class="bi bi-brightness-high-fill"></i>Type: Organic
+                    <i class="bi bi-brightness-high-fill"></i>Brand: {{ $brands?->brand_name }}
                 </li>
                 <li class="nav-item">
-                    <i class="bi bi-brightness-high-fill"></i>MFG: {{\Carbon\Carbon::parse($show_product->created_date)->format('d M Y')}}
+                    <i class="bi bi-brightness-high-fill"></i>Weight: {{ $show_product->weight }}
                     {{-- <i class="bi bi-brightness-high-fill"></i>MFG: {{$show_product->created_date}} --}}
                 </li>
                 <li class="nav-item">
-                    <i class="bi bi-brightness-high-fill"></i>LIFE: {{\Carbon\Carbon::parse($show_product->expire_date)->diffForHumans()}}
+                    <i class="bi bi-brightness-high-fill"></i>Category: {{ $childcat?->childcategory_name }}
                 </li>
                 </ul>
             </div>

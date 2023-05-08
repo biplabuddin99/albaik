@@ -38,10 +38,12 @@ class ProductController extends Controller
         // $show_product = DB::table('db_items')->join('db_units','db_items.unit_id','=','db_units.id')->where('db_items.id',$id)->first();
         $show_product = DB::table('db_items')->where('id',$id)->first();
         $unit = DB::table('db_units')->where('id',$show_product->unit_id)->first();
+        $brands = DB::table('db_brands')->where('id',$show_product->brand_id)->first();
+        $childcat = DB::table('db_childcategory')->where('id',$show_product->childcategory_id)->first();
         $related_products = DB::table('db_items')->whereNot('id', $id)->select('id', 'item_name', 'sales_price', 'item_image', 'is_feature')->limit(4)->get();
         // print_r($show_product);
         // die();
-        return view('product.singleProduct',compact('show_product','related_products','unit'));
+        return view('product.singleProduct',compact('show_product','related_products','unit','brands','childcat'));
     }
     /**
      * Show the form for creating a new resource.
