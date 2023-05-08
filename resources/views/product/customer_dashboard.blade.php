@@ -47,7 +47,7 @@
     </div>
       <div class="prorduct-table">
         <div class="row">
-            <p>Recent Orders</p>
+            <p>Last Three Orders</p>
             <hr />
           <div class="col-sm-12 p-3">
             <div class="rounded bg-white my-3 shadow p-2">

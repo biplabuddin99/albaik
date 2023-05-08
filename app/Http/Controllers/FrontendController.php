@@ -32,9 +32,9 @@ class FrontendController extends Controller
         return view('home',compact('faq','slide','offer','product','offer_product'));
     }
 
-    public function CustomerDansboard()
+    public function CustomerDasboard()
     {
-        $order=Order::where('user_id',Session::get('userId'))->with(['billing','orderdetails'])->get();
+        $order=Order::where('user_id',Session::get('userId'))->with(['billing','orderdetails'])->limit(3)->get();
         // return $order;
         return view('product.customer_dashboard',['order_details' =>$order]);
     }

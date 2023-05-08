@@ -60,7 +60,7 @@ Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
 Route::group(['middleware'=>isCustomer::class],function(){
     Route::prefix('customer')->group(function(){
-        Route::get('dashboard',[FrontendController::class,'CustomerDansboard'])->name('customer.dashboard');
+        Route::get('dashboard',[FrontendController::class,'CustomerDasboard'])->name('customer.dashboard');
 
         Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to.cart');
         /*Checkout Page */
