@@ -22,8 +22,8 @@
             </nav>
             <p class="p-title">{{ $show_product->item_name }}</p>
             <div class="d-flex top-display-2">
-            <p><span>Unit :</span>{{ $show_product->unit_id }}</p>
-            <p><span>Review :</span>5 <i class="bi bi-star-half"></i></p>
+            <p><span>Unit :</span>{{ $unit->unit_name }}</p>
+            {{--  <p><span>Review :</span>5 <i class="bi bi-star-half"></i></p>  --}}
             <p><span>SKU :</span>{{ $show_product->sku }}</p>
             </div>
         </div>
