@@ -8,7 +8,7 @@
         @forelse ($child_advertise as $childcat)
         <div class="col">
             <a href="#">
-              <img src="{{ asset('./../POS/uploads/childcategory') }}/{{ $childcat->advertise_image }}" alt="" />
+              <img src="{{ asset('./../pos/uploads/childcategory') }}/{{ $childcat->advertise_image }}" alt="" />
             </a>
           </div>
         @empty
@@ -34,7 +34,7 @@
         @forelse ($show_childcategory as $childcat)
         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3">
             <a href="{{ route('category.product.list',[$childcat->sub_category?->category_id,$childcat->subcategory_id,$childcat->id]) }}">
-              <img src="{{ asset('./../POS/uploads/childcategory') }}/{{ $childcat->banner_image }}" width="150" height="150" alt="" />
+              <img src="{{ asset('./../pos/uploads/childcategory') }}/{{ $childcat->banner_image }}" width="150" height="150" alt="" />
               <p class="pe-5">{{ $childcat->childcategory_name }}</p></a
             >
           </div>

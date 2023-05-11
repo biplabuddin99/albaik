@@ -35,7 +35,7 @@
             >
               <img
                 class="side-nav-icon"
-                src="{{ asset('./../POS/uploads/category') }}/{{ $cat->image }}"
+                src="{{ asset('./../pos/uploads/category') }}/{{ $cat->image }}"
                 alt=""
               />
               {{ $cat->category_name }}
@@ -50,7 +50,7 @@
                       data-bs-toggle="dropdown" aria-expanded="false"
                       ><img
                         class="side-nav-icon"
-                        src="{{ asset('./../POS/uploads/category') }}/{{ $subcat->image }}"
+                        src="{{ asset('./../pos/uploads/category') }}/{{ $subcat->image }}"
                         alt=""
                       />{{ $subcat->subcategory_name }}
                     </a>
@@ -61,7 +61,7 @@
                           <a class="dropdown-item childcategorybutton chcat{{$chcat->id}}" href="{{ route('category.product.list',[$cat->id,$subcat->id,$chcat->id]) }}"
                             ><img
                               class="side-nav-icon"
-                              src="{{ asset('./../POS/uploads/category') }}/{{ $chcat->image }}"
+                              src="{{ asset('./../pos/uploads/category') }}/{{ $chcat->image }}"
                               alt=""
                             />{{ $chcat->childcategory_name }}
                           </a>
@@ -73,7 +73,7 @@
                     data-bs-toggle="dropdown" aria-expanded="false"
                     ><img
                       class="side-nav-icon"
-                      src="{{ asset('./../POS/uploads/category') }}/{{ $subcat->image }}"
+                      src="{{ asset('./../pos/uploads/category') }}/{{ $subcat->image }}"
                       alt=""
                     />{{ $subcat->subcategory_name }}
                   </a>
@@ -89,7 +89,7 @@
             >
               <img
                 class="side-nav-icon"
-                src="{{ asset('./../POS/uploads/category') }}/{{ $cat->image }}"
+                src="{{ asset('./../pos/uploads/category') }}/{{ $cat->image }}"
                 alt=""
               />
               {{ $cat->category_name }}

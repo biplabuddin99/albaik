@@ -8,7 +8,7 @@
         @forelse ($subcategorys as $subcat)
         <div class="col">
             <a href="#">
-              <img src="{{ asset('./../POS/uploads/subcategory') }}/{{ $subcat->advertise_image }}" alt="" />
+              <img src="{{ asset('./../pos/uploads/subcategory') }}/{{ $subcat->advertise_image }}" alt="" />
             </a>
           </div>
         @empty
@@ -34,14 +34,14 @@
           @if($subcat->child_category->count()>0)
             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3">
               <a href="{{ route('category.subcategory.list',[$subcat->category_id,$subcat->id]) }}">
-                <img src="{{ asset('./../POS/uploads/subcategory') }}/{{ $subcat->banner_image }}" width="150" height="150" alt="" />
+                <img src="{{ asset('./../pos/uploads/subcategory') }}/{{ $subcat->banner_image }}" width="150" height="150" alt="" />
                 <p class="pe-5">{{ $subcat->subcategory_name }}</p></a
               >
             </div>
           @else
             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3">
               <a href="{{ route('category.product.list',[$subcat->category_id,$subcat->id]) }}">
-                <img src="{{ asset('./../POS/uploads/subcategory') }}/{{ $subcat->banner_image }}" width="150" height="150" alt="" />
+                <img src="{{ asset('./../pos/uploads/subcategory') }}/{{ $subcat->banner_image }}" width="150" height="150" alt="" />
                 <p class="pe-5">{{ $subcat->subcategory_name }}</p></a
               >
             </div>

@@ -49,11 +49,7 @@
                     @forelse ($carts as $cartitem)
                     <tr>
                         <td>
-                          <img
-                            class="img-fluid"
-                            src="{{ asset('./../POS/') }}/{{ $cartitem->options->product_image }}"
-                            alt=""
-                          />
+                          <img class="img-fluid" src="{{ asset('./../pos/') }}/{{ $cartitem->options->product_image }}" alt=""/>
                         </td>
                         <td>{{ $cartitem->name }}</td>
                         <td>${{ $cartitem->price }}</td>

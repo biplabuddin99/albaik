@@ -35,7 +35,7 @@
                       <td>
                         <img
                           class="img-fluid"
-                          src="{{ asset('./../POS/') }}/{{ $list->product->item_image }}"
+                          src="{{ asset('./../pos/') }}/{{ $list->product->item_image }}"
                           alt=""
                         />
                       </td>
