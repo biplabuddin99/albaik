@@ -24,7 +24,7 @@
          $sales_price=$purchase_price=$profit_margin=$unit_id=$price=$alert_qty=
          $lot_number=$wholesale_price=$item_image=$item_image_two=
          $item_image_three=$item_image_four=$item_image_five=$weight=$is_feature=$is_latest=$is_top=$is_review=$short_description=$long_description="";
-         $stock = 0;
+         $stock = $old_price=0;
          $expire_date ='';
          $description ='';
          $final_price ='';
@@ -347,6 +347,10 @@
                                  <label for="wholesale_price" class="control-label">Wholesale price<span class="text-danger">*</span></label>
                                  <input type="text" class="form-control only_currency " id="wholesale_price" name="wholesale_price" placeholder="Whole sale Price"  value="<?php print $wholesale_price; ?>" >
                                  <span id="final_price_msg" style="display:none" class="text-danger"></span>
+                              </div>
+							         <div class="form-group col-md-4">
+                                 <label for="old_price" class="control-label">Old price (For E-commerce)<span class="text-danger">*</span></label>
+                                 <input type="text" class="form-control only_currency " id="old_price" name="old_price" placeholder="Old Price"  value="<?php print $old_price; ?>" >
                               </div>
 							         <div class="form-group col-md-4">
                                  <label for="weight" class="control-label">Weight</label>

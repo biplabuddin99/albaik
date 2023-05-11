@@ -11,7 +11,7 @@ class Items_model extends CI_Model {
 	var $column_search = array( 'a.id','a.item_image','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name','a.stock','a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.custom_barcode','a.tax_type','a.hsn','a.sku'); //set column field database for datatable searchable 
 	var $order = array('a.id' => 'desc');*/ // default order 
 	var $table = 'db_items as a';
-	var $column_order = array( 'a.id','a.item_image','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name',
+	var $column_order = array( 'a.id','a.item_image','a.old_price','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name',
 	                            '(select sum(qty) from db_stockentry where db_stockentry.item_id=a.id) as stock'
 	                            ,'a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.tax_type','a.hsn','a.sku'); //set column field database for datatable orderable
 	var $column_search = array( 'a.id','a.item_image','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name','a.stock','a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.custom_barcode','a.tax_type','a.hsn','a.sku'); //set column field database for datatable searchable 
@@ -293,15 +293,16 @@ class Items_model extends CI_Model {
 		$profit_margin = (empty(trim($profit_margin))) ? 'null' : $profit_margin;
 
 		$expire_date= (!empty(trim($expire_date))) ? date('Y-m-d',strtotime($expire_date)) : null;
+		$mfg_date= (!empty(trim($mfg_date))) ? date('Y-m-d',strtotime($mfg_date)) : 'null';
 		$slug= str_replace(' ', '-', strtolower($item_name));
 
-		$query1="insert into db_items(description,item_code,item_name,brand_id,category_id,subcategory_id,childcategory_id,sku,hsn,unit_id,alert_qty,lot_number,expire_date,
-									price,tax_id,purchase_price,tax_type,profit_margin,
+		$query1="insert into db_items(description,item_code,item_name,brand_id,category_id,subcategory_id,childcategory_id,sku,hsn,unit_id,alert_qty,lot_number,mfg_date,expire_date,
+									old_price,price,tax_id,purchase_price,tax_type,profit_margin,
 									sales_price,custom_barcode,final_price,wholesale_price,weight,is_feature,is_latest,is_top,is_review,short_description,long_description,
 									system_ip,system_name,created_date,created_time,created_by,status)
 
-							values('$description','$item_code','$item_name','$brand_id','$category_id','$subcategory_id','$childcategory_id','$sku','$hsn','$unit_id','$alert_qty','$lot_number','$expire_date',
-									'$price','$tax_id','$purchase_price','$tax_type',$profit_margin,
+							values('$description','$item_code','$item_name','$brand_id','$category_id','$subcategory_id','$childcategory_id','$sku','$hsn','$unit_id','$alert_qty','$lot_number','$mfg_date','$expire_date',
+									'$old_price','$price','$tax_id','$purchase_price','$tax_type',$profit_margin,
 									'$sales_price','$custom_barcode','$final_price','$wholesale_price','$weight','$is_feature','$is_latest','$is_top','$is_review','$short_description','$long_description',
 									'$SYSTEM_IP','$SYSTEM_NAME','$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1)";
 		
@@ -366,6 +367,8 @@ class Items_model extends CI_Model {
 			$data['hsn']=$query->hsn;
 			$data['unit_id']=$query->unit_id;
 			$data['alert_qty']=$query->alert_qty;
+			$data['old_price']=$query->old_price;
+			$data['mfg_date']=$query->mfg_date;
 			$data['price']=$query->price;
 			$data['tax_id']=$query->tax_id;
 			$data['purchase_price']=$query->purchase_price;
@@ -600,6 +603,7 @@ class Items_model extends CI_Model {
 			//$stock = $current_opening_stock + $new_opening_stock;
 			$alert_qty = (empty(trim($alert_qty))) ? '0' : $alert_qty;
 			$profit_margin = (empty(trim($profit_margin))) ? 'null' : $profit_margin;
+			$mfg_date= (!empty(trim($mfg_date))) ? date('Y-m-d',strtotime($mfg_date)) : 'null';
 			$expire_date= (!empty(trim($expire_date))) ? date('Y-m-d',strtotime($expire_date)) : 'null';
 			$query1="update db_items set 
 						item_name='$item_name',
@@ -613,8 +617,10 @@ class Items_model extends CI_Model {
 						unit_id='$unit_id',
 						alert_qty='$alert_qty',
 						lot_number='$lot_number',
+						mfg_date='$mfg_date',
 						expire_date='$expire_date',
 						custom_barcode='$custom_barcode',
+						old_price='$old_price',
 						price='$price',
 						tax_id='$tax_id',
 						purchase_price='$purchase_price',
