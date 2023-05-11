@@ -73,7 +73,7 @@
             <a href="#">
             <div class="nav-logo">
                 <img
-                class="navbar-brand img-fluid bg-dark rounded"
+                class="navbar-brand img-fluid bg-dark rounded height-40"
                 src="{{ asset('assets/resource') }}/img/logo1-01.png"
                 alt="logo"
                 />
