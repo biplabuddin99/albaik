@@ -11,12 +11,20 @@
         </ol>
       </nav>
       <div class="cart-condition shadow">
-        {{-- @php
-            $first_number = 5000;
-            $second_number = $total_price;
-            $sum_total = $first_number - $second_number
-            // return $sum_total;
-        @endphp --}}
+        {{--  @php
+        $first_number = 5000.00;
+        $second_number = $total_price;
+        $sum_total = is_numeric($second_number) ? $first_number - $second_number : 0;
+        @endphp
+    
+    @if ($second_number > $first_number)
+        <p>Free shipping available!</p>
+    @else
+    <p>Add <span>${{ number_format($sum_total, 2) }}</span> to your cart and get free shipping!</p>
+
+    @endif  --}}
+    
+    
         <p>Add <span>${{ $total_price }}</span> to cart and get free shipping!</p>
         <div class="progress mb-3">
           <div
