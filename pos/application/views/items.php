@@ -4,6 +4,13 @@
   <!-- TABLES CSS CODE -->
   <?php include"comman/code_css_form.php"; ?>
   <!-- </copy> -->  
+  <!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+
   </head>
    <body class="hold-transition skin-blue  sidebar-mini">
 
@@ -210,11 +217,6 @@
                                  <span id="custom_barcode_msg" style="display:none" class="text-danger"></span>
                               </div>
                               <div class="form-group col-md-4">
-                                 <label for="custom_barcode" ><?= $this->lang->line('description'); ?></label>
-                                 <textarea type="text" class="form-control" id="description" name="description" placeholder=""><?php print $description; ?></textarea>
-                                 <span id="description_msg" style="display:none" class="text-danger"></span>
-                              </div>
-                              <div class="form-group col-md-4">
                                  <label for="item_image" class="form-label"><?= $this->lang->line('select_image'); ?></label>
                                  <input type="file" class="form-control" name="item_image" id="item_image">
                                  <span id="item_image_msg" style="display:block;" class="text-danger">Max Width/Height: 1000px * 1000px & Size: 1MB </span>
@@ -224,7 +226,7 @@
                                     </a>
                                  <?php } ?>
                               </div>
-                              <div class="form-group col-md-4">
+                              <!-- <div class="form-group col-md-4">
                                  <label for="item_image" class="form-label">Image two</label>
                                  <input type="file" class="form-control" name="item_image_two" id="item_image_two">
                                  <span id="item_image_msg" style="display:block;" class="text-danger">Max Width/Height: 1000px * 1000px & Size: 1MB </span>
@@ -263,7 +265,7 @@
                                        <img src="<?= base_url($item_image_five) ?>" alt="" width="50px">
                                     </a>
                                  <?php } ?>
-                              </div>
+                              </div> -->
                            </div>
                            <hr>
                            <div class="row">
@@ -412,18 +414,25 @@
                                     <option <?= $yes_selected ?> value="1">Yes</option>
                                  </select>
                               </div>
+                           </div>
+                           <!-- /row -->
+                           <div class="row">                              
+                              <div class="form-group col-md-4">
+                                 <label for="custom_barcode" ><?= $this->lang->line('description'); ?></label>
+                                 <textarea type="text" class="form-control summernote" id="description" name="description" placeholder=""><?php print $description; ?></textarea>
+                                 <span id="description_msg" style="display:none" class="text-danger"></span>
+                              </div>
                               <div class="form-group col-md-4">
                                  <label for="short_description" >Additional Information </label>
-                                 <textarea type="text" class="form-control" id="short_description" name="short_description"><?php print $short_description; ?></textarea>
+                                 <textarea type="text" class="form-control summernote" id="short_description" name="short_description"><?php print $short_description; ?></textarea>
                                  <span id="description_msg" style="display:none" class="text-danger"></span>
                               </div>
                               <div class="form-group col-md-4">
                                  <label for="long_description" >Long Description</label>
-                                 <textarea type="text" class="form-control" id="long_description" name="long_description"><?php print $long_description; ?></textarea>
+                                 <textarea type="text" class="form-control summernote" id="long_description" name="long_description"><?php print $long_description; ?></textarea>
                                  <span id="description_msg" style="display:none" class="text-danger"></span>
                               </div>
                            </div>
-                           <!-- /row -->
                            <hr>
                            <div class="row">
                               <div class="form-group col-md-4">
@@ -571,5 +580,13 @@
       <script src="<?php echo $theme_link; ?>js/modals.js"></script>
       <!-- Make sidebar menu hughlighter/selector -->
       <script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+      <script>
+    $(document).ready(function() {
+        $('.summernote').summernote();
+    });
+  </script>
    </body>
 </html>

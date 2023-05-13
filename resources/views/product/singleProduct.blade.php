@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-sm-6">
             <div class="product-img">
-                <span>29%</span>
+                <span>{{ number_format(($show_product->old_price-$show_product->sales_price)*100/$show_product->old_price,1) }}%</span>
                 <span>off</span>
                 <img
                 class="img-fluid"
@@ -41,11 +41,11 @@
             </div>
             <div class="col-sm-6 p-specification">
             <div class="p-price d-flex">
-                <p><del>৳{{ $show_product->sales_price+($show_product->sales_price*29/100) }}</del></p>
+                <p><del>৳{{ $show_product->old_price }}</del></p>
                 <p>৳ {{ $show_product->sales_price }}</p>
             </div>
             <span>In Stock</span>
-            <p class="p-short-specification">{{ $show_product->description }} </p>
+            <p class="p-short-specification">{!! $show_product->description !!} </p>
             <form class="quentity d-flex my-4" action="{{ route('add-to.cart') }}" method="post">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $show_product->id }}">
@@ -61,16 +61,6 @@
                 <i class="bi bi-heart-fill"></i>
                 </div>
             </form>
-            {{-- <form action="{{ route('add-to.cart') }}" method="post">
-                @csrf
-                <input type="hidden" name="product_slug" value="{{ $product->slug }}">
-                <li class="quantity cart-plus-minus">
-                    <input type="text" value="1" name="order_qty" />
-                </li>
-                <li>
-                    <button type="submit" class="btn btn-danger">Add to Cart</button>
-                </li>
-            </form> --}}
             <div class="p-short-point">
                 <ul class="navbar-nav">
                 <li class="nav-item">
@@ -78,7 +68,6 @@
                 </li>
                 <li class="nav-item">
                     <i class="bi bi-brightness-high-fill"></i>Weight: {{ $show_product->weight }}
-                    {{-- <i class="bi bi-brightness-high-fill"></i>MFG: {{$show_product->created_date}} --}}
                 </li>
                 <li class="nav-item">
                     <i class="bi bi-brightness-high-fill"></i>Category: {{ $childcat?->childcategory_name }}

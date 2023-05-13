@@ -293,15 +293,15 @@ class Items_model extends CI_Model {
 		$profit_margin = (empty(trim($profit_margin))) ? 'null' : $profit_margin;
 
 		$expire_date= (!empty(trim($expire_date))) ? date('Y-m-d',strtotime($expire_date)) : null;
-		$mfg_date= (!empty(trim($mfg_date))) ? date('Y-m-d',strtotime($mfg_date)) : 'null';
+		// $mfg_date= (!empty(trim($mfg_date))) ? date('Y-m-d',strtotime($mfg_date)) : 'null';
 		$slug= str_replace(' ', '-', strtolower($item_name));
 
-		$query1="insert into db_items(description,item_code,item_name,brand_id,category_id,subcategory_id,childcategory_id,sku,hsn,unit_id,alert_qty,lot_number,mfg_date,expire_date,
+		$query1="insert into db_items(description,item_code,item_name,brand_id,category_id,subcategory_id,childcategory_id,sku,hsn,unit_id,alert_qty,lot_number,expire_date,
 									old_price,price,tax_id,purchase_price,tax_type,profit_margin,
 									sales_price,custom_barcode,final_price,wholesale_price,weight,is_feature,is_latest,is_top,is_review,short_description,long_description,
 									system_ip,system_name,created_date,created_time,created_by,status)
 
-							values('$description','$item_code','$item_name','$brand_id','$category_id','$subcategory_id','$childcategory_id','$sku','$hsn','$unit_id','$alert_qty','$lot_number','$mfg_date','$expire_date',
+							values('$description','$item_code','$item_name','$brand_id','$category_id','$subcategory_id','$childcategory_id','$sku','$hsn','$unit_id','$alert_qty','$lot_number','$expire_date',
 									'$old_price','$price','$tax_id','$purchase_price','$tax_type',$profit_margin,
 									'$sales_price','$custom_barcode','$final_price','$wholesale_price','$weight','$is_feature','$is_latest','$is_top','$is_review','$short_description','$long_description',
 									'$SYSTEM_IP','$SYSTEM_NAME','$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1)";
@@ -603,7 +603,7 @@ class Items_model extends CI_Model {
 			//$stock = $current_opening_stock + $new_opening_stock;
 			$alert_qty = (empty(trim($alert_qty))) ? '0' : $alert_qty;
 			$profit_margin = (empty(trim($profit_margin))) ? 'null' : $profit_margin;
-			$mfg_date= (!empty(trim($mfg_date))) ? date('Y-m-d',strtotime($mfg_date)) : 'null';
+			// $mfg_date= (!empty(trim($mfg_date))) ? date('Y-m-d',strtotime($mfg_date)) : 'null';
 			$expire_date= (!empty(trim($expire_date))) ? date('Y-m-d',strtotime($expire_date)) : 'null';
 			$query1="update db_items set 
 						item_name='$item_name',
@@ -617,7 +617,6 @@ class Items_model extends CI_Model {
 						unit_id='$unit_id',
 						alert_qty='$alert_qty',
 						lot_number='$lot_number',
-						mfg_date='$mfg_date',
 						expire_date='$expire_date',
 						custom_barcode='$custom_barcode',
 						old_price='$old_price',
