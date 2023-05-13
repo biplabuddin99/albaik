@@ -30,7 +30,14 @@
         <div class="row">
             <div class="col-sm-6">
             <div class="product-img">
-                <span>{{ number_format(($show_product->old_price-$show_product->sales_price)*100/$show_product->old_price,1) }}%</span>
+                {{--  <span>{{ number_format(($show_product->old_price-$show_product->sales_price)*100/$show_product->old_price,1) }}%</span>  --}}
+                <span>
+                    @if ($show_product->old_price > 0)
+                    {{ number_format(($show_product->old_price - $show_product->sales_price) * 100 / $show_product->old_price, 1) }}%
+                    @else
+                    0%
+                    @endif
+                </span>
                 <span>off</span>
                 <img
                 class="img-fluid"
