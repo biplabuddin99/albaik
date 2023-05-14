@@ -52,7 +52,7 @@
                 <p>৳ {{ $show_product->sales_price }}</p>
             </div>
             <span>In Stock</span>
-            <p class="p-short-specification">{!! $show_product->description !!} </p>
+            <p class="p-short-specification">{!! html_entity_decode($show_product->description)!!} </p>
             <form class="quentity d-flex my-4" action="{{ route('add-to.cart') }}" method="post">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $show_product->id }}">
@@ -150,7 +150,7 @@
             aria-labelledby="nav-home-tab"
             tabindex="0"
             >
-            {{ $show_product->long_description }}
+            {!! html_entity_decode($show_product->long_description) !!}
             </div>
             <div
             class="tab-pane fade"

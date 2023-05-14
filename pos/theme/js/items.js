@@ -85,7 +85,7 @@ $('#save,#update').click(function (e) {
 						e.preventDefault();
 						data = new FormData($('#items-form')[0]);//form name3
 						/*Check XSS Code*/
-						if(!xss_validation(data)){ return false; }
+						//if(!xss_validation(data)){ return false; }
 						
 						$(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
 						$("#"+this_id).attr('disabled',true);  //Enable Save or Update button
