@@ -3,19 +3,19 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" href="#"
-          >offer Pakage
+          >অফার প্যাকেজ
           <i class="bi bi-arrow-right"></i>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href=""
-          >Your Favorite Products
+          >আপনার প্রিয় পণ্য
           <i class="bi bi-arrow-right"></i>
         </a>
       </li>
     </ul>
     <div class="m-auto">
-      <h6>Our Products Catagory</h6>
+      <h6>আমাদের পণ্য বিভাগ</h6>
     </div>
   </nav>
 

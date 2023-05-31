@@ -116,7 +116,7 @@ nav {
 
 /* left bottom nav */
 .left-bottom-div {
-  height: 2550px;
+
 }
 .left-bottom-nav {
   margin-top: 100px;
@@ -289,7 +289,7 @@ footer {
 }
 .footer-logo {
   background-color: var(--brand-color);
-  max-width: 400px;
+  max-width: 315px;
   text-align: center;
   padding: 10px;
   border-radius: 20px;

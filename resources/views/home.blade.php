@@ -92,7 +92,7 @@
                     class="body-title-icon"
                     src="{{ asset('assets/resource') }}/img/icon/image 49.png"
                     alt=""
-                  /><strong>Our Popular Product</strong>
+                  /><strong>আমাদের জনপ্রিয় পণ্য</strong>
                 </p>
               </div>
               <div class="col d-flex justify-content-end">
@@ -141,7 +141,7 @@
                     class="body-title-icon"
                     src="{{ asset('assets/resource') }}/img/icon/image 49.png"
                     alt=""
-                  /><strong>Our offer Product</strong>
+                  /><strong>আমাদের অফার পণ্য</strong>
                 </p>
               </div>
               <div class="col d-flex justify-content-end">
@@ -195,16 +195,16 @@
         <!-- product Row 2 end-->
         <!-- Product Catagory Section start -->
         <div class="product-catagory my-5 p-4">
-          <p class="mb-4">Our Products Catagory</p>
+          <p class="mb-4">আমাদের পণ্য বিভাগ</p>
           <div class="row justify-content-center">
 
             <?php $category = DB::table('db_category')->where('is_slied', '1')->select('category_name','image','is_slied')->get(); ?>
 
             @forelse ($category as $cat)
                 <div class="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                <div class="d-flex catagory-card shadow">
+                <div class="catagory-card shadow">
                     <div class="row">
-                    <div class="col-5">
+                    <div class="col-2">
                         <img
                         class="img-fluid"
                         src="{{ asset('./../pos/uploads/category') }}/{{ $cat->image }}"
