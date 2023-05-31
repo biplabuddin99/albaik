@@ -190,7 +190,7 @@
             <div class="row justify-content-center">
                 @forelse ($related_products as $rproduct)
                 <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div class="card shadow mb-3">
+                    <div class="card shadow mb-3" style="max-width: 200px; max-height:355px;">
                         <a href="{{ route('product_details.singleProduct',$rproduct->id) }}">
                             <img class="card-img-top" src="{{ asset('./../pos/') }}/{{ $rproduct->item_image }}" width="200px" height="200px"/>
                         </a>
