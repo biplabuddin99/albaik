@@ -126,7 +126,9 @@
                 @empty
                     <p>no Product</p>
                 @endforelse
-
+                <div class="pt-2">
+                    {{$product->links()}}
+                </div>
             </div>
           </div>
         </div>
@@ -172,23 +174,11 @@
                     </div>
                   </div>
                 @empty
-                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                        <div class="card shadow mb-3">
-                        <img
-                            class="card-img-top"
-                            src="{{ asset('assets/resource') }}/img/image 7.png"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-title text-center">Beef Bone In ± 50 gm</p>
-                            <div class="card-button">
-                            <a href="#">+ Add to Card</a>
-                            <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>
-                            </div>
-                        </div>
-                        </div>
-                  </div>
+                    <p>no Product</p>
                 @endforelse
+                <div class="pt-2">
+                    {{$offer_product->links()}}
+                </div>
             </div>
           </div>
         </div>

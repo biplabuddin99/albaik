@@ -29,7 +29,7 @@
         <li class="nav-item">
           @if($cat->sub_category->count()>0)
             <a
-              class="nav-link dropdown-toggle categorybutton cat{{$cat->id}}" href="{{ route('category.list',[$cat->id]) }}"
+              class="nav-link dropdown-toggle categorybutton cat{{$cat->id}}" href="#"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
