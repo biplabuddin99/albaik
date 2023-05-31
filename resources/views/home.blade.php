@@ -108,7 +108,7 @@
                 @forelse ($product as $p)
 
                 <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div class="card shadow mb-3">
+                    <div class="card shadow mb-3" style="max-width: 194px; max-height:352px;">
                       <a href="#">
                         <a href="{{ route('product_details.singleProduct',$p->id) }}">
                       <img class="card-img-top" src="{{ asset('./../pos/') }}/{{ $p->item_image }}" width="200px" height="200px"/>
@@ -156,7 +156,7 @@
             <div class="row justify-content-center">
                 @forelse ($offer_product as $off)
                 <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div class="card shadow mb-3">
+                    <div class="card shadow mb-3" style="max-width: 194px; max-height:352px;">
                       <a href="#">
                         <a href="{{ route('product_details.singleProduct',$off->id) }}">
                       <img class="card-img-top" src="{{ asset('./../pos/') }}/{{ $off->item_image }}"  width="200px" height="200px"/>
@@ -165,7 +165,7 @@
                         <p class="card-title text-center">{{ $off->item_name }}</p>
                         <p class="card-title text-center m-0 p-0">{{ $off->sales_price .' '.'TK' }}</p>
                         <div class="card-button">
-                          <a href="{{ route('product_details.singleProduct',$p->id) }}">+ Add to Card</a>
+                          <a href="{{ route('product_details.singleProduct',$off->id) }}">+ Add to Card</a>
                           <a href="#"><i class="bi bi-heart-fill"></i></a>
                         </div>
                       </div>

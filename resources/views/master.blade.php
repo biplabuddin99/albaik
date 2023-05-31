@@ -73,7 +73,7 @@
             <a href="#">
             <div class="nav-logo">
                 <img
-                class="navbar-brand img-fluid bg-dark rounded height-40"
+                class="navbar-brand img-fluid rounded height-40"
                 src="{{ asset('assets/resource') }}/img/logo1-01.png"
                 alt="logo"
                 />
@@ -96,28 +96,30 @@
             class="collapse mobile-bg navbar-collapse p-3"
             id="navbarSupportedContent"
             >
-            <div class="nav-search mobile-bg">
-                <div class="input-group input-group-sm my-3">
-                <input
-                    type="text"
-                    class="form-control"
-                    placeholder="ex: enter your Products..."
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm"
-                />
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                    ><i class="bi bi-search"></i
-                ></span>
+            <form action="" method="get">
+                <div class="nav-search mobile-bg">
+                    <div class="input-group input-group-sm my-3">
+                        <input
+                            type="text" name="item_name"
+                            class="form-control"
+                            placeholder="আপনার পণ্য খুঁজুন..."
+                            aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm"
+                        />
+                        <button class="input-group-text" id="inputGroup-sizing-sm" type="submit"
+                            ><i class="bi bi-search"></i
+                        ></button>
+                    </div>
                 </div>
-            </div>
+            </form>
             </div>
             <div class="ms-auto customer-seciton mobile-bg p-1">
                 <div class="dropdown">
-                    <a class="" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration:none;">
                         <i class="bi bi-person-circle"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #FFFF66;">
-                        @if(Session::get('userId'))                       
+                        @if(Session::get('userId'))
                         <li><a class="dropdown-item" href="{{ route('customer.dashboard') }}">Dashboard</a></li>
                         <li><a class="dropdown-item" href="{{ route('logOut') }}">Logout</a></li>
                         @else
