@@ -150,7 +150,7 @@
             aria-labelledby="nav-home-tab"
             tabindex="0"
             >
-            {!! html_entity_decode($show_product->long_description) !!}
+            {!! html_entity_decode($show_product->short_description) !!}
             </div>
             <div
             class="tab-pane fade"
@@ -160,22 +160,7 @@
             tabindex="0"
             >
             <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">S.L.</th>
-                    <th scope="col">Weight</th>
-                    <th scope="col">Height</th>
-                    <th scope="col">Exp. Date:</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>{{ $show_product->weight }}</td>
-                    <td>1 inci</td>
-                    <td>{{ $show_product->expire_date }}</td>
-                </tr>
-                </tbody>
+                {!! html_entity_decode($show_product->long_description) !!}
             </table>
             </div>
         </div>
