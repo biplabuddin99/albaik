@@ -96,7 +96,7 @@
             class="collapse mobile-bg navbar-collapse p-3"
             id="navbarSupportedContent"
             >
-            <form action="" method="get">
+            <form action="{{ route('search_product') }}" method="get">
                 <div class="nav-search mobile-bg">
                     <div class="input-group input-group-sm my-3">
                         <input

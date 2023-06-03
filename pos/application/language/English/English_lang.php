@@ -562,3 +562,4 @@ $lang['front settings']	                    =		'Front settings';
 $lang['headslide_add']	                    =		'Head slide add';
 $lang['short_description']	                =		'Short Description';
 $lang['link']	                            =		'Link';
+$lang['headslide_list']	                    =		'Headslide List';

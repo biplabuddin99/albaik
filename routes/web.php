@@ -26,6 +26,7 @@ use App\Http\Middleware\isCustomer;
 
 Route::get('/',[FrontendController::class,'index']);
 Route::get('/home',[FrontendController::class,'index'])->name('home');
+Route::get('/search_product',[FrontendController::class,'Search'])->name('search_product');
 Route::get('/category-all',[CategoryController::class,'index'])->name('category.index');
 Route::get('/category/{category_id}',[FrontendController::class,'subCategory'])->name('category.list');
 Route::get('/category/{category_id}/{subcategory_id}',[FrontendController::class,'childCategory'])->name('category.subcategory.list');
