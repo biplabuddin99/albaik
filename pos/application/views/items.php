@@ -3,7 +3,7 @@
    <head>
   <!-- TABLES CSS CODE -->
   <?php include"comman/code_css_form.php"; ?>
-  <!-- </copy> -->  
+  <!-- </copy> -->
   <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
     <?php include"modals/modal_unit.php"; ?>
     <?php include"modals/modal_tax.php"; ?>
     <!-- **********************MODALS END***************** -->
-      
+
       </div>
       <div class="wrapper">
       <?php include"sidebar.php"; ?>
@@ -65,7 +65,7 @@
                <div class="col-md-12">
                   <!-- Horizontal Form -->
                   <div class="box box-info ">
-                     
+
                       <?= form_open('#', array('class' => 'form', 'id' => 'items-form', 'enctype'=>'multipart/form-data', 'method'=>'POST'));?>
                         <input type="hidden" id="base_url" value="<?php echo $base_url; ?>">
                         <div class="box-body">
@@ -82,8 +82,8 @@
                                         <?php
                                             $query1="select * from db_brands where status=1";
                                             $q1=$this->db->query($query1);
-                                            if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>'; 
-                                                foreach($q1->result() as $res1){ 
+                                            if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>';
+                                                foreach($q1->result() as $res1){
                                                     $selected = ($brand_id==$res1->id)? 'selected' : '';
                                                     echo "<option $selected value='".$res1->id."'>".$res1->brand_name."</option>";
                                                 }
@@ -103,8 +103,8 @@
                                     <?php
                                         $query1="select * from db_category where status=1";
                                         $q1=$this->db->query($query1);
-                                        if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>'; 
-                                            foreach($q1->result() as $res1){ 
+                                        if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>';
+                                            foreach($q1->result() as $res1){
                                                 $selected = ($category_id==$res1->id)? 'selected' : '';
                                                 echo "<option $selected value='".$res1->id."'>".$res1->category_name."</option>";
                                             }
@@ -123,8 +123,8 @@
                                     <?php
                                        $query1="select * from db_subcategory where status=1";
                                        $q1=$this->db->query($query1);
-                                       if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>'; 
-                                            foreach($q1->result() as $res1){ 
+                                       if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>';
+                                            foreach($q1->result() as $res1){
                                             $selected = ($subcategory_id==$res1->id)? 'selected' : '';
                                             echo "<option $selected value='".$res1->id."' class='subopt".$res1->category_id."'>".$res1->subcategory_name."</option>";
                                           }
@@ -141,8 +141,8 @@
                                     <?php
                                        $query1="select * from db_childcategory where status=1";
                                        $q1=$this->db->query($query1);
-                                       if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>'; 
-                                            foreach($q1->result() as $res1){ 
+                                       if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>';
+                                            foreach($q1->result() as $res1){
                                             $selected = ($childcategory_id==$res1->id)? 'selected' : '';
                                             echo "<option $selected value='".$res1->id."' class='childopt".$res1->subcategory_id."'>".$res1->childcategory_name."</option>";
                                           }
@@ -162,7 +162,7 @@
                                        $q1=$this->db->query($query1);
                                        if($q1->num_rows($q1)>0)
                                         {
-                                         echo '<option value="">-Select-</option>'; 
+                                         echo '<option value="">-Select-</option>';
                                             foreach($q1->result() as $res1)
                                           {
                                             $selected = ($res1->id==$unit_id)? 'selected' : '';
@@ -283,9 +283,9 @@
                                        $q1=$this->db->query($query1);
                                        if($q1->num_rows($q1)>0)
                                         {
-                                            echo '<option data-tax="0" value="">-Select-</option>'; 
+                                            echo '<option data-tax="0" value="">-Select-</option>';
                                             foreach($q1->result() as $res1)
-                                          { 
+                                          {
                                             $selected = ($tax_id==$res1->id)? 'selected' : '';
                                             echo "<option $selected data-tax='".$res1->tax."' value='".$res1->id."'>".$res1->tax_name."(".$res1->tax."%)</option>";
                                           }
@@ -313,7 +313,7 @@
                               <div class="form-group col-md-4">
                                  <label for="tax_type"><?= $this->lang->line('tax_type'); ?><span class="text-danger">*</span></label>
                                  <select class="form-control select2" id="tax_type" name="tax_type"  style="width: 100%;" >
-                                  <?php 
+                                  <?php
                                     $inclusive_selected=$exclusive_selected='';
                                     if($tax_type =='Inclusive') { $inclusive_selected='selected'; }
                                     if($tax_type =='Exclusive') { $exclusive_selected='selected'; }
@@ -323,7 +323,7 @@
                                     <option <?= $inclusive_selected ?> value="Inclusive">Inclusive</option>
                                  </select>
                                  <span id="tax_type_msg" style="display:none" class="text-danger"></span>
-                                 
+
                               </div>
                               <div class="form-group col-md-4">
                                  <label for="profit_margin"><?= $this->lang->line('profit_margin'); ?>(%) <i class="hover-q " data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $this->lang->line('based_on_purchase_price'); ?>" data-html="true" data-trigger="hover" data-original-title="">
@@ -344,7 +344,7 @@
                                  <input type="text" class="form-control only_currency " id="final_price" name="final_price" placeholder="Final Price"  value="<?php print $final_price; ?>" readonly >
                                  <span id="final_price_msg" style="display:none" class="text-danger"></span>
                               </div>
-							  
+
 							         <div class="form-group col-md-4">
                                  <label for="wholesale_price" class="control-label">Wholesale price<span class="text-danger">*</span></label>
                                  <input type="text" class="form-control only_currency " id="wholesale_price" name="wholesale_price" placeholder="Whole sale Price"  value="<?php print $wholesale_price; ?>" >
@@ -362,7 +362,7 @@
 							         <div class="form-group col-md-4">
                                  <label for="slied" class="control-label">Is Popular Product<span class="text-danger"></label>
                                  <select class="form-control" name="is_feature" id="is_feature" >
-                                 <?php 
+                                 <?php
                                     $yes_selected=$no_selected='';
                                     if($is_feature =='1') { $yes_selected='selected'; }
                                     if($is_feature =='0') { $no_selected='selected'; }
@@ -370,13 +370,13 @@
                                   ?>
                                     <option <?= $no_selected ?> value="0">No</option>
                                     <option <?= $yes_selected ?> value="1">Yes</option>
-                                    
+
                                  </select>
                               </div>
 							         <div class="form-group col-md-4">
                                  <label for="slied" class="control-label">Is Latest<span class="text-danger"></label>
                                  <select class="form-control" name="is_latest" id="is_latest" value="<?php print $is_latest; ?>">
-                                 <?php 
+                                 <?php
                                     $yes_selected=$no_selected='';
                                     if($is_latest =='1') { $yes_selected='selected'; }
                                     if($is_latest =='0') { $no_selected='selected'; }
@@ -384,13 +384,13 @@
                                   ?>
                                     <option <?= $no_selected ?> value="0">No</option>
                                     <option <?= $yes_selected ?> value="1">Yes</option>
-                                    
+
                                  </select>
                               </div>
 							         <div class="form-group col-md-4">
                                  <label for="slied" class="control-label">Is offer Product<span class="text-danger"></label>
                                  <select class="form-control" name="is_top" id="is_top" value="<?php print $is_top; ?>">
-                                 <?php 
+                                 <?php
                                     $yes_selected=$no_selected='';
                                     if($is_top =='1') { $yes_selected='selected'; }
                                     if($is_top =='0') { $no_selected='selected'; }
@@ -398,13 +398,13 @@
                                   ?>
                                     <option <?= $no_selected ?> value="0">No</option>
                                     <option <?= $yes_selected ?> value="1">Yes</option>
-                                    
+
                                  </select>
                               </div>
 							         <div class="form-group col-md-4">
                                  <label for="slied" class="control-label">Is Review<span class="text-danger"></label>
                                  <select class="form-control" name="is_review" id="is_review" value="<?php print $is_review; ?>">
-                                 <?php 
+                                 <?php
                                     $yes_selected=$no_selected='';
                                     if($is_review =='1') { $yes_selected='selected'; }
                                     if($is_review =='0') { $no_selected='selected'; }
@@ -416,7 +416,7 @@
                               </div>
                            </div>
                            <!-- /row -->
-                           <div class="row">                              
+                           <div class="row">
                               <div class="form-group col-md-4">
                                  <label for="custom_barcode" ><?= $this->lang->line('description'); ?></label>
                                  <textarea type="text" class="form-control summernote" id="description" name="description" placeholder=""><?php print $description; ?></textarea>
@@ -453,8 +453,8 @@
                                     <?php
                                         $query1="select * from db_warehouse where status=1";
                                         $q1=$this->db->query($query1);
-                                        if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>'; 
-                                            foreach($q1->result() as $res1){ 
+                                        if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>';
+                                            foreach($q1->result() as $res1){
                                                 echo "<option value='".$res1->id."'>".$res1->warehouse_name."</option>";
                                             }
                                         } else {
@@ -503,14 +503,14 @@
                   <!--/.col (right) -->
                </div>
                <div class="col-md-12">
-         
+
                     <div class="box">
                       <div class="box-header">
                         <h3 class="box-title text-blue"><?= $this->lang->line('opening_stock_adjustment_records'); ?></h3>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body table-responsive no-padding">
-                        
+
                         <table class="table table-bordered table-hover " id="report-data" >
                           <thead>
                           <tr class="bg-gray">
@@ -522,7 +522,7 @@
                           </tr>
                           </thead>
                           <tbody>
-                              <?php 
+                              <?php
                                 if(isset($q_id)){
                                   $q3 = $this->db->query("select * from db_stockentry where item_id=$q_id");
                                   if($q3->num_rows()>0){
@@ -548,8 +548,8 @@
                               ?>
                            </tbody>
                         </table>
-                        
-                        
+
+
                       </div>
                       <!-- /.box-body -->
                     </div>

@@ -553,3 +553,12 @@ $lang['stock_exchange']	                    =		'Stock Exchange';
 $lang['stock_list']	                        =		'Stock List';
 $lang['accounts']	                        =		'Accounts';
 $lang['transactions']	                    =		'Transactions';
+$lang['Headslider']	                        =		'Headslider';
+
+$lang['headslider_list']	                =       'Headslider List';
+$lang['slider_image']	                    =		'Slider Image';
+$lang['title']	                            =		'Slider Title';
+$lang['front settings']	                    =		'Front settings';
+$lang['headslide_add']	                    =		'Head slide add';
+$lang['short_description']	                =		'Short Description';
+$lang['link']	                            =		'Link';

@@ -495,3 +495,5 @@ $lang['hsn'								]	=		'HSN';
 $lang['final_price'						]	=		'চূড়ান্ত মূল্য';
 $lang['final_sales_price'				]	=		'চূড়ান্ত বিক্রয় মূল্য';
 $lang['item_purchase_report'			]	=		'আইটেম ক্রয়ের প্রতিবেদন';
+$lang['Headslider'			]	=		'হেড-স্লাইডার';
+$lang['headslider_list'			]	=		'হেড-স্লাইডার তালিকা';
