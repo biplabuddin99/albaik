@@ -39,7 +39,7 @@
               <div class="carousel-item active">
                   <a href="#"
                     ><img
-                      src="{{ asset('uploads/slider') }}/{{ $s->slider_image }}"
+                      src="{{ asset('./../pos/uploads/slider_image') }}/{{ $s->slider_image }}"
                       class="d-block w-100"
                       alt="..."
                   /></a>

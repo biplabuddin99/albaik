@@ -51,12 +51,10 @@
               <table id="example2" class="table table-bordered table-striped" width="100%">
                 <thead class="bg-primary ">
                 <tr>
-                  <th class="text-center">
-                    <input type="checkbox" class="group_check checkbox" >
-                  </th>
-                  <th><?= $this->lang->line('category_code'); ?></th>
-                  <th><?= $this->lang->line('category_name'); ?></th>
-                  <th><?= $this->lang->line('description'); ?></th>
+                  <th><?= $this->lang->line('title'); ?></th>
+                  <th><?= $this->lang->line('short_description'); ?></th>
+                  <th><?= $this->lang->line('link'); ?></th>
+                  <th><?= $this->lang->line('slider_image'); ?></th>
                   <th><?= $this->lang->line('action'); ?></th>
                 </tr>
                 </thead>
