@@ -19,8 +19,8 @@
     </div>
   </nav>
 
-  <div class="left-bottom-div bg-light">
-    <div class="navbar left-bottom-nav bg-light">
+  <div class="left-bottom-div">
+    <div class="navbar left-bottom-nav">
           @php
             $category =\App\Models\Category::all();
         @endphp
