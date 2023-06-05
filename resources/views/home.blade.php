@@ -36,7 +36,7 @@
             </div>
             <div class="carousel-inner">
               @forelse ($slide as $s)
-              <div class="carousel-item active">
+                <div class="carousel-item active">
                   <a href="#"
                     ><img
                       src="{{ asset('./../pos/uploads/slider_image') }}/{{ $s->slider_image }}"

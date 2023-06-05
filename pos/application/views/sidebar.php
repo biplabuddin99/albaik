@@ -575,11 +575,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          <?php if($CI->permissions('headslide_add')) { ?>
-            <li class="items-active-li"><a href="<?php echo $base_url; ?>headslider/add"><i class="fa fa-plus-square-o "></i> <span><?= $this->lang->line('headslide_add'); ?></span></a></li>
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>headslider/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('Headslider'); ?></span></a></li>
             <?php } ?>
             <?php if($CI->permissions('items_view')) { ?>
-            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>headslider/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('headslide_list'); ?></span></a></li>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>footslider/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('footslider'); ?></span></a></li>
             <?php } ?>
 
 
