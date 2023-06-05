@@ -245,11 +245,11 @@
                 ></button>
               </div>
               <div class="carousel-inner">
-                    @forelse ($offer as $of)
+                    @forelse ($footslider as $of)
                     <div class="carousel-item active">
                         <a href="#"
                         ><img
-                            src="{{ asset('uploads/offer') }}/{{ $of->offer_image }}"
+                            src="{{ asset('./../pos/uploads/fslider_image') }}/{{ $of->fslider_image }}"
                             class="d-block w-100"
                             alt="..."
                         /></a>

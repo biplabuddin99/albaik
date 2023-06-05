@@ -10,6 +10,7 @@ use App\Models\ChildCategory;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\HeaderSlider;
+use App\Models\FooterSlider;
 use App\Models\OurOffer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,10 +27,10 @@ class FrontendController extends Controller
     {
         $faq=Faq::all();
         $slide=HeaderSlider::all();
-        $offer=OurOffer::all();
+        $footslider=FooterSlider::all();
         $product = DB::table('db_items')->where('is_feature', '1')->select('id','item_name','sales_price','item_image','is_feature')->paginate(12);
         $offer_product = DB::table('db_items')->where('is_top', '1')->select('id','item_name','sales_price','item_image','is_top')->paginate(12);
-        return view('home',compact('faq','slide','offer','product','offer_product'));
+        return view('home',compact('faq','slide','footslider','product','offer_product'));
     }
     public function Search(Request $request)
     {

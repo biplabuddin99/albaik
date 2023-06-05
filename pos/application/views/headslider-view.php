@@ -42,7 +42,7 @@
               <?php if($CI->permissions('items_category_add')) { ?>
               <div class="box-tools">
                 <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>headslider/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('add_category'); ?></a>
+                <i class="fa fa-plus"></i> <?= $this->lang->line('Headslider'); ?></a>
               </div>
               <?php } ?>
             </div>
