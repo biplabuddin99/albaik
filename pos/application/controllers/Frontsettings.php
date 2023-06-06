@@ -69,31 +69,19 @@ class Frontsettings extends MY_Controller {
 			$row[] = $fsettings->email;
 			$row[] = $fsettings->address;
 			$row[] = $fsettings->description;
-			$row[] = "<img src='".base_url('uploads/fsettings_image/').$fsettings->logo_img."' width='80px'>";
-			$row[] = "<img src='".base_url('uploads/fsettings_image/').$fsettings->offer_icon."' width='80px'>";
-			$row[] = "<img src='".base_url('uploads/fsettings_image/').$fsettings->popular_icon."' width='80px'>";
+			$row[] = "<img src='".base_url('uploads/fsettings_image/').$fsettings->logo_img."' width='50px'>";
+			$row[] = "<img src='".base_url('uploads/fsettings_image/').$fsettings->offer_icon."' width='20px'>";
+			$row[] = "<img src='".base_url('uploads/fsettings_image/').$fsettings->popular_icon."' width='20px'>";
+            $row[] = $fsettings->facebooklink;
+            $row[] = $fsettings->twitterlink;
+            $row[] = $fsettings->linkdinlink;
+            $row[] = $fsettings->youtubelink;
 
 					$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
+                        <a class="btn btn-primary" title="Edit Record ?" href="update/'.$fsettings->id.'">
+                        <i class="fa fa-fw fa-edit text-blue"></i>Edit
+                        </a>
 
-											if($this->permissions('items_category_edit'))
-											$str2.='<li>
-												<a title="Edit Record ?" href="update/'.$fsettings->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('items_category_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_fsettings('.$fsettings->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-
-										</ul>
 									</div>';
 
 			$row[] = $str2;

@@ -90,7 +90,8 @@
                 <p class="h6">
                   <img
                     class="body-title-icon"
-                    src="{{ asset('assets/resource') }}/img/icon/image 49.png"
+                    src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ $frontsettt->popular_icon }}"
+                    //src="{{ asset('assets/resource') }}/img/icon/image 49.png"
                     alt=""
                   /><strong>আমাদের জনপ্রিয় পণ্য</strong>
                 </p>
@@ -141,7 +142,7 @@
                 <p class="h6">
                   <img
                     class="body-title-icon"
-                    src="{{ asset('assets/resource') }}/img/icon/image 49.png"
+                    src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ $frontsettt->offer_icon }}"
                     alt=""
                   /><strong>আমাদের অফার পণ্য</strong>
                 </p>
@@ -296,30 +297,30 @@
         <div class="container faq my-5">
           <p>FAQ</p>
           <div class="row faq-body">
+              @forelse ($faq as $f)
             <div class="col-sm-6">
-                @forelse ($faq as $f)
                 <div
                 class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
+                id="fid{{ $f->id }}"
                 >
                 <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
+                <h2 class="accordion-header" id="f{{ $f->id }}">
                     <button
                     class="accordion-button collapsed rounded"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne"
+                    data-bs-target="#fls{{ $f->id }}"
                     aria-expanded="false"
-                    aria-controls="flush-collapseOne"
+                    aria-controls="fls{{ $f->id }}"
                     >
                     {{ $f->question }}
                     </button>
                 </h2>
                 <div
-                    id="flush-collapseOne"
+                    id="fls{{ $f->id }}"
                     class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
+                    aria-labelledby="f{{ $f->id }}"
+                    data-bs-parent="#fid{{ $f->id }}"
                 >
                     <div class="accordion-body">
                     {{ $f->description }}
@@ -328,172 +329,10 @@
                 </div>
                 </div>
 
+            </div>
                 @empty
                 <p>No Faq </p>
-                @endforelse
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseTwo"
-                    >
-                      How does the site work?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseTwo"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseThree"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseThree"
-                    >
-                      How much do deliveries cost?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseThree"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseFour"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseFour"
-                    >
-                      What are your delivery hours?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseFour"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseFive"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseFive"
-                    >
-                      My order is wrong. What do I do?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseFive"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseSix"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseSix"
-                    >
-                      Do you serve my area?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseSix"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @endforelse
           </div>
         </div>
           <!-- Footer -->

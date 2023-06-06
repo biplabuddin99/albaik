@@ -584,6 +584,9 @@
             <?php if($CI->permissions('items_view')) { ?>
             <li class="items-list-active-li"><a href="<?php echo $base_url; ?>faq/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('faq_list'); ?></span></a></li>
             <?php } ?>
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>frontsettings/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('frontsettings'); ?></span></a></li>
+            <?php } ?>
 
 		   </ul>
         </li>

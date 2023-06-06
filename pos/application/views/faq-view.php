@@ -18,12 +18,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?=$page_question;?>
+        <?=$page_title;?>
         <small>View/Search Items Faq</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_question;?></li>
+        <li class="active"><?=$page_title;?></li>
       </ol>
     </section>
 
@@ -38,7 +38,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_question;?></h3>
+              <h3 class="box-title"><?=$page_title;?></h3>
               <?php if($CI->permissions('items_category_add')) { ?>
               <div class="box-tools">
                 <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>faq/add">
@@ -103,11 +103,11 @@ $(document).ready(function() {
                     multi_delete();
                 }
             },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
+            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2]} },
+            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2]} },
+            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2]} },
+            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2]} },
+            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2]} },
             { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },
 
             ]
@@ -142,7 +142,7 @@ $(document).ready(function() {
         //Set column definition initialisation properties.
         "columnDefs": [
         {
-            "targets": [ 0,4 ], //first column / numbering column
+            "targets": [ 0,2 ], //first column / numbering column
             "orderable": false, //set not orderable
         },
         {

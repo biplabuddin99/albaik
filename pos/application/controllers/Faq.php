@@ -11,7 +11,7 @@ class Faq extends MY_Controller {
 	public function add(){
 		$this->permission_check('items_category_add');
 		$data=$this->data;
-		$data['page_question']=$this->lang->line('faq');
+		$data['page_title']=$this->lang->line('faq');
 		$this->load->view('faq', $data);
 	}
 
@@ -32,7 +32,7 @@ class Faq extends MY_Controller {
 
 		$result=$this->faq->get_details($id,$data);
 		$data=array_merge($data,$result);
-		$data['page_question']=$this->lang->line('faq');
+		$data['page_title']=$this->lang->line('faq');
 		$this->load->view('faq', $data);
 	}
 	public function update_faq(){
@@ -49,7 +49,7 @@ class Faq extends MY_Controller {
 	public function view(){
 		$this->permission_check('items_category_view');
 		$data=$this->data;
-		$data['page_question']=$this->lang->line('faq_list');
+		$data['page_title']=$this->lang->line('faq_list');
 		$this->load->view('faq-view', $data);
 	}
 

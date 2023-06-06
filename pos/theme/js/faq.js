@@ -20,7 +20,7 @@ $('#save,#update').click(function (e) {
     }
 
     //Validate Input box or selection box should not be blank or empty
-	check_field("question");
+	check_field("page_question");
 
     if(flag==false)
     {

@@ -153,13 +153,9 @@
             <div class="row">
                 <div class="col-sm-6 p-5">
                     <div class="footer-logo">
-                        <img class="img-fluid" src="{{ asset('assets/resource') }}/img/logo1-01.png" alt="" />
+                        <img class="img-fluid" src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}" alt="" />
                     </div>
-                    <p class="footer-about-footer text-white">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Nesciunt soluta ipsam dolorum perferendis at nihil autem
-                        iusto perspiciatis laudantium quia, nobis aliquid voluptas
-                        possimus doloremque non voluptatibus nam voluptates ullam.
+                    <p class="footer-about-footer text-white">{{ \App\Models\FrontSettings::first()->description }}
                     </p>
                     <div class="social-icon">
                         <i class="bi bi-facebook"></i>
@@ -175,18 +171,16 @@
                     </div>
                     <div class="address text-white">
                         <i class="bi bi-geo-alt-fill"> </i>
-                        <p>
-                        3100 Danforth Avenue <br />
-                        Torento, Canada
+                        <p>{{ \App\Models\FrontSettings::first()->address }}
                         </p>
                         <br />
                         <br />
                         <i class="bi bi-telephone-fill"></i>
-                        <p>647-352-5009</p>
+                        <p>{{ \App\Models\FrontSettings::first()->phone }}</p>
                         <br />
                         <br />
                         <i class="bi bi-envelope-fill"></i>
-                        <p>support@chowkbazaarhalalmeat.com</p>
+                        <p>{{ \App\Models\FrontSettings::first()->email }}</p>
                     </div>
                 </div>
             </div>

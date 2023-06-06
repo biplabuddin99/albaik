@@ -98,8 +98,8 @@ class Frontsettings_model extends CI_Model {
 	        	/*Create Thumbnail*/
 	        	$config['image_library'] = 'gd2';
 				$config['source_image'] = 'uploads/fsettings_image/'.$popular_icon;
-				$config['create_thumb'] = TRUE;
-				$config['maintain_ratio'] = TRUE;
+				$config['create_thumb'] = false;
+				$config['maintain_ratio'] = false;
 				$config['width']         = 20;
 				$config['height']       = 20;
 				$this->load->library('image_lib', $config);
@@ -127,8 +127,8 @@ class Frontsettings_model extends CI_Model {
 	        	/*Create Thumbnail*/
 	        	$config['image_library'] = 'gd2';
 				$config['source_image'] = 'uploads/fsettings_image/'.$offer_icon;
-				$config['create_thumb'] = TRUE;
-				$config['maintain_ratio'] = TRUE;
+				$config['create_thumb'] = false;
+				$config['maintain_ratio'] = false;
 				$config['width']         = 20;
 				$config['height']       = 20;
 				$this->load->library('image_lib', $config);
@@ -202,17 +202,77 @@ class Frontsettings_model extends CI_Model {
 			return $data;
 		}
 	}
-	public function update_slider(){
+	public function update_settings(){
 		//Filtering XSS and html escape from user inputs
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
 
 		//Validate This category already exist or not
 
         $file_name='';
-        if(!empty($_FILES['slider_image']['name'])){
+		if(!empty($_FILES['popular_icon']['name'])){
+			$new_name = time();
+			$config['file_name'] = $new_name;
+			$config['upload_path']          = './uploads/fsettings_image/';
+	        $config['allowed_types']        = 'jpg|png|jpeg';
+	        $config['max_size']             = 1024000;
+	        $config['max_width']            = 100000;
+	        $config['max_height']           = 100000;
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('popular_icon')){
+                $error = array('error' => $this->upload->display_errors());
+                print($error['error']);
+                exit();
+	        }else{
+	        	$popular_icon=$this->upload->data('file_name');
+	        	/*Create Thumbnail*/
+	        	$config['image_library'] = 'gd2';
+				$config['source_image'] = 'uploads/fsettings_image/'.$popular_icon;
+				$config['create_thumb'] = false;
+				$config['maintain_ratio'] = false;
+				$config['width']         = 20;
+				$config['height']       = 20;
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				//end
+                $file_name.=" ,popular_icon='".$popular_icon."' ";
+	        }
+		}
+		if(!empty($_FILES['offer_icon']['name'])){
+			$new_name = time();
+			$config['file_name'] = $new_name;
+			$config['upload_path']          = './uploads/fsettings_image/';
+	        $config['allowed_types']        = 'jpg|png|jpeg';
+	        $config['max_size']             = 1024000;
+	        $config['max_width']            = 100000;
+	        $config['max_height']           = 100000;
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('offer_icon')){
+                $error = array('error' => $this->upload->display_errors());
+                print($error['error']);
+                exit();
+	        }else{
+	        	$offer_icon=$this->upload->data('file_name');
+	        	/*Create Thumbnail*/
+	        	$config['image_library'] = 'gd2';
+				$config['source_image'] = 'uploads/fsettings_image/'.$offer_icon;
+				$config['create_thumb'] = false;
+				$config['maintain_ratio'] = false;
+				$config['width']         = 20;
+				$config['height']       = 20;
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				//end
+                $file_name.=" ,offer_icon='".$offer_icon."' ";
+	        }
+		}
+        if(!empty($_FILES['logo_img']['name'])){
             $new_name = time();
             $config['file_name'] = $new_name;
-            $config['upload_path']          = './uploads/slider_image/';
+            $config['upload_path']          = './uploads/fsettings_image/';
             $config['allowed_types']        = 'jpg|png|jpeg';
             $config['max_size']             = 1024000;
             $config['max_width']            = 100000;
@@ -220,28 +280,28 @@ class Frontsettings_model extends CI_Model {
 
             $this->load->library('upload', $config);
 
-            if ( ! $this->upload->do_upload('slider_image')){
+            if ( ! $this->upload->do_upload('logo_img')){
                 $error = array('error' => $this->upload->display_errors());
                 print($error['error']);
                 exit();
             }else{
-                $file_name="slider_image='".$this->upload->data('file_name')."', ";
+                $logo_img=$this->upload->data('file_name');
                 /*Create Thumbnail*/
                 $config['image_library'] = 'gd2';
-                $config['source_image'] = 'uploads/slider_image/'.$file_name;
+                $config['source_image'] = 'uploads/fsettings_image/'.$logo_img;
                 $config['create_thumb'] = false;
                 $config['maintain_ratio'] = false;
-                $config['width']         = 1290;
-                $config['height']       = 400;
+                $config['width']         = 200;
+                $config['height']       = 100;
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
                 //end
+                $file_name.=" ,logo_img='".$logo_img."' ";
             }
         }
-
-			$query1="update header_sliders set $file_name short_description='$short_description',title='$title',link='$link' where id=$q_id";
+			$query1="update frontsettings set description='$description',address='$address',phone='$phone',email='$email',facebooklink='$facebooklink',twitterlink='$twitterlink',linkdinlink='$linkdinlink',youtubelink='$youtubelink' $file_name where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Slider Updated Successfully!');
+					$this->session->set_flashdata('success', 'Success!! Front Setting Updated Successfully!');
 			        return "success";
 			}
 			else{
@@ -252,7 +312,7 @@ class Frontsettings_model extends CI_Model {
 
 	public function delete_slider_from_table($ids){
 
-			$query1="delete from header_sliders where id in($ids)";
+			$query1="delete from frontsettings where id in($ids)";
 	        if ($this->db->simple_query($query1)){
 	            echo "success";
 	        }
