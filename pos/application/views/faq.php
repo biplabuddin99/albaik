@@ -23,11 +23,11 @@
     <section class="content-header">
       <h1>
         <?=$page_question;?>
-        <small>Add/Update Headslider</small>
+        <small>Add/Update Faq</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>category/view"><?= $this->lang->line('faq_list'); ?></a></li>
+        <li><a href="<?php echo $base_url; ?>faq/view"><?= $this->lang->line('faq_list'); ?></a></li>
         <li class="active"><?=$page_question;?></li>
       </ol>
     </section>
