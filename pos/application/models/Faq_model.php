@@ -77,7 +77,7 @@ class Faq_model extends CI_Model {
         $query1="insert into faqs(question,description)
                             values('$question','$description')";
         if ($this->db->simple_query($query1)){
-                $this->session->set_flashdata('success', 'Success!! New Header Sliders Added Successfully!');
+                $this->session->set_flashdata('success', 'Success!! New Faq Added Successfully!');
                 return "success";
         }
         else{

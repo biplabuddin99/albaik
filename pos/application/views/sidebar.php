@@ -581,35 +581,8 @@
             <?php if($CI->permissions('items_view')) { ?>
             <li class="items-list-active-li"><a href="<?php echo $base_url; ?>footslider/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('footslider'); ?></span></a></li>
             <?php } ?>
-
-
-            <?php if($CI->permissions('tax_view')) { ?>
-            <li class="tax-active-li  tax-list-active-li"><a href="<?php echo $base_url; ?>tax"><i class="fa fa-percent  "></i> <span><?= $this->lang->line('tax_list'); ?></span></a></li>
-            <?php } ?>
-            <?php if($CI->permissions('units_view')) { ?>
-            <li class="units-list-active-li unit-active-li"><a href="<?php echo $base_url; ?>units/"><i class="fa fa-list "></i> <span><?= $this->lang->line('units_list'); ?></span></a></li>
-            <?php } ?>
-			<?php if($CI->permissions('payment_types_view')) { ?>
-            <li class="units-list-active-li unit-active-li hidden"><a href="<?php echo $base_url; ?>banks/"><i class="fa fa-bank "></i> <span>Banks List</span></a></li>
-
-			 <li class="units-list-active-li unit-active-li"><a href="<?php echo $base_url; ?>openning_balance/"><i class="fa fa-money "></i> <span>Openning Balance</span></a></li>
-
-
-            <li class="payment_types_list-active-li payment_types-active-li"><a href="<?php echo $base_url; ?>payment_types/"><i class="fa fa-list "></i> <span><?= $this->lang->line('payment_types_list'); ?></span></a></li>
-            <?php } ?>
-
-            <?php if($CI->permissions('currency_view')) { ?>
-            <li class="currency-view-active-li currency-active-li"><a href="<?php echo $base_url; ?>currency/view"><i class="fa fa-gg "></i> <span><?= $this->lang->line('currency_list'); ?></span></a></li>
-            <?php } ?>
-
-            <?php if($CI->permissions('warehouse_view')) { ?>
-            <li class="currency-view-active-li currency-active-li"><a href="<?php echo $base_url; ?>warehouse/"><i class="fa fa-gg "></i> <span><?= $this->lang->line('warehouse'); ?></span></a></li>
-            <?php } ?>
-            <li class="change-pass-active-li"><a href="<?php echo $base_url; ?>users/password_reset"><i class="fa fa-lock "></i> <span><?= $this->lang->line('change_password'); ?></span></a></li>
-
-
-            <?php if($CI->permissions('database_backup')) { ?>
-            <li class="dbbackup-active-li"><a href="<?php echo $base_url; ?>users/dbbackup"><i class="fa fa-database "></i> <span><?= $this->lang->line('database_backup'); ?></span></a></li>
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>faq/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('faq_list'); ?></span></a></li>
             <?php } ?>
 
 		   </ul>
