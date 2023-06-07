@@ -44,7 +44,7 @@
         </div>
         <div class="col-sm-4 text-center">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('assets/resource') }}/img/logo1-01.png" alt="Your Image" class="img-fluid float-middle middle_logo">
+                <img src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}" alt="Your Image" class="img-fluid float-middle middle_logo">
             </a>
         </div>
         <div class="col-sm-4 text-center">
@@ -70,11 +70,11 @@
             </div>
             </div>
 
-            <a href="#">
+            <a href="{{ route('home') }}">
             <div class="nav-logo">
                 <img
-                class="navbar-brand img-fluid bg-dark rounded"
-                src="{{ asset('assets/resource') }}/img/logo1-01.png"
+                class="navbar-brand img-fluid rounded height-40"
+                src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}"
                 alt="logo"
                 />
             </div>
@@ -117,7 +117,7 @@
                         <i class="bi bi-person-circle"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"  style="background-color: #FFFF66;">
-                        @if(Session::get('userId'))                       
+                        @if(Session::get('userId'))
                         <li><a class="dropdown-item" href="{{ route('customer.dashboard') }}">Dashboard</a></li>
                         <li><a class="dropdown-item" href="{{ route('logOut') }}">Logout</a></li>
                         @else

@@ -42,7 +42,7 @@ class CustomerAuthController extends Controller
             }
 
         }catch(Exception $e){
-            Toastr::info('Please try Again!');
+            Toastr::primary('Please try Again!');
             // dd($e);
         }
     }
@@ -149,7 +149,7 @@ class CustomerAuthController extends Controller
             }
         } catch (Exception $error) {
             // dd($error);
-            Toastr::info('Please try Again!');
+            // Toastr::info('Please try Again!');
             return redirect()->route('login')->with($this->resMessageHtml(false, 'error', 'wrong cradential!'));
         }
     }
