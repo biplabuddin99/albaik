@@ -158,10 +158,10 @@
                     <p class="footer-about-footer text-white">{{ \App\Models\FrontSettings::first()->description }}
                     </p>
                     <div class="social-icon">
-                        <i class="bi bi-facebook"></i>
-                        <i class="bi bi-twitter"></i>
-                        <i class="bi bi-linkedin"></i>
-                        <i class="bi bi-youtube"></i>
+                        <a href="{{ \App\Models\FrontSettings::first()->facebooklink }}"><i class="bi bi-facebook"></i></a>
+                        <a href="{{ \App\Models\FrontSettings::first()->twitterlink }}"><i class="bi bi-twitter"></i></a>
+                        <a href="{{ \App\Models\FrontSettings::first()->linkdinlink }}"><i class="bi bi-linkedin"></i></a>
+                        <a href="{{ \App\Models\FrontSettings::first()->youtubelink }}"><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
                 <div class="col-sm-6 p-5">

@@ -149,7 +149,7 @@
               </div>
               <div class="col d-flex justify-content-end">
                 <p class="view">
-                  <a href="#">View All</a>
+                  <a href="{{ route('product.index') }}">View All</a>
                 </p>
               </div>
             </div>

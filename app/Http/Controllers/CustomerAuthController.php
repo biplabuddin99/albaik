@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Crypt;
 use Exception;
 use Session;
@@ -41,7 +42,8 @@ class CustomerAuthController extends Controller
             }
 
         }catch(Exception $e){
-            dd($e);
+            Toastr::info('Please try Again!');
+            // dd($e);
         }
     }
 
@@ -76,8 +78,8 @@ class CustomerAuthController extends Controller
            $wishlist->user_id=$user_id;
            $wishlist->save();
            return redirect()->back();
-           
-           
+
+
        }else{
         return redirect()->route('login');
        }
@@ -91,7 +93,7 @@ class CustomerAuthController extends Controller
     }
 
     public function WishlistDelete($id)
-    { 
+    {
         $wishlist=Wishlist::findOrFail($id);
         $wishlist->delete();
         return redirect()->back();
@@ -146,7 +148,8 @@ class CustomerAuthController extends Controller
                 return redirect()->route('login')->with($this->resMessageHtml(false, 'error', 'wrong cradential!. Or no user found!'));
             }
         } catch (Exception $error) {
-            dd($error);
+            // dd($error);
+            Toastr::info('Please try Again!');
             return redirect()->route('login')->with($this->resMessageHtml(false, 'error', 'wrong cradential!'));
         }
     }
