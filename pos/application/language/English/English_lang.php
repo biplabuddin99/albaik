@@ -585,3 +585,5 @@ $lang['linkdinlink']	                    =		' Linkdin Link';
 $lang['youtubelink']	                    =		' Youtube Link';
 $lang['online_order']	                    =		' Online Order';
 $lang['online_order_list']	                =		' Online Order List';
+$lang['Customer']	                        =		' Customer';
+$lang['Bill_id']	                        =		' Bill Id';

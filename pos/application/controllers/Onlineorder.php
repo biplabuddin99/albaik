@@ -36,14 +36,14 @@ class Onlineorder extends MY_Controller {
 		$this->load->view('onlineorder', $data);
 	}
 	public function update_onlineorder(){
-		$this->form_validation->set_rules('title', 'Title', 'trim|required');
+		$this->form_validation->set_rules('status', 'Status', 'trim|required');
 		$this->form_validation->set_rules('q_id', '', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE) {
 			$result=$this->onlineorder->update_onlineorder();
 			echo $result;
 		} else {
-			echo "Please Enter Title.";
+			echo "Please Enter Status.";
 		}
 	}
 	public function view(){

@@ -109,9 +109,9 @@ class Onlineorder_model extends CI_Model {
 		//Filtering XSS and html escape from user inputs
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
 
-			$query1="update header_sliders set $file_name short_description='$short_description',title='$title',link='$link' where id=$q_id";
+			$query1="update orders set user_id='$user_id',billing_id='$billing_id',sub_total='$sub_total',total='$total',status='$status' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Slider Updated Successfully!');
+					$this->session->set_flashdata('success', 'Success!! Updated Successfully!');
 			        return "success";
 			}
 			else{
@@ -120,9 +120,9 @@ class Onlineorder_model extends CI_Model {
 
 	}
 
-	public function delete_slider_from_table($ids){
+	public function delete_order_from_table($ids){
 
-			$query1="delete from header_sliders where id in($ids)";
+			$query1="delete from orders where id in($ids)";
 	        if ($this->db->simple_query($query1)){
 	            echo "success";
 	        }

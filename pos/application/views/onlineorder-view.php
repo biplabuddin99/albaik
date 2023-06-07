@@ -19,7 +19,7 @@
     <section class="content-header">
       <h1>
         <?=$page_title;?>
-        <small>View/Search Items Slider</small>
+        <small>View Online Order</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -37,24 +37,16 @@
         <!-- ********** ALERT MESSAGE END******* -->
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_title;?></h3>
-              <?php if($CI->permissions('items_category_add')) { ?>
-              <div class="box-tools">
-                <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>headslider/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('Headslider'); ?></a>
-              </div>
-              <?php } ?>
-            </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-striped" width="100%">
                 <thead class="bg-primary ">
                 <tr>
-                  <th><?= $this->lang->line('title'); ?></th>
-                  <th><?= $this->lang->line('short_description'); ?></th>
-                  <th><?= $this->lang->line('link'); ?></th>
-                  <th><?= $this->lang->line('slider_image'); ?></th>
+                  <th><?= $this->lang->line('Customer'); ?></th>
+                  <th><?= $this->lang->line('Bill_id'); ?></th>
+                  <th><?= $this->lang->line('subtotal'); ?></th>
+                  <th><?= $this->lang->line('total'); ?></th>
+                  <th><?= $this->lang->line('status'); ?></th>
                   <th><?= $this->lang->line('action'); ?></th>
                 </tr>
                 </thead>
@@ -125,7 +117,7 @@ $(document).ready(function() {
         },
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('headslider/ajax_list')?>",
+            "url": "<?php echo site_url('onlineorder/ajax_list')?>",
             "type": "POST",
 
             complete: function (data) {
@@ -157,7 +149,7 @@ $(document).ready(function() {
     new $.fn.dataTable.FixedHeader( table );
 });
 </script>
-<script src="<?php echo $theme_link; ?>js/headslider.js"></script>
+<script src="<?php echo $theme_link; ?>js/onlineorder.js"></script>
 <!-- Make sidebar menu hughlighter/selector -->
 <script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
 </body>
