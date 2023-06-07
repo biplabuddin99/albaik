@@ -113,7 +113,7 @@
             </div>
             <div class="ms-auto customer-seciton mobile-bg p-1">
                 <div class="dropdown">
-                    <a class="" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"  style="background-color: #FFFF66;">
