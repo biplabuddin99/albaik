@@ -42,7 +42,7 @@ class CustomerAuthController extends Controller
             }
 
         }catch(Exception $e){
-            Toastr::primary('Please try Again!');
+            // Toastr::primary('Please try Again!');
             // dd($e);
         }
     }
@@ -125,7 +125,7 @@ class CustomerAuthController extends Controller
                 ]);
             return redirect()->route('customer.dashboard');
         } catch (Exception $e) {
-            Toastr::info('Please try Again!');
+            // Toastr::info('Please try Again!');
             // dd($e);
         }
     }
