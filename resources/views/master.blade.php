@@ -199,8 +199,8 @@ integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0
 crossorigin="anonymous"
 ></script>
 <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-{!! Toastr::message() !!}
+{{--  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}  --}}
 <!-- Apps JS -->
 <script src="{{ asset('assets/resource') }}/js/apps.js"></script>
 <script src="{{ asset('assets/resource') }}/js/jquery-3.6.3.min.js"></script>
