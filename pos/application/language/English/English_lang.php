@@ -590,3 +590,5 @@ $lang['Bill_id']	                        =		' Bill Id';
 $lang['cupon']	                            =		' Cupon';
 $lang['cupon_list']	                        =		' Cupon List';
 $lang['cupon_name']	                        =		' Cupon Name';
+$lang['cupon_code']	                        =		' Cupon Code';
+$lang['number_of']	                        =		' Number Of';

@@ -49,49 +49,57 @@
               <div class="box-body">
 			<div class="form-group">
 			      <label for="cupon" class="col-sm-2 control-label"><?= $this->lang->line('cupon_name'); ?><label class="text-danger">*</label></label>
-           <div class="col-sm-4">
-             <input type="text" class="form-control input-sm" id="cupon" name="cupon" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $cupon_name; ?>" autofocus >
-				      <span id="cupon_msg" style="display:none" class="text-danger"></span>
-            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control input-sm" id="cupon" name="cupon" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $cupon_name; ?>" autofocus >
+                        <span id="cupon_msg" style="display:none" class="text-danger"></span>
+                </div>
       </div>
       <div class="form-group">
-          <label for="image" class="col-sm-2 control-label">Icon Image</label>
+          <label for="cupon_code" class="col-sm-2 control-label"><?= $this->lang->line('cupon_code'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control" name="image">
-              <span id="item_image_msg" style="display:block;" class="text-danger">Max Width/Height: 1000px * 1000px & Size: 1MB </span>
-              <?php if($image){ ?>
-                <a href="<?= base_url($image) ?>" target="_blank">
-                    <img src="<?= base_url($image) ?>" alt="" width="50px">
+              <input type="text" class="form-control" name="cupon_code">
+              <?php if($cupon_code){ ?>
+                <a href="<?= base_url($cupon_code) ?>" target="_blank">
+                    <img src="<?= base_url($cupon_code) ?>" alt="" width="50px">
                 </a>
               <?php } ?>
           </div>
       </div>
       <div class="form-group">
-          <label for="banner_image" class="col-sm-2 control-label">Banner Image</label>
+          <label for="number_of" class="col-sm-2 control-label"><?= $this->lang->line('number_of'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control" name="banner_image">
-              <span id="item_image_msg" style="display:block;" class="text-danger">Max Width/Height: 1000px * 1000px & Size: 1MB </span>
-              <?php if($banner_image){ ?>
-                <a href="<?= base_url($banner_image) ?>" target="_blank">
-                    <img src="<?= base_url($banner_image) ?>" alt="" width="50px">
+              <input type="text" class="form-control" name="number_of">
+              <?php if($number_of){ ?>
+                <a href="<?= base_url($number_of) ?>" target="_blank">
+                    <img src="<?= base_url($number_of) ?>" alt="" width="50px">
                 </a>
               <?php } ?>
           </div>
       </div>
       <div class="form-group">
-          <label for="advertise_image" class="col-sm-2 control-label">Advertisement Image</label>
+          <label for="start_date" class="col-sm-2 control-label"><?= $this->lang->line('start_date'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control" name="advertise_image">
-              <span id="item_image_msg" style="display:block;" class="text-danger">Max Width/Height: 337px * 600px & Size: 1MB </span>
-              <?php if($advertise_image){ ?>
-                <a href="<?= base_url($advertise_image) ?>" target="_blank">
-                    <img src="<?= base_url($advertise_image) ?>" alt="" width="50px">
+              <input type="text" class="form-control" name="start_date">
+              <?php if($start_date){ ?>
+                <a href="<?= base_url($start_date) ?>" target="_blank">
+                    <img src="<?= base_url($start_date) ?>" alt="" width="50px">
                 </a>
               <?php } ?>
           </div>
       </div>
       <div class="form-group">
-          <label for="slied" class="col-sm-2 control-label">Is Slied<span class="text-danger"></label>
+          <label for="finish_date" class="col-sm-2 control-label"><?= $this->lang->line('finish_date'); ?></label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control" name="finish_date">
+              <?php if($finish_date){ ?>
+                <a href="<?= base_url($finish_date) ?>" target="_blank">
+                    <img src="<?= base_url($finish_date) ?>" alt="" width="50px">
+                </a>
+              <?php } ?>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="slied" class="col-sm-2 control-label"><?= $this->lang->line('finish_date'); ?></label>
           <div class="col-sm-4">
               <select class="form-control" name="is_slied" >
               <?php
