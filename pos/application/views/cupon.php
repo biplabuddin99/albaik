@@ -13,7 +13,7 @@
  <?php include"sidebar.php"; ?>
  <?php
 	if(!isset($cupon_name)){
-      $cupon_code=$cupon_name=$description=$is_slied=$is_advertise=$image=$banner_image=$advertise_image="";
+      $cupon_code=$cupon_name=$number_of=$start_date=$finish_date=$discount_type=$discount=$status="";
 	}
  ?>
 
@@ -27,7 +27,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>Cupon/view"><?= $this->lang->line('cupons_list'); ?></a></li>
+        <li><a href="<?php echo $base_url; ?>cupon/view"><?= $this->lang->line('cupons_list'); ?></a></li>
         <li class="active"><?=$page_title;?></li>
       </ol>
     </section>
@@ -44,13 +44,9 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" enctype="multipart/form-data" id="cupon-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
+            <?= form_open('#', array('class' => 'form', 'id' => 'cupon-form', 'enctype'=>'multipart/form-data', 'method'=>'POST'));?>
+            <input type="hidden" id="base_url" value="<?php echo $base_url; ?>">
               <div class="box-body">
-
-
-
 			<div class="form-group">
 			      <label for="cupon" class="col-sm-2 control-label"><?= $this->lang->line('cupon_name'); ?><label class="text-danger">*</label></label>
            <div class="col-sm-4">
@@ -61,7 +57,7 @@
       <div class="form-group">
           <label for="image" class="col-sm-2 control-label">Icon Image</label>
           <div class="col-sm-4">
-              <input type="file" class="form-control" name="image">
+              <input type="text" class="form-control" name="image">
               <span id="item_image_msg" style="display:block;" class="text-danger">Max Width/Height: 1000px * 1000px & Size: 1MB </span>
               <?php if($image){ ?>
                 <a href="<?= base_url($image) ?>" target="_blank">
@@ -73,7 +69,7 @@
       <div class="form-group">
           <label for="banner_image" class="col-sm-2 control-label">Banner Image</label>
           <div class="col-sm-4">
-              <input type="file" class="form-control" name="banner_image">
+              <input type="text" class="form-control" name="banner_image">
               <span id="item_image_msg" style="display:block;" class="text-danger">Max Width/Height: 1000px * 1000px & Size: 1MB </span>
               <?php if($banner_image){ ?>
                 <a href="<?= base_url($banner_image) ?>" target="_blank">
@@ -85,7 +81,7 @@
       <div class="form-group">
           <label for="advertise_image" class="col-sm-2 control-label">Advertisement Image</label>
           <div class="col-sm-4">
-              <input type="file" class="form-control" name="advertise_image">
+              <input type="text" class="form-control" name="advertise_image">
               <span id="item_image_msg" style="display:block;" class="text-danger">Max Width/Height: 337px * 600px & Size: 1MB </span>
               <?php if($advertise_image){ ?>
                 <a href="<?= base_url($advertise_image) ?>" target="_blank">

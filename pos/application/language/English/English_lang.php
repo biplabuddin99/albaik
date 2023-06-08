@@ -587,3 +587,6 @@ $lang['online_order']	                    =		' Online Order';
 $lang['online_order_list']	                =		' Online Order List';
 $lang['Customer']	                        =		' Customer';
 $lang['Bill_id']	                        =		' Bill Id';
+$lang['cupon']	                            =		' Cupon';
+$lang['cupon_list']	                        =		' Cupon List';
+$lang['cupon_name']	                        =		' Cupon Name';
