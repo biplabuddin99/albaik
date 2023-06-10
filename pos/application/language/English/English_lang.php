@@ -592,3 +592,6 @@ $lang['cupon_list']	                        =		' Cupon List';
 $lang['cupon_name']	                        =		' Cupon Name';
 $lang['cupon_code']	                        =		' Cupon Code';
 $lang['number_of']	                        =		' Number Of';
+$lang['start_date']	                        =		' Start Date';
+$lang['finish_date']	                    =		'Finish Date';
+$lang['discount_type']	                    =		'Discount Type';

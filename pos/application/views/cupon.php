@@ -115,17 +115,17 @@
           </div>
       </div>
       <div class="form-group">
-          <label for="slied" class="col-sm-2 control-label">Is Advertise<span class="text-danger"></label>
+          <label for="slied" class="col-sm-2 control-label"><?= $this->lang->line('discount_type'); ?><span class="text-danger"></label>
           <div class="col-sm-4">
               <select class="form-control" name="is_advertise" >
               <?php
                 $yes_selected=$no_selected='';
-                if($is_advertise =='1') { $yes_selected='selected'; }
-                if($is_advertise =='0') { $no_selected='selected'; }
+                if($is_advertise =='0') { $yes_selected='selected'; }
+                if($is_advertise =='1') { $no_selected='selected'; }
 
               ?>
-                <option <?= $no_selected ?> value="0">No</option>
-                <option <?= $yes_selected ?> value="1">Yes</option>
+                <option <?= $no_selected ?> value="0">Percent</option>
+                <option <?= $yes_selected ?> value="1">Amount</option>
 
               </select>
           </div>
@@ -133,11 +133,15 @@
 
 
 				<div class="form-group">
-                  <label for="description" class="col-sm-2 control-label"><?= $this->lang->line('description'); ?></label>
+                  <label for="description" class="col-sm-2 control-label"><?= $this->lang->line('discount'); ?></label>
                   <div class="col-sm-4">
-                    <textarea type="text" class="form-control" id="description" name="description" placeholder=""><?php print $description; ?></textarea>
-					<span id="description_msg" style="display:none" class="text-danger"></span>
-                  </div>
+              <input type="text" class="form-control" name="discount">
+              <?php if($discount){ ?>
+                <a href="<?= base_url($discount) ?>" target="_blank">
+                    <img src="<?= base_url($discount) ?>" alt="" width="50px">
+                </a>
+              <?php } ?>
+          </div>
                 </div>
 
               </div>
