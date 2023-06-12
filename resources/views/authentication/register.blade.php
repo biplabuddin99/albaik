@@ -21,22 +21,22 @@
                 <div class="mb-3">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"
-                    >First Name</label
+                    >Full Name</label
                     >
                     <input
                     type="text"
-                    class="form-control @error('first_name') is-invalid @enderror"
+                    class="form-control @error('customer_name') is-invalid @enderror"
                     id="exampleInputEmail1"
-                    name="first_name" value="{{ old('first_name') }}" placeholder="Enter Your First Name"
+                    name="customer_name" value="{{ old('customer_name') }}" placeholder="Enter Your Name"
                     aria-describedby="emailHelp"
                     />
-                    @if($errors->has('first_name'))
+                    @if($errors->has('customer_name'))
                         <small class="d-block text-danger">
-                            {{$errors->first('first_name')}}
+                            {{$errors->first('customer_name')}}
                         </small>
                     @endif
                 </div>
-                <div class="mb-3">
+                {{--  <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"
                     >Last Name</label
                     >
@@ -52,38 +52,38 @@
                         {{ $errors->first('last_name') }}
                     </small>
                     @endif
-                </div>
+                </div>  --}}
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"
                     >Mobile Number</label
                     >
                     <input
                     type="number"
-                    class="form-control @error('contact') is-invalid @enderror"
+                    class="form-control @error('mobile') is-invalid @enderror"
                     id="exampleInputEmail1"
-                    name="contact" value="{{ old('contact') }}" placeholder="Enter Your Phone Number"
+                    name="mobile" value="{{ old('mobile') }}" placeholder="Enter Your Phone Number"
                     aria-describedby="emailHelp"
                     />
-                    @if($errors->has('contact'))
+                    @if($errors->has('mobile'))
                     <small class="d-block text-danger">
-                        {{ $errors->first('contact') }}
+                        {{ $errors->first('mobile') }}
                     </small>
                     @endif
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"
-                    >Shipping Address</label
+                    >Address</label
                     >
                     <input
                     type="text"
-                    class="form-control @error('shipping_address') is-invalid @enderror"
+                    class="form-control @error('address') is-invalid @enderror"
                     id="exampleInputEmail1"
-                    name="shipping_address" value="{{ old('shipping_address') }}" placeholder="Enter Your Place"
+                    name="address" value="{{ old('address') }}" placeholder="Enter Your Place"
                     aria-describedby="emailHelp"
                     />
-                    @if($errors->has('shipping_address'))
+                    @if($errors->has('address'))
                     <small class="d-block text-danger">
-                        {{ $errors->first('shipping_address') }}
+                        {{ $errors->first('address') }}
                     </small>
                     @endif
                 </div>
@@ -124,7 +124,7 @@
                 @endif
                 </div>
                 <div class="mb-3 form-check">
-                <input
+                {{--  <input
                     type="checkbox"
                     class="form-check-input"
                     id="exampleCheck1"
@@ -133,9 +133,10 @@
                 />
                 <label class="form-check-label" for="exampleCheck1"
                     >Check me out</label
-                > <a class="ms-2" href="{{ route('login') }}"><span>or Login</span></a>
-                </div>
-                <button type="submit" class="submit shadow">Submit</button>
+                >   --}}
+            </div>
+            <button type="submit" class="submit shadow">Submit</button>
+            <a class="ms-2" href="{{ route('login') }}"><span>or Login</span></a>
                 {{-- <a class="submit shadow" href="#">Submit</a> --}}
           </form>
         </div>

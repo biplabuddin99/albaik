@@ -50,8 +50,8 @@ class Cupon_model extends CI_Model {
 	function get_datatables()
 	{
 		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-		$this->db->limit($_POST['length'], $_POST['start']);
+		// if($_POST['length'] != -1)
+		// $this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -74,22 +74,6 @@ class Cupon_model extends CI_Model {
 		//Filtering XSS and html escape from user inputs
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
 
-		//Validate This cupon already exist or not
-		$query=$this->db->query("select * from db_cupon where upper(cupon_name)=upper('$cupon')");
-		if($query->num_rows()>0){
-			return "This Cupon Name already Exist.";
-		}
-		else{
-			$qs5="select cupon_init from db_company";
-			$q5=$this->db->query($qs5);
-			$cupon_init=$q5->row()->cupon_init;
-
-			//Create cupon unique Number
-			$qs4="select coalesce(max(id),0)+1 as maxid from db_cupon";
-			$q1=$this->db->query($qs4);
-			$maxid=$q1->row()->maxid;
-			$cat_code='CT'.str_pad($maxid, 4, '0', STR_PAD_LEFT);
-			//end
 			$query1="insert into db_cupon(cupon_code,cupon_name,number_of,start_date,finish_date,discount_type,discount,status)
 								values('$cupon_code','$cupon_name','$number_of','$start_date','$finish_date','$discount_type','$discount',1)";
 			if ($this->db->simple_query($query1)){
@@ -100,7 +84,6 @@ class Cupon_model extends CI_Model {
 			        return "failed";
 			}
 		}
-	}
 
 	//Get cupon_details
 	public function get_details($id,$data){

@@ -6,21 +6,21 @@ $('#save,#update').click(function (e) {
 
     function check_field(id)
     {
-      if(!$("#"+id).val().trim() ) //Also check Others????
-        {
-            $('#'+id+'_msg').fadeIn(200).show().html('Required Field').addClass('required');
-           // $('#'+id).css({'background-color' : '#E8E2E9'});
-            flag=false;
-        }
-        else
-        {
-             $('#'+id+'_msg').fadeOut(200).hide();
-             //$('#'+id).css({'background-color' : '#FFFFFF'});    //White color
-        }
+    //   if(!$("#"+id).val().trim() ) //Also check Others????
+    //     {
+    //         $('#'+id+'_msg').fadeIn(200).show().html('Required Field').addClass('required');
+    //        // $('#'+id).css({'background-color' : '#E8E2E9'});
+    //         flag=false;
+    //     }
+    //     else
+    //     {
+    //          $('#'+id+'_msg').fadeOut(200).hide();
+    //          //$('#'+id).css({'background-color' : '#FFFFFF'});    //White color
+    //     }
     }
 
     //Validate Input box or selection box should not be blank or empty
-	check_field("cupon");
+	// check_field("cupon");
 
     if(flag==false)
     {
@@ -43,7 +43,7 @@ $('#save,#update').click(function (e) {
 						$("#"+this_id).attr('disabled',true);  //Enable Save or Update button
 						$.ajax({
 						type: 'POST',
-						url: base_url+'cupon/+',
+						url: base_url+'cupon/newCupon',
 						data: data,
 						cache: false,
 						contentType: false,

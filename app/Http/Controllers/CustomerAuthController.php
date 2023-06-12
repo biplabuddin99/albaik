@@ -25,16 +25,15 @@ class CustomerAuthController extends Controller
 
     public function signUpStore(CustomerSignupRequest $request)
     {
+        // dd($request->all());
         try {
             $customer = new CustomerAuth;
-            $customer->first_name=$request->first_name;
-            $customer->last_name=$request->last_name;
-            $customer->contact=$request->contact;
-            $customer->shipping_address=$request->shipping_address;
+            $customer->customer_name=$request->customer_name;
+            $customer->mobile=$request->mobile;
+            $customer->address=$request->address;
             $customer->email=$request->email;
             $customer->image='avater.jpg';
             $customer->password=Crypt::encryptString($request->password);
-            $customer->check_me_out=$request->check_me_out;
             if($customer->save()){
             return redirect(route('login'));
             }else{
@@ -43,7 +42,7 @@ class CustomerAuthController extends Controller
 
         }catch(Exception $e){
             // Toastr::primary('Please try Again!');
-            // dd($e);
+            dd($e);
         }
     }
 
@@ -105,10 +104,10 @@ class CustomerAuthController extends Controller
         try {
             $id=Session::get('userId');
             $customer=CustomerAuth::findOrFail($id);
-            $customer->first_name=$request->first_name;
-            $customer->last_name=$request->last_name;
-            $customer->contact=$request->contact;
-            $customer->shipping_address=$request->shipping_address;
+            $customer->customer_name=$request->customer_name;
+            $customer->mobile=$request->mobile;
+            $customer->address=$request->address;
+            $customer->email=$request->email;
             if($request->hasFile('image')){
                 $imageName = rand(111,999).time().'.'.$request->image->extension();
                 $request->image->move(public_path('uploads/customer_img'), $imageName);
@@ -119,7 +118,7 @@ class CustomerAuthController extends Controller
                 [
                     'userId'=>$customer->id,
                     'userName'=>$customer->first_name." ".$customer->last_name,
-                    'shippingAddress'=>$customer->shipping_address,
+                    'shippingAddress'=>$customer->address,
                     'Phone'=>$customer->contact,
                     'Image'=>$customer->image?$customer->image:'avater.jpg'
                 ]);
@@ -158,10 +157,10 @@ class CustomerAuthController extends Controller
         return request()->session()->put(
                 [
                     'userId'=>$customer->id,
-                    'userName'=>$customer->first_name." ".$customer->last_name,
+                    'userName'=>$customer->customer_name,
                     'userEmail'=>$customer->email,
-                    'shippingAddress'=>$customer->shipping_address,
-                    'Phone'=>$customer->contact,
+                    'shippingAddress'=>$customer->address,
+                    'Phone'=>$customer->mobile,
                     'language'=>$customer->language,
                     'Image'=>$customer->image?$customer->image:'no-image.png'
                 ]

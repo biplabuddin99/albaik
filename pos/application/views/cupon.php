@@ -46,11 +46,11 @@
             <!-- form start -->
             <?= form_open('#', array('class' => 'form', 'id' => 'cupon-form', 'enctype'=>'multipart/form-data', 'method'=>'POST'));?>
             <input type="hidden" id="base_url" value="<?php echo $base_url; ?>">
-              <div class="box-body">
+            <div class="box-body">
 			<div class="form-group">
 			      <label for="cupon" class="col-sm-2 control-label"><?= $this->lang->line('cupon_name'); ?><label class="text-danger">*</label></label>
             <div class="col-sm-4">
-                <input type="text" class="form-control input-sm" id="cupon" name="cupon" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $cupon_name; ?>" autofocus >
+                <input type="text" class="form-control input-sm" id="cupon_name" name="cupon_name" placeholder="" value="<?php print $cupon_name; ?>" autofocus >
                         <span id="cupon_msg" style="display:none" class="text-danger"></span>
                 </div>
       </div>
@@ -79,7 +79,7 @@
       <div class="form-group">
           <label for="start_date" class="col-sm-2 control-label"><?= $this->lang->line('start_date'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control" name="start_date">
+              <input type="text" class="form-control datepicker" name="start_date">
               <?php if($start_date){ ?>
                 <a href="<?= base_url($start_date) ?>" target="_blank">
                     <img src="<?= base_url($start_date) ?>" alt="" width="50px">
@@ -90,7 +90,7 @@
       <div class="form-group">
           <label for="finish_date" class="col-sm-2 control-label"><?= $this->lang->line('finish_date'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control" name="finish_date">
+              <input type="text" class="form-control datepicker" name="finish_date">
               <?php if($finish_date){ ?>
                 <a href="<?= base_url($finish_date) ?>" target="_blank">
                     <img src="<?= base_url($finish_date) ?>" alt="" width="50px">
@@ -99,33 +99,17 @@
           </div>
       </div>
       <div class="form-group">
-          <label for="slied" class="col-sm-2 control-label"><?= $this->lang->line('finish_date'); ?></label>
-          <div class="col-sm-4">
-              <select class="form-control" name="is_slied" >
-              <?php
-                $yes_selected=$no_selected='';
-                if($is_slied =='1') { $yes_selected='selected'; }
-                if($is_slied =='0') { $no_selected='selected'; }
-
-              ?>
-                <option <?= $no_selected ?> value="0">No</option>
-                <option <?= $yes_selected ?> value="1">Yes</option>
-
-              </select>
-          </div>
-      </div>
-      <div class="form-group">
           <label for="slied" class="col-sm-2 control-label"><?= $this->lang->line('discount_type'); ?><span class="text-danger"></label>
           <div class="col-sm-4">
-              <select class="form-control" name="is_advertise" >
+              <select class="form-control" name="discount_type" >
               <?php
-                $yes_selected=$no_selected='';
-                if($is_advertise =='0') { $yes_selected='selected'; }
-                if($is_advertise =='1') { $no_selected='selected'; }
+                $amount=$percent='';
+                if($is_advertise =='0') { $amount='selected'; }
+                if($is_advertise =='1') { $percent='selected'; }
 
               ?>
-                <option <?= $no_selected ?> value="0">Percent</option>
-                <option <?= $yes_selected ?> value="1">Amount</option>
+                <option <?= $percent ?> value="0">Percent</option>
+                <option <?= $amount ?> value="1">Amount</option>
 
               </select>
           </div>
@@ -133,8 +117,8 @@
 
 
 				<div class="form-group">
-                  <label for="description" class="col-sm-2 control-label"><?= $this->lang->line('discount'); ?></label>
-                  <div class="col-sm-4">
+          <label for="description" class="col-sm-2 control-label"><?= $this->lang->line('discount'); ?></label>
+          <div class="col-sm-4">
               <input type="text" class="form-control" name="discount">
               <?php if($discount){ ?>
                 <a href="<?= base_url($discount) ?>" target="_blank">
@@ -151,18 +135,17 @@
                    <!-- <div class="col-sm-4"></div> -->
                    <?php
                       if($cupon_code!=""){
-                           $btn_name="Update";
-                           $btn_id="update";
-                          ?>
-                            <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-                            <?php
-                      }
-                                else{
-                                    $btn_name="Save";
-                                    $btn_id="save";
-                                }
+                          $btn_name="Update";
+                          $btn_id="update";
+                        ?>
+                          <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
+                          <?php
+                      }else{
+                              $btn_name="Save";
+                              $btn_id="save";
+                          }
 
-                                ?>
+                          ?>
 
                    <div class="col-md-3 col-md-offset-3">
                       <button type="button" id="<?php echo $btn_id;?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name;?></button>
