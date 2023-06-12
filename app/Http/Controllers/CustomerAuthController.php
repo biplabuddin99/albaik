@@ -117,9 +117,9 @@ class CustomerAuthController extends Controller
             request()->session()->put(
                 [
                     'userId'=>$customer->id,
-                    'userName'=>$customer->first_name." ".$customer->last_name,
+                    'userName'=>$customer->customer_name,
                     'shippingAddress'=>$customer->address,
-                    'Phone'=>$customer->contact,
+                    'Phone'=>$customer->mobile,
                     'Image'=>$customer->image?$customer->image:'avater.jpg'
                 ]);
             return redirect()->route('customer.dashboard');
