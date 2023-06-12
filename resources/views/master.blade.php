@@ -129,7 +129,7 @@
                         @endif
                     </ul>
                     <a href="#"><i class="bi bi-truck"></i></a>
-                    <a href="#"><i class="bi bi-heart"></i></a>
+                    {{--  <a href="#"><i class="bi bi-heart"></i></a>  --}}
                     <a href="{{ route('cart.page') }}"><i class="bi bi-basket"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }}

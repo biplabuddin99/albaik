@@ -65,7 +65,7 @@
                 </div>
                 <input type="submit" value="Add To Cart" />
                 <div>
-                <i class="bi bi-heart-fill"></i>
+                {{--  <i class="bi bi-heart-fill"></i>  --}}
                 </div>
             </form>
             <div class="p-short-point">
@@ -197,10 +197,16 @@
                     <div class="card-body">
                         <p class="card-title text-center"> {{ $rproduct->item_name }} </p>
                         <p class="card-title text-center m-0 p-0">{{ $rproduct->sales_price .' '.'TK' }}</p>
-                        <div class="card-button">
-                        <a href="#">+ Add to Card</a>
-                        <a href="#"><i class="bi bi-heart-fill"></i></a>
-                        </div>
+                        <form class="" action="{{ route('add-to.cart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $rproduct->id }}">
+                            <input type="hidden" id="qtyBox" placeholder="1" value="1" name="order_qty" />
+                            <div class="card-button">
+                                <input class="cartsubmit" type="submit" value="+Add To Cart" />
+                                <a href="#"></a>
+                                {{--  <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>  --}}
+                              </div>
+                        </form>
                     </div>
                     </div>
                 </div>
