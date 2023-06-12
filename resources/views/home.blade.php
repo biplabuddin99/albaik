@@ -117,19 +117,26 @@
                       <div class="card-body">
                         <p class="card-title text-center">{{ $p->item_name }}</p>
                         <p class="card-title text-center m-0 p-0">{{ $p->sales_price .' '.'TK' }}</p>
-                        <div class="card-button">
-                          <a href="{{ route('product_details.singleProduct',$p->id) }}">+ Add to Card</a>
-                          <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>
-                        </div>
+                        <form class="" action="{{ route('add-to.cart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $p->id }}">
+                            <input type="hidden" id="qtyBox" placeholder="1" value="1" name="order_qty" />
+                            <div class="card-button">
+                                <input class="cartsubmit" type="submit" value="+Add To Cart" />
+                                {{--  <a href="{{ route('product_details.singleProduct',$p->id) }}">+ Add to Card</a>  --}}
+                                <a href="#"></a>
+                                {{--  <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>  --}}
+                              </div>
+                        </form>
                       </div>
                     </div>
                 </div>
                 @empty
                     <p>no Product</p>
                 @endforelse
-                <div class="pt-2">
+                {{--  <div class="pt-2">
                     {{$product->links()}}
-                </div>
+                </div>  --}}
             </div>
           </div>
         </div>
@@ -167,19 +174,26 @@
                       <div class="card-body">
                         <p class="card-title text-center">{{ $off->item_name }}</p>
                         <p class="card-title text-center m-0 p-0">{{ $off->sales_price .' '.'TK' }}</p>
-                        <div class="card-button">
-                          <a href="{{ route('product_details.singleProduct',$off->id) }}">+ Add to Card</a>
-                          <a href="#"><i class="bi bi-heart-fill"></i></a>
-                        </div>
+                        <form class="" action="{{ route('add-to.cart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $off->id }}">
+                            <input type="hidden" id="qtyBox" placeholder="1" value="1" name="order_qty" />
+                            <div class="card-button">
+                                <input class="cartsubmit" type="submit" value="+Add To Cart" />
+                                {{--  <a href="{{ route('product_details.singleProduct',$p->id) }}">+ Add to Card</a>  --}}
+                                <a href="#"></a>
+                                {{--  <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>  --}}
+                              </div>
+                        </form>
                       </div>
                     </div>
                   </div>
                 @empty
                     <p>no Product</p>
                 @endforelse
-                <div class="pt-2">
+                {{--  <div class="pt-2">
                     {{$offer_product->links()}}
-                </div>
+                </div>  --}}
             </div>
           </div>
         </div>

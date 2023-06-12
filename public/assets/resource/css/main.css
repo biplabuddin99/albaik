@@ -202,9 +202,9 @@ nav {
 .card-button {
   margin-top: 10px;
   text-align: center;
-  margin: 20px 0;
+  margin: 0px 0px 20px 0px;
 }
-.card-button a:first-child {
+.cartsubmit, .card-button a:first-child {
   font-weight: bold;
   color: #000;
   text-decoration: none;
@@ -212,6 +212,7 @@ nav {
   background: rgba(247, 243, 5, 0.973);
   padding: 5px 10px 5px 10px;
   border-radius: 10px;
+  border: none;
 }
 .card-button a:last-child {
   color: rgba(247, 243, 5, 0.973);

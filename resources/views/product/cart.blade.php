@@ -16,16 +16,16 @@
         $second_number = $total_price;
         $sum_total = is_numeric($second_number) ? $first_number - $second_number : 0;
         @endphp
-    
+
     @if ($second_number > $first_number)
         <p>Free shipping available!</p>
     @else
     <p>Add <span>${{ number_format($sum_total, 2) }}</span> to your cart and get free shipping!</p>
 
     @endif  --}}
-    
-    
-        <p>Add <span>${{ $total_price }}</span> to cart and get free shipping!</p>
+
+
+        <p>You Add <span>{{ $total_price }} TK</span> in cart !</p>
         <div class="progress mb-3">
           <div
             class="progress-bar bg-warning"
@@ -60,11 +60,11 @@
                           <img class="img-fluid" src="{{ asset('./../pos/') }}/{{ $cartitem->options->product_image }}" alt=""/>
                         </td>
                         <td>{{ $cartitem->name }}</td>
-                        <td>${{ $cartitem->price }}</td>
+                        <td>{{ $cartitem->price }} TK</td>
                         <td>
                             <strong class="ps-2">{{ $cartitem->qty }}</strong>
                         </td>
-                        <td>${{ $cartitem->price*$cartitem->qty  }}</td>
+                        <td>{{ $cartitem->price*$cartitem->qty  }} TK</td>
                         <td>
                             <a href="{{ route('removefrom.cart',['cart_id' => $cartitem->rowId]) }}">
                                 <i class="ms-3 text-danger bi bi-x-circle-fill"></i>
@@ -102,9 +102,12 @@
               <div class="cart-detaits p-3">
                 <p>CART TOTALS</p>
                 <hr />
-                <p>Shipping Charge :<span>$1000.00</span></p>
-                <p>Discount :<span>$1000.00</span></p>
-                <p>Grant Total :<span>${{ $total_price }}</span></p>
+                <div class="row">
+                    <b>Discount :<span class="m-5">1000.00 TK</span></b>
+                </div>
+                <div class="row">
+                    <b>Grant Total :<span class="m-5">{{ $total_price }} TK</span></b>
+                </div>
                 <hr />
                 <a class="submit shadow" href="{{ route('customer.checkoutpage') }}">Process to Chackout</a>
               </div>
