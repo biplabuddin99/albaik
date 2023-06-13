@@ -19,6 +19,12 @@ class ProductController extends Controller
         // return $product;
         return view('product.product',compact('product'));
     }
+    public function topProduct()
+    {
+        $product = DB::table('db_items')->where('is_top', '1')->select('id','item_name','sales_price','item_image','is_feature')->paginate(12);
+        // return $product;
+        return view('product.product',compact('product'));
+    }
 
     /**
      * Show the form for creating a new resource.

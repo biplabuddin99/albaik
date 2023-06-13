@@ -104,8 +104,8 @@
               <select class="form-control" name="discount_type" >
               <?php
                 $amount=$percent='';
-                if($is_advertise =='0') { $amount='selected'; }
-                if($is_advertise =='1') { $percent='selected'; }
+                if($percent =='0') { $percent='selected'; }
+                if($amount =='1') { $amount='selected'; }
 
               ?>
                 <option <?= $percent ?> value="0">Percent</option>

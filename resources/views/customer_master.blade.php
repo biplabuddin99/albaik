@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/cart.css" />
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/single.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <!-- Bootstrp 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -202,6 +203,9 @@ src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.j
 integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 crossorigin="anonymous"
 ></script>
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 <!-- Apps JS -->
 <script src="{{ asset('assets/resource') }}/js/apps.js"></script>
 <script src="{{ asset('assets/resource') }}/js/jquery-3.6.3.min.js"></script>

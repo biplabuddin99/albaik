@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\Coupon;
+use Illuminate\Support\Facades\Session;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {
@@ -43,6 +47,59 @@ class CartController extends Controller
         Cart::remove($cart_id);
         // Toastr::info('Product Removed from Cart!!');
         return back();
+    }
+
+    public function couponApply(Request $request)
+    {
+        //dd($request->all());
+        $check=Coupon::where('cupon_code',$request->cupon_code)->first();
+        // print_r($check->discount);
+        // print_r(Cart::subtotal());
+        $cartsubtotal=str_replace(",", "", Cart::subtotal());
+        //if session got existing coupon, then don't allow double coupon
+        if(Session::get('coupon')){
+            Toastr::error('Already Applied coupon!!','Info!!');
+            return redirect()->back();
+        }
+
+        //if valid coupon found
+        if($check !=null){
+            //check coupon validity
+            $check_validity=$check->finish_date>Carbon::now()->format('Y-m-d');
+            //if coupon date is not expried
+            if($check_validity && $check->discount_type==0){
+                Session::put('coupon',[
+                    'cupon_code'=>$check->cupon_code,
+                    'discount'=>($cartsubtotal * $check->discount)/100,
+                    'cart_total'=> $cartsubtotal,
+                    'balance'=> $cartsubtotal - ($cartsubtotal * $check->discount)/100
+                ]);
+                Toastr::success('Coupon Percentage Applied!!','Successfully!!');
+                return redirect()->back();
+            }else if($check_validity && $check->discount_type==1){
+                Session::put('coupon',[
+                    'cupon_code'=>$check->cupon_code,
+                    'discount'=>$check->discount,
+                    'cart_total'=> $cartsubtotal,
+                    'balance'=> $cartsubtotal - $check->discount
+                ]);
+                Toastr::success('Coupon Percentage Applied!!','Successfully!!');
+                return redirect()->back();
+            }else{
+                Toastr::error('Coupon Date Expire!!!','Info!!');
+                return redirect()->back();
+            }
+        }else{
+            Toastr::error('Invalid Action/Coupon! Check, Empty Cart');
+            return redirect()->back();
+        }
+    }
+
+    public function removeCoupon($cupon_code)
+    {
+        Session::forget('coupon');
+        Toastr::success('Coupon Removed','Successfully!!');
+        return redirect()->back();
     }
 
 }

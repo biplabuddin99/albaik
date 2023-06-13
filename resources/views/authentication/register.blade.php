@@ -135,8 +135,8 @@
                     >Check me out</label
                 >   --}}
             </div>
-            <button type="submit" class="submit shadow">Submit</button>
-            <a class="ms-2" href="{{ route('login') }}"><span>or Login</span></a>
+            <button type="submit" class="submit shadow">Submit</button> OR
+            <a class="ms-2 submit shadow" href="{{ route('login') }}"><span>Login</span></a>
                 {{-- <a class="submit shadow" href="#">Submit</a> --}}
           </form>
         </div>

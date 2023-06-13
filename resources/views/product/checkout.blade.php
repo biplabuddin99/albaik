@@ -11,7 +11,7 @@
                     @csrf
                     <div class="row">
                         <div class="col-8 w-50 mt-1">
-                            <h3>Billing Details</h3>
+                            <h3>Shipping Details</h3>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"
                                 >Full Name</label
@@ -141,7 +141,7 @@
                                         @if (Session::has('coupon'))
                                         <tr>
                                             <td>Discount</td>
-                                            <td> (-) $ {{ Session::get('coupon')['discount_amount'] }}</td>
+                                            <td> (-) $ {{ Session::get('coupon')['discount'] }}</td>
                                         </tr>
                                         <tr>
                                             <td>Total</td>

@@ -33,14 +33,17 @@ Route::get('/category/{category_id}/{subcategory_id}',[FrontendController::class
 Route::get('/products/{category_id}/{subcategory_id?}/{childcategory_id?}',[FrontendController::class,'childCategoryProductList'])->name('category.product.list');
 Route::get('/child-category-all',[ChildCategoryController::class,'index'])->name('child-category.index');
 Route::get('/child-category-list/{subcategory_id}',[ChildCategoryController::class,'childCategory'])->name('child-category.list');
-Route::get('product-all',[ProductController::class,'index'])->name('product.index');
+Route::get('offer-product',[ProductController::class,'index'])->name('product.index');
+Route::get('popular-product',[ProductController::class,'topProduct'])->name('product.populer');
 Route::get('/product-list/{childcategory_id}', [ProductController::class,'productList'])->name('product.list');
 Route::get('/product_details/{id}', [ProductController::class,'singleProduct'])->name('product_details.singleProduct');
 
 Route::get('/shopping-cart',[CartController::class,'cartPage'])->name('cart.page');
-
-
 Route::get('/remove-from-cart/{cart_id}', [CartController::class, 'removeFromCart'])->name('removefrom.cart');
+
+/* Coupon apply & remove */
+Route::post('cart/apply-coupon',[CartController::class,'couponApply'])->name('customer.couponapply');
+Route::get('cart/remove-coupon/{coupon_name}',[CartController::class,'removeCoupon'])->name('customer.couponremove');
 
 
 Route::get('/customer',[CustomerAuthController::class,'SingUpForm'])->name('register');

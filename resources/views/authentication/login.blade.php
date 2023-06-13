@@ -58,9 +58,11 @@
                     >Check me out</label
                 >
                 </div>
-                <button type="submit" class="submit shadow">{{__('Log in')}}</button>
+                <button type="submit" class="submit shadow">{{__('Log in')}}</button> OR
+                <a class="submit shadow" href="{{ route('register') }}">Registration</a>
                 {{-- <a class="submit shadow" href="#">Submit</a> --}}
             </form>
+
             </div>
         </div>
         </div>
