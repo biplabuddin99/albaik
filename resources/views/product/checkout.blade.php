@@ -135,17 +135,17 @@
                                         @foreach ($carts as $item)
                                         <tr>
                                             <td>{{ $item->name }} X {{ $item->qty }} </td>
-                                            <td>$ {{ $item->price*$item->qty }}</td>
+                                            <td> {{ $item->price*$item->qty }} TK</td>
                                         </tr>
                                         @endforeach
                                         @if (Session::has('coupon'))
                                         <tr>
                                             <td>Discount</td>
-                                            <td> (-) $ {{ Session::get('coupon')['discount'] }}</td>
+                                            <td> (-) {{ Session::get('coupon')['discount'] }} TK</td>
                                         </tr>
                                         <tr>
                                             <td>Total</td>
-                                            <td>$ {{ Session::get('coupon')['balance'] }} <del class="text-danger">৳ {{ Session::get('coupon')['cart_total'] }}</del></td>
+                                            <td> {{ Session::get('coupon')['balance'] }} TK<del class="text-danger"> ৳{{ Session::get('coupon')['cart_total'] }} TK</del></td>
                                         </tr>
                                         @else
                                         <tr>
