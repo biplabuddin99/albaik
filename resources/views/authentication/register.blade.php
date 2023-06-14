@@ -70,7 +70,7 @@
                     </small>
                     @endif
                 </div>
-                <div class="mb-3">
+                {{--  <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"
                     >Address</label
                     >
@@ -105,7 +105,7 @@
                 @endif
                 <div id="emailHelp" class="form-text">
                     We'll never share your email with anyone else.
-                </div>
+                </div>  --}}
                 </div>
                 <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label"

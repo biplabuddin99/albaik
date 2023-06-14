@@ -39,7 +39,7 @@
             All Order
           </a>
         </li>
-        <li class="nav-item">
+        {{--  <li class="nav-item">
           <a
             class="nav-link wishlist" href="{{route('wishlist.list')}}"
             type="button"
@@ -48,7 +48,7 @@
           >
             Wishlist
           </a>
-        </li>
+        </li>  --}}
       </ul>
     </div>
   </div>

@@ -47,18 +47,18 @@
                 </div>  --}}
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"
-                    >Mobile Number</label
+                    >Email Number</label
                     >
                     <input
-                    type="number"
-                    class="form-control @error('mobile') is-invalid @enderror"
+                    type="email"
+                    class="form-control @error('email') is-invalid @enderror"
                     id="exampleInputEmail1"
-                    name="mobile" value="{{ old('mobile',$customer->mobile) }}" placeholder="Enter Your Phone Number"
+                    name="email" value="{{ old('email',$customer->email) }}" placeholder=".......@email.com"
                     aria-describedby="emailHelp"
                     />
-                    @if($errors->has('mobile'))
+                    @if($errors->has('email'))
                     <small class="d-block text-danger">
-                        {{ $errors->first('mobile') }}
+                        {{ $errors->first('email') }}
                     </small>
                     @endif
                 </div>

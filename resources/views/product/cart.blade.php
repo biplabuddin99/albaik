@@ -79,6 +79,9 @@
               </table>
             </div>
             <div class="rounded bg-white my-3 shadow p-3">
+                @if(Session::has('response'))
+                {!!Session::get('response')['message']!!}
+                @endif
                 <form action="{{ route('customer.couponapply') }}" method="post">
                     @csrf
                     <div class="row">

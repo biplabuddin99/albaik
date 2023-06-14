@@ -9,9 +9,11 @@ use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
+use App\Http\Traits\ResponseTrait;
 
 class CartController extends Controller
 {
+    use ResponseTrait;
     public function cartPage()
     {
         $carts=Cart::content();
@@ -58,8 +60,8 @@ class CartController extends Controller
         $cartsubtotal=str_replace(",", "", Cart::subtotal());
         //if session got existing coupon, then don't allow double coupon
         if(Session::get('coupon')){
-            Toastr::error('Already Applied coupon!!','Info!!');
-            return redirect()->back();
+            // Toastr::error('Already Applied coupon!!','Info!!');
+            return redirect()->back()->with($this->resMessageHtml(false, 'error','ইতিমধ্যেই কুপন প্রয়োগ করা হয়েছে !'));
         }
 
         //if valid coupon found
@@ -74,8 +76,8 @@ class CartController extends Controller
                     'cart_total'=> $cartsubtotal,
                     'balance'=> $cartsubtotal - ($cartsubtotal * $check->discount)/100
                 ]);
-                Toastr::success('Coupon Percentage Applied!!','Successfully!!');
-                return redirect()->back();
+                // Toastr::success('Coupon Percentage Applied!!','Successfully!!');
+                return redirect()->back()->with($this->resMessageHtml(true, 'message','কুপন শতাংশ প্রয়োগ করা হয়েছে সফলভাবে!'));
             }else if($check_validity && $check->discount_type==1){
                 Session::put('coupon',[
                     'cupon_code'=>$check->cupon_code,
@@ -83,23 +85,23 @@ class CartController extends Controller
                     'cart_total'=> $cartsubtotal,
                     'balance'=> $cartsubtotal - $check->discount
                 ]);
-                Toastr::success('Coupon Percentage Applied!!','Successfully!!');
-                return redirect()->back();
+                // Toastr::success('Coupon Percentage Applied!!','Successfully!!');
+                return redirect()->back()->with($this->resMessageHtml(true, 'message','কুপন নির্দিষ্ট পরিমাণ টাকা প্রয়োগ করা হয়েছে সফলভাবে !'));
             }else{
-                Toastr::error('Coupon Date Expire!!!','Info!!');
-                return redirect()->back();
+                // Toastr::error('কুপন তারিখ মেয়াদ শেষ!!!','Info!!');
+                return redirect()->back()->with($this->resMessageHtml(false, 'error','কুপনের মেয়াদ শেষ হয়ে গিয়েছে !'));
             }
         }else{
-            Toastr::error('Invalid Action/Coupon! Check, Empty Cart');
-            return redirect()->back();
+            // Toastr::error('অবৈধ অ্যাকশন/কুপন! চেক, খালি কার্ট');
+            return redirect()->back()->with($this->resMessageHtml(false, 'error','আপনি যে কুপন কোডটি প্রদান করেছেন তা সঠিক নয়'));
         }
     }
 
     public function removeCoupon($cupon_code)
     {
         Session::forget('coupon');
-        Toastr::success('Coupon Removed','Successfully!!');
-        return redirect()->back();
+        // Toastr::success('কুপন সরানো হয়েছে সফলভাবে!!');
+        return redirect()->back()->with($this->resMessageHtml(false, 'error','কুপন সফলভাবে সরানো হয়েছে'));
     }
 
 }

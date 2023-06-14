@@ -318,7 +318,7 @@
             <li class="cupon-active-li"><a href="<?php echo $base_url; ?>cupon/add"><i class="fa fa-plus-square-o "></i> <span><?= $this->lang->line('new_cupon'); ?></span></a></li>
             <?php } ?>
             <?php if($CI->permissions('items_cupon_view')) { ?>
-            <li class="cupon-view-active-li"><a href="<?php echo $base_url; ?>cupon/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('cupons_list'); ?></span></a></li>
+            <li class="cupon-view-active-li"><a href="<?php echo $base_url; ?>cupon/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('cupon_list'); ?></span></a></li>
             <?php } ?>
 
 

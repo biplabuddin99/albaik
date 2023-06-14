@@ -25,9 +25,9 @@ class CustomerSignupRequest extends FormRequest
     {
         return [
             'customer_name'=>'required|max:255',
-            'mobile'=>'required|unique:customer_auths,contact,except,id',
-            'address'=>'required',
-            'email'=>'required',
+            'mobile'=>'required|unique:db_customers,mobile,except,id',
+            // 'address'=>'required',
+            // 'email'=>'required',
             'password'=>'required|min:3',
         ];
     }

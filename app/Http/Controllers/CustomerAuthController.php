@@ -30,8 +30,8 @@ class CustomerAuthController extends Controller
             $customer = new CustomerAuth;
             $customer->customer_name=$request->customer_name;
             $customer->mobile=$request->mobile;
-            $customer->address=$request->address;
-            $customer->email=$request->email;
+            // $customer->address=$request->address;
+            // $customer->email=$request->email;
             $customer->image='avater.jpg';
             $customer->password=Crypt::encryptString($request->password);
             if($customer->save()){
@@ -105,7 +105,7 @@ class CustomerAuthController extends Controller
             $id=Session::get('userId');
             $customer=CustomerAuth::findOrFail($id);
             $customer->customer_name=$request->customer_name;
-            $customer->mobile=$request->mobile;
+            // $customer->mobile=$request->mobile;
             $customer->address=$request->address;
             $customer->email=$request->email;
             if($request->hasFile('image')){
@@ -119,7 +119,7 @@ class CustomerAuthController extends Controller
                     'userId'=>$customer->id,
                     'userName'=>$customer->customer_name,
                     'shippingAddress'=>$customer->address,
-                    'Phone'=>$customer->mobile,
+                    'email'=>$customer->email,
                     'Image'=>$customer->image?$customer->image:'avater.jpg'
                 ]);
             return redirect()->route('customer.dashboard');
@@ -136,7 +136,7 @@ class CustomerAuthController extends Controller
     public function customerLoginCheck(CustomerSigninRequest $request)
     {
         try {
-            $customer = CustomerAuth::where('email', $request->email)->first();
+            $customer = CustomerAuth::where('mobile', $request->mobile)->first();
             if ($customer) {
                 if ($request->password === Crypt::decryptString($customer->password)) {
                     $this->setSession($customer);
