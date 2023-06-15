@@ -93,10 +93,10 @@ class Cupon extends MY_Controller {
 			$row[] = $cupon->discount_type;
 			$row[] = $cupon->discount;
 
-            //     if($cupon->status==1){
-            //         $str= "<span onclick='update_status(".$cupon->id.",0)' id='span_".$cupon->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
+            //     if($cupon->discount_type==1){
+            //         $str= "<span class='label label-success' style='cursor:pointer'>Parcent </span>";}
             //     else{
-            //         $str = "<span onclick='update_status(".$cupon->id.",1)' id='span_".$cupon->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
+            //         $str = "<span class='label label-success' style='cursor:pointer'> Amount </span>";
             //     }
 			// $row[] = $str;
 					$str2 = '<div class="btn-group" title="View Account">
