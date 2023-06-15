@@ -79,7 +79,7 @@
       <div class="form-group">
           <label for="start_date" class="col-sm-2 control-label"><?= $this->lang->line('start_date'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control datepicker" name="start_date">
+              <input type="date" class="form-control" name="start_date">
               <?php if($start_date){ ?>
                 <a href="<?= base_url($start_date) ?>" target="_blank">
                     <img src="<?= base_url($start_date) ?>" alt="" width="50px">
@@ -90,7 +90,7 @@
       <div class="form-group">
           <label for="finish_date" class="col-sm-2 control-label"><?= $this->lang->line('finish_date'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control datepicker" name="finish_date">
+              <input type="date" class="form-control" name="finish_date">
               <?php if($finish_date){ ?>
                 <a href="<?= base_url($finish_date) ?>" target="_blank">
                     <img src="<?= base_url($finish_date) ?>" alt="" width="50px">

@@ -10,7 +10,8 @@ class Shippingcharge_model extends CI_Model {
 
 	private function _get_datatables_query()
 	{
-
+        $this->db->select('shipping_charge.*,districts.bn_name');
+	    $this->db->join('districts','shipping_charge.district_id=districts.id');
 		$this->db->from($this->table);
 
 		$i = 0;

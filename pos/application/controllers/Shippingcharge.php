@@ -65,8 +65,8 @@ class Shippingcharge extends MY_Controller {
 		foreach ($list as $shippingcharge) {
 			//$no++;
 			$row = array();
-			$row[] = $shippingcharge->question;
-			$row[] = $shippingcharge->description;
+			$row[] = $shippingcharge->bn_name;
+			$row[] = $shippingcharge->shipping_charge;
 
 					$str2 = '<div class="btn-group" title="View Account">
 										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
@@ -83,7 +83,7 @@ class Shippingcharge extends MY_Controller {
 
 											if($this->permissions('items_category_delete'))
 											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_shippingcharge('.$shippingcharge->id.')">
+												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_shipping('.$shippingcharge->id.')">
 													<i class="fa fa-fw fa-trash text-red"></i>Delete
 												</a>
 											</li>

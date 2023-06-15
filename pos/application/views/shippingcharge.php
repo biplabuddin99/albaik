@@ -38,13 +38,31 @@
         <!-- right column -->
         <?= form_open('#', array('class' => 'form', 'id' => 'category-form', 'enctype'=>'multipart/form-data', 'method'=>'POST'));?>
                 <input type="hidden" id="base_url" value="<?php echo $base_url; ?>">
-
-				<div class="form-group">
-                  <label for="district_id" class="col-sm-2 control-label"><?= $this->lang->line('district'); ?></label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" value="<?php print $district_id; ?>" id="district_id" name="district_id" placeholder="select">
-					<span id="district_id_msg" style="display:none" class="text-danger"></span>
-                  </div>
+                <div class="form-group">
+                     <label for="district_id" class="col-sm-2 control-label"><?= $this->lang->line('district'); ?><span class="text-danger">*</span></label>
+                     <div class="col-sm-4 input-group">
+                     <select class="form-control select2" id="district_id" name="district_id"  style="width: 100%;"  value="<?php print $district_id; ?>">
+                        <?php
+                           $query1="select * from districts";
+                           $q1=$this->db->query($query1);
+                           if($q1->num_rows($q1)>0)
+                            {  echo '<option value="">-Select-</option>';
+                                foreach($q1->result() as $res1)
+                              {
+                                $selected = ($district_id==$res1->id)? 'selected' : '';
+                                echo "<option $selected value='".$res1->id."'>".$res1->bn_name."</option>";
+                              }
+                            }
+                            else
+                            {
+                               ?>
+                        <option value="">No Records Found</option>
+                        <?php
+                           }
+                           ?>
+                     </select>
+                      </div>
+                     <span id="category_id_msg" style="display:none" class="text-danger"></span>
                 </div>
 				<div class="form-group">
                   <label for="shipping_charge" class="col-sm-2 control-label"><?= $this->lang->line('shippingcharge'); ?></label>

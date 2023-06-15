@@ -340,6 +340,10 @@
             <li class="items-list-active-li"><a href="<?php echo $base_url; ?>onlineorder/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('online_order_list'); ?></span></a></li>
             <?php } ?>
 
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>shippingcharge/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('shippingcharge_list'); ?></span></a></li>
+            <?php } ?>
+
 		   </ul>
         </li>
         <?php } ?>

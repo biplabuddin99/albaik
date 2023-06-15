@@ -1,4 +1,6 @@
 <?php
+
+use MY_Controller;
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Cupon extends MY_Controller {
@@ -80,24 +82,23 @@ class Cupon extends MY_Controller {
 		$list = $this->cupon->get_datatables();
 
 		$data = array();
-		$no = $_POST['start'];
+		// $no = $_POST['start'];
 		foreach ($list as $cupon) {
-			$no++;
+			// $no++;
 			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$cupon->id.' class="checkbox column_checkbox" >';
+			// $row[] = '<input type="checkbox" name="checkbox[]" value='.$cupon->id.' class="checkbox column_checkbox" >';
 			$row[] = $cupon->cupon_code;
 			$row[] = $cupon->cupon_name;
-			$row[] = $cupon->description;
 			$row[] = $cupon->number_of;
 			$row[] = $cupon->start_date;
 			$row[] = $cupon->finish_date;
 			$row[] = $cupon->discount_type;
 			$row[] = $cupon->discount;
 
-                if($cupon->status==1){
-                    $str= "<span onclick='update_status(".$cupon->id.",0)' id='span_".$cupon->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
+                if($cupon->discount_type==1){
+                    $str= "<span class='label label-success' style='cursor:pointer'>Percentage </span>";}
                 else{
-                    $str = "<span onclick='update_status(".$cupon->id.",1)' id='span_".$cupon->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
+                    $str = "<span class='label label-danger' style='cursor:pointer'> Inactive </span>";
                 }
 			$row[] = $str;
 					$str2 = '<div class="btn-group" title="View Account">
