@@ -4,14 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Onlineorder_model extends CI_Model {
 
 	var $table = 'orders';
-	var $column_order = array(null,'user_id','billing_id','sub_total','total','status'); //set column field database for datatable orderable
-	var $column_search = array('user_id','billing_id','sub_total','total','status'); //set column field database for datatable searchable
-	var $order = array('id' => 'desc'); // default order
+	var $column_order = array(null,'orders.user_id','orders.billing_id','orders.sub_total','orders.total','orders.status'); //set column field database for datatable orderable
+	var $column_search = array('orders.user_id','orders.billing_id','orders.sub_total','orders.total','orders.status'); //set column field database for datatable searchable
+	var $order = array('orders.id' => 'desc'); // default order
 
 	private function _get_datatables_query()
 	{
-
+        $this->db->select('orders.*,db_customers.customer_name,db_customers.mobile');
 		$this->db->from($this->table);
+	    $this->db->join('db_customers','orders.user_id=db_customers.id');
 
 		$i = 0;
 

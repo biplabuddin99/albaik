@@ -90,15 +90,16 @@ class Cupon extends MY_Controller {
 			$row[] = $cupon->number_of;
 			$row[] = $cupon->start_date;
 			$row[] = $cupon->finish_date;
-			$row[] = $cupon->discount_type;
+			if($cupon->discount_type==0){
+                    $strs= "<span class='label label-success' style='cursor:pointer'>% </span>";}
+                else{
+                    $strs = "<span class='label label-success' style='cursor:pointer'> BDT </span>";
+                }
+			$row[] = $strs;
+
 			$row[] = $cupon->discount;
 
-            //     if($cupon->discount_type==1){
-            //         $str= "<span class='label label-success' style='cursor:pointer'>Parcent </span>";}
-            //     else{
-            //         $str = "<span class='label label-success' style='cursor:pointer'> Amount </span>";
-            //     }
-			// $row[] = $str;
+
 					$str2 = '<div class="btn-group" title="View Account">
                                 <a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
                                     Action <span class="caret"></span>
@@ -140,7 +141,7 @@ class Cupon extends MY_Controller {
         $this->load->model('cupon_model');
 		$this->permission_check_with_msg('items_cupon_delete');
 		$id=$this->input->post('q_id');
-		return $this->cupon_model->delete_cupons_from_table($id);
+		return $this->cupon_model->delete_cupon_from_table($id);
 	}
 
 }

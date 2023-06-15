@@ -50,8 +50,8 @@ class CheckoutController extends Controller
                 $order->user_id=$request->session()->get('userId');
                 $order->billing_id=$billing->id;
                 $order->sub_total=Session::get('coupon')['cart_total']??Cart::subtotal();
-                $order->discount_amount=Session::get('coupon')['discount_amount']?? 0;
-                $order->coupon_name=Session::get('coupon')['name']?? '';
+                $order->discount_amount=Session::get('coupon')['discount']?? 0;
+                $order->coupon_name=Session::get('coupon')['cupon_code']?? '';
                 $order->total=Session::get('coupon')['balance']?? Cart::subtotal();
                 $order->status=0;
                 if($order->save()){
@@ -64,7 +64,7 @@ class CheckoutController extends Controller
                         $orderdetails->product_id=$cart_item->id;
                         $orderdetails->product_qty=$cart_item->qty;
                         $orderdetails->product_price=$cart_item->price;
-                        StockEntry::findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
+                        // StockEntry::findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
                         // DB::table('db_stockentry')->findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
                         if($orderdetails->save()){
                             // Toastr::success('Your Order placed successfully!!!!','Success');
@@ -85,7 +85,7 @@ class CheckoutController extends Controller
             }
 
         }catch(Exception $e){
-            // dd($e);
+            dd($e);
         }
     }
 }

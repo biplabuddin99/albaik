@@ -15,6 +15,13 @@ class Onlineorder extends MY_Controller {
 		$this->load->view('onlineorder', $data);
 	}
 
+    public function online_invoice($invid){
+		$data['billings']=$this->db->query("select * from billings where id=$invid")->row();
+		$data['orders']=$this->db->query("select * from orders where billing_id=$invid")->row();
+		$data['order_details']=$this->db->query("select * from order_details where order_id=$invid")->result();
+		$data['page_title']=$this->lang->line('online_order');
+		$this->load->view('onlineorder_invoice', $data);
+	}
 
 	public function newonlineorder(){
 		$this->form_validation->set_rules('title', 'Title', 'trim|required');
@@ -65,7 +72,7 @@ class Onlineorder extends MY_Controller {
 		foreach ($list as $order) {
 			//$no++;
 			$row = array();
-			$row[] = $order->user_id;
+			$row[] = $order->customer_name."-".$order->mobile;
 			$row[] = $order->billing_id;
 			$row[] = $order->sub_total;
 			$row[] = $order->total;
@@ -81,6 +88,11 @@ class Onlineorder extends MY_Controller {
 											$str2.='<li>
 												<a title="Edit Record ?" href="update/'.$order->id.'">
 													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+												</a>
+											</li>';
+											$str2.='<li>
+												<a title="Edit Record ?" href="online_invoice/'.$order->id.'">
+													<i class="fa fa-fw fa-list text-blue"></i>Invoice
 												</a>
 											</li>';
 
