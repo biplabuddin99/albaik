@@ -57,7 +57,7 @@
       <div class="form-group">
           <label for="cupon_code" class="col-sm-2 control-label"><?= $this->lang->line('cupon_code'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control" name="cupon_code">
+              <input type="text" class="form-control" name="cupon_code" value="<?php print $cupon_code; ?>">
               <?php if($cupon_code){ ?>
                 <a href="<?= base_url($cupon_code) ?>" target="_blank">
                     <img src="<?= base_url($cupon_code) ?>" alt="" width="50px">
@@ -68,7 +68,7 @@
       <div class="form-group">
           <label for="number_of" class="col-sm-2 control-label"><?= $this->lang->line('number_of'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control" name="number_of">
+              <input type="text" class="form-control" name="number_of" value="<?php print $number_of; ?>">
               <?php if($number_of){ ?>
                 <a href="<?= base_url($number_of) ?>" target="_blank">
                     <img src="<?= base_url($number_of) ?>" alt="" width="50px">
@@ -79,7 +79,7 @@
       <div class="form-group">
           <label for="start_date" class="col-sm-2 control-label"><?= $this->lang->line('start_date'); ?></label>
           <div class="col-sm-4">
-              <input type="date" class="form-control" name="start_date">
+              <input type="date" class="form-control" name="start_date" value="<?php print $start_date; ?>">
               <?php if($start_date){ ?>
                 <a href="<?= base_url($start_date) ?>" target="_blank">
                     <img src="<?= base_url($start_date) ?>" alt="" width="50px">
@@ -90,7 +90,7 @@
       <div class="form-group">
           <label for="finish_date" class="col-sm-2 control-label"><?= $this->lang->line('finish_date'); ?></label>
           <div class="col-sm-4">
-              <input type="date" class="form-control" name="finish_date">
+              <input type="date" class="form-control" name="finish_date" value="<?php print $finish_date; ?>">
               <?php if($finish_date){ ?>
                 <a href="<?= base_url($finish_date) ?>" target="_blank">
                     <img src="<?= base_url($finish_date) ?>" alt="" width="50px">
@@ -104,8 +104,8 @@
               <select class="form-control" name="discount_type" >
               <?php
                 $amount=$percent='';
-                if($percent =='0') { $percent='selected'; }
-                if($amount =='1') { $amount='selected'; }
+                if($discount_type =='0') { $percent='selected'; }
+                if($discount_type =='1') { $amount='selected'; }
 
               ?>
                 <option <?= $percent ?> value="0">Percent</option>
@@ -119,7 +119,7 @@
 				<div class="form-group">
           <label for="description" class="col-sm-2 control-label"><?= $this->lang->line('discount'); ?></label>
           <div class="col-sm-4">
-              <input type="text" class="form-control" name="discount">
+              <input type="text" class="form-control" name="discount" value="<?php print $discount; ?>">
               <?php if($discount){ ?>
                 <a href="<?= base_url($discount) ?>" target="_blank">
                     <img src="<?= base_url($discount) ?>" alt="" width="50px">
@@ -134,7 +134,7 @@
                 <div class="col-sm-8 col-sm-offset-2 text-center">
                    <!-- <div class="col-sm-4"></div> -->
                    <?php
-                      if($cupon_code!=""){
+                      if($cupon_name!=""){
                           $btn_name="Update";
                           $btn_id="update";
                         ?>

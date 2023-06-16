@@ -61,6 +61,7 @@ Route::get('/logout',[CustomerAuthController::class,'singOut'])->name('logOut');
 
     /*AJAX Call */
     Route::get('/upzilla/ajax/{district_id}', [CheckoutController::class, 'loadUpazillaAjax'])->name('loadupazila.ajax');
+    Route::get('/shipping/ajax/{district_id}', [CheckoutController::class, 'ShippingAjax'])->name('loadupazila.ajax');
 
 Route::group(['middleware'=>isCustomer::class],function(){
     Route::prefix('customer')->group(function(){

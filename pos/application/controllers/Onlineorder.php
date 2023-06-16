@@ -17,8 +17,9 @@ class Onlineorder extends MY_Controller {
 
     public function online_invoice($invid){
 		$data['billings']=$this->db->query("select * from billings where id=$invid")->row();
+		$data['frontsettings']=$this->db->query("select logo_img from frontsettings")->row();
 		$data['orders']=$this->db->query("select * from orders where billing_id=$invid")->row();
-		$data['order_details']=$this->db->query("select * from order_details where order_id=$invid")->result();
+		$data['order_details']=$this->db->query("SELECT order_details.*, db_items.item_name FROM order_details LEFT JOIN db_items ON order_details.product_id = db_items.id where order_id=$invid")->result();
 		$data['page_title']=$this->lang->line('online_order');
 		$this->load->view('onlineorder_invoice', $data);
 	}
@@ -73,10 +74,20 @@ class Onlineorder extends MY_Controller {
 			//$no++;
 			$row = array();
 			$row[] = $order->customer_name."-".$order->mobile;
+			$row[] = date('d/m/Y', strtotime($order->created_at));
 			$row[] = $order->billing_id;
 			$row[] = $order->sub_total;
 			$row[] = $order->total;
-			$row[] = $order->status;
+            if($order->status==0){
+                $strs= "<span class='label label-warning' style='cursor:pointer'>Pending </span>";
+            }else if($order->status==1){
+                $strs = "<span class='label label-info' style='cursor:pointer'> Processing </span>";
+            }else if($order->status==2){
+                $strs = "<span class='label label-success' style='cursor:pointer'> Delivered </span>";
+            }else{
+                $strs = "<span class='label label-danger' style='cursor:pointer'> Cancel </span>";
+            }
+            $row[] = $strs;
 
 					$str2 = '<div class="btn-group" title="View Account">
 										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">

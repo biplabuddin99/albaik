@@ -20,7 +20,11 @@ class CartController extends Controller
         $total_price=Cart::subtotal();
         // return $carts;
         // return view('product.checkout',compact('carts','total_price'));
-        return view('product.cart',compact('carts','total_price'));
+        if($total_price>0){
+            return view('product.cart',compact('carts','total_price'));
+        }else{
+            return view('product.empty_cart');
+        }
     }
 
     public function addToCart(Request $request)

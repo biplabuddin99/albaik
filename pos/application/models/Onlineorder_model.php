@@ -110,10 +110,31 @@ class Onlineorder_model extends CI_Model {
 		//Filtering XSS and html escape from user inputs
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
 
-			$query1="update orders set user_id='$user_id',billing_id='$billing_id',sub_total='$sub_total',total='$total',status='$status' where id=$q_id";
+			$query1="update orders set status='$status' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Updated Successfully!');
-			        return "success";
+                if($status==2){
+                    $order_item=$this->db->query("select * from order_details where order_id=$q_id")->result();
+                    if($order_item){
+                        $this->db->query("delete from db_stockentry where order_id=$q_id");// delete if old data found under this order
+                        foreach($order_item as $items){
+                            $to_entry = array(
+    		    				'entry_date' 	=> date('Y-m-d'),
+    		    				'item_id' 		=> $items->product_id,
+    		    				'qty' 		    => "-".$items->product_qty,
+    		    				'note' 	        => "Online Order",
+    		    				'warehouse_id' 	=> 1,
+    		    				'status'	 	=> 1,
+    		    				'order_id' 		=> $q_id,
+    		    			);
+    		                $qtoentry = $this->db->insert('db_stockentry', $to_entry);
+                        }
+                    }
+                }else{
+                    $this->db->query("delete from db_stockentry where order_id=$q_id");// delete if old data found under this order
+                }
+
+                $this->session->set_flashdata('success', 'Success!! Updated Successfully!');
+                return "success";
 			}
 			else{
 			        return "failed";

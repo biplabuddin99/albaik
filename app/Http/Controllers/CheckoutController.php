@@ -9,6 +9,7 @@ use App\Models\Billing;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\StockEntry;
+use App\Models\Shippingcharge;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -29,6 +30,11 @@ class CheckoutController extends Controller
     {
         $upazilas=Upazila::where('district_id',$district_id)->select('id','name')->get();
         return response()->json($upazilas,200);
+    }
+    public function ShippingAjax($district_id)
+    {
+        $shippingcharge=Shippingcharge::where('district_id',$district_id)->select('id','shipping_charge')->get();
+        return response()->json($shippingcharge,200);
     }
 
 

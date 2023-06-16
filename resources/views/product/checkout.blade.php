@@ -144,17 +144,30 @@
                                             <td> (-) {{ Session::get('coupon')['discount'] }} TK</td>
                                         </tr>
                                         <tr>
+                                            <td>Shipping</td>
+                                            <td>
+                                                <input readonly type="text" class="form-control" id="shipping_charge" name="shipping_charge" value=""/>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>Total</td>
                                             <td> {{ Session::get('coupon')['balance'] }} TK<del class="text-danger"> ৳{{ Session::get('coupon')['cart_total'] }} TK</del></td>
                                         </tr>
                                         @else
                                         <tr>
+                                            <td>Shipping</td>
+                                            <td>
+                                                <input type="text" readonly  class="form-control"
+                                                id="shipping_charge" name="shipping_charge" value="" />
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>Subtotal</td>
-                                            <td>$ {{ $total_price }}</td>
+                                            <td> {{ $total_price }} BDT</td>
                                         </tr>
                                         <tr>
                                             <td>Total</td>
-                                            <td>$ {{ $total_price }}</td>
+                                            <td> {{ $total_price }} BDT</td>
                                         </tr>
                                         @endif
                                         {{-- <tr>
@@ -206,6 +219,27 @@
                         $.each(data, function(key, value) {
                             $('#upazila_id').append('<option value="' + value.id + '">' + value.name + '</option>');
                         });
+                    },
+                });
+            }
+        });
+    });
+</script>
+<script>
+    // District wise shipping Charge
+    $(document).ready(function() {
+        $('#district_id').on('change', function() {
+            var district_id = $(this).val();
+            // console.log();
+            if (district_id) {
+                $.ajax({
+                    url: "{{ url('/shipping/ajax') }}/" + district_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var shippingChargeInput = $('<input readonly type="text" class="form-control" id="shipping_charge" name="shipping_charge"/>');
+                        shippingChargeInput.val(data.shipping_charge);
+                        $('#shipping_charge').parent('td').empty().append(shippingChargeInput);
                     },
                 });
             }

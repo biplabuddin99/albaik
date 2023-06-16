@@ -110,7 +110,7 @@ class Cupon_model extends CI_Model {
 		//Filtering XSS and html escape from user inputs
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
 
-        $query1="update db_cupon set cupon_name='$cupon_name',cupon_code='$cupon_code',number_of='$number_of',finish_date='$finish_date',discount_type='$discount_type',discount='$discount',status='$status' where id=$q_id";
+        $query1="update db_cupon set cupon_name='$cupon_name',cupon_code='$cupon_code',number_of='$number_of',start_date='$start_date',finish_date='$finish_date',discount_type='$discount_type',discount='$discount',status=1 where id=$q_id";
         if ($this->db->simple_query($query1)){
                 $this->session->set_flashdata('success', 'Success!! cupon Updated Successfully!');
                 return "success";

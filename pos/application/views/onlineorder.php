@@ -44,15 +44,17 @@
                     <label for="status"><?= $this->lang->line('status'); ?><span class="text-danger">*</span></label>
                     <select class="form-control select2" id="status" name="status"  style="width: 100%;" >
                     <?php
-                    $status0=$status1=$status2='';
-                    if($status =='0') { $status1='selected'; }
-                    if($status =='1') { $status2='selected'; }
-                    if($status =='2') { $status3='selected'; }
+                    $status0=$status1=$status2=$status3='';
+                    if($status =='0') { $status0='selected'; }
+                    if($status =='1') { $status1='selected'; }
+                    if($status =='2') { $status2='selected'; }
+                    if($status =='3') { $status3='selected'; }
 
                     ?>
                     <option <?= $status0 ?> value="0">Pending</option>
                     <option <?= $status1 ?> value="1">Processing</option>
-                    <option <?= $status2 ?> value="2">Success</option>
+                    <option <?= $status2 ?> value="2">Delivered</option>
+                    <option <?= $status3 ?> value="3">Cancel</option>
                     </select>
                     </div>
                 </div>
