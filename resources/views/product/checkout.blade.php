@@ -130,14 +130,15 @@
                                     <tr colspan="2">
                                         <th scope="col"><h3>Your Order</h3></th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
                                         @foreach ($carts as $item)
                                         <tr>
                                             <td>{{ $item->name }} X {{ $item->qty }} </td>
                                             <td> {{ $item->price*$item->qty }} TK</td>
                                         </tr>
                                         @endforeach
+                                    </thead>
+                                    <tbody class="shippingdata">
+
                                         @if (Session::has('coupon'))
                                         <tr>
                                             <td>Discount</td>
@@ -238,9 +239,9 @@
                     dataType: "json",
                     success: function(data) {
                        //console.log(data);
-                        var shippingCharge = data[0].shipping_charge;
+                        var shippingCharge = data;
                         //console.log(shippingCharge);
-                        $('#shipping_charge').html(shippingCharge+' TK');
+                        $('.shippingdata').html(shippingCharge);
                     },
                 });
             }

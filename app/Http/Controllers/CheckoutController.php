@@ -33,8 +33,44 @@ class CheckoutController extends Controller
     }
     public function ShippingAjax($district_id)
     {
-        $shippingcharge=Shippingcharge::where('district_id',$district_id)->select('id','shipping_charge')->get();
-        return response()->json($shippingcharge,200);
+        // $shipcheck=Shippingcharge::where('district_id',$district_id);
+        $shippingcharge=Shippingcharge::where('district_id',$district_id);
+        if($shippingcharge->count() >0)
+            $shippingcharge= $shippingcharge->pluck('shipping_charge')[0];
+        else
+            $shippingcharge=0;
+
+        Session::put('shipping',['amount'=> $shippingcharge]);
+        if (Session::has('coupon')){
+            $return="<tr>
+                <td>Discount</td>
+                <td> (-) ". Session::get('coupon')['discount'] ." TK</td>
+            </tr>
+            <tr>
+                <td>Shipping</td>
+                <td id='shipping_charge'>".
+                $shippingcharge
+                ."</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td> ". (Session::get('coupon')['balance']+$shippingcharge) ." TK<del class='text-danger'> ৳". (Session::get('coupon')['cart_total']+$shippingcharge) ." TK</del></td>
+            </tr>";
+        }else{
+            $return="<tr>
+                        <td>Shipping</td>
+                        <td id='shipping_charge'>".$shippingcharge."</td>
+                    </tr>
+                    <tr>
+                        <td>Subtotal</td>
+                        <td> ".Cart::subtotal()." BDT</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td> ".(Cart::subtotal()+$shippingcharge)." BDT</td>
+                    </tr>";
+        }
+        return response()->json($return,200);
     }
 
 
