@@ -40,7 +40,6 @@ class CheckoutController extends Controller
             $shippingcharge= $shippingcharge->pluck('shipping_charge')[0];
         else
             $shippingcharge=0;
-
          Session::put('shipping',['amount'=> $shippingcharge]);
         if (Session::has('coupon')){
             $return="
@@ -144,7 +143,7 @@ class CheckoutController extends Controller
             }
 
         }catch(Exception $e){
-            dd($e);
+            // dd($e);
         }
     }
 }
