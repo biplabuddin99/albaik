@@ -33,6 +33,7 @@ class CheckoutController extends Controller
     }
     public function ShippingAjax($district_id)
     {
+        Session::forget('shipping');
         // $shipcheck=Shippingcharge::where('district_id',$district_id);
         $shippingcharge=Shippingcharge::where('district_id',$district_id);
         if($shippingcharge->count() >0)
@@ -40,9 +41,14 @@ class CheckoutController extends Controller
         else
             $shippingcharge=0;
 
-        Session::put('shipping',['amount'=> $shippingcharge]);
+         Session::put('shipping',['amount'=> $shippingcharge]);
         if (Session::has('coupon')){
-            $return="<tr>
+            $return="
+            <tr>
+                <td>Subtotal</td>
+                <td> ".Cart::subtotal()." BDT</td>
+            </tr>
+            <tr>
                 <td>Discount</td>
                 <td> (-) ". Session::get('coupon')['discount'] ." BDT</td>
             </tr>
@@ -52,8 +58,14 @@ class CheckoutController extends Controller
             </tr>
             <tr>
                 <td>Total</td>
-                <td> ". (Session::get('coupon')['balance']+$shippingcharge) ." TK<del class='text-danger'> ৳". (Session::get('coupon')['cart_total']+$shippingcharge) ." TK</del></td>
-            </tr>";
+                <td> ". (Session::get('coupon')['balance'])+$shippingcharge ." TK<del class='text-danger'> ৳". (Session::get('coupon')['cart_total']+$shippingcharge) ." TK</del></td>
+            </tr>
+            <tr>
+            <td>
+                <input id='delivery' name='payment_method' value='1' type='checkbox'>
+                <label for='delivery'>Cash on Delivery</label>
+            </td>
+        </tr>";
         }else{
             $return="<tr>
                         <td>Subtotal</td>
@@ -66,7 +78,13 @@ class CheckoutController extends Controller
                     <tr>
                         <td>Total</td>
                         <td> ".(str_replace(",", "", Cart::subtotal())+$shippingcharge)." BDT</td>
-                    </tr>";
+                    </tr>
+                    <tr>
+                    <td>
+                        <input id='delivery' name='payment_method' value='1' type='checkbox'>
+                        <label for='delivery'>Cash on Delivery</label>
+                    </td>
+                </tr>";
         }
         return response()->json($return,200);
     }
@@ -92,7 +110,8 @@ class CheckoutController extends Controller
                 $order->sub_total=Session::get('coupon')['cart_total']??Cart::subtotal();
                 $order->discount_amount=Session::get('coupon')['discount']?? 0;
                 $order->coupon_name=Session::get('coupon')['cupon_code']?? '';
-                $order->total=Session::get('coupon')['balance']?? Cart::subtotal();
+                $order->shipping_charge=Session::get('shipping')['amount']?? 0;
+                $order->total=(Session::get('coupon')['balance'])+(Session::get('shipping')['amount'])?? Cart::subtotal()+(Session::get('shipping')['amount']);
                 $order->status=0;
                 if($order->save()){
 

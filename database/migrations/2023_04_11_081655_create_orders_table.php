@@ -22,6 +22,7 @@ return new class extends Migration
             // $table->decimal('discount_amount', 8, 2)->default(0);
             $table->string('discount_amount')->default(0);
             $table->string('coupon_name')->nullable();
+            $table->string('shipping_charge')->nullable();
             // $table->decimal('total', 8, 2);
             $table->string('total');
             $table->string('status')->default(0);
