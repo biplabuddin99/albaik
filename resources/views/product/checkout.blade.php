@@ -145,8 +145,8 @@
                                         </tr>
                                         <tr>
                                             <td>Shipping</td>
-                                            <td>
-                                                <input readonly type="text" class="form-control" id="shipping_charge" name="shipping_charge" value=""/>
+                                            <td id="shipping_charge">
+                                                {{--  <input readonly type="text" class="form-control" id="shipping_charge" name="shipping_charge" value=""/>  --}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -156,9 +156,9 @@
                                         @else
                                         <tr>
                                             <td>Shipping</td>
-                                            <td>
-                                                <input type="text" readonly  class="form-control"
-                                                id="shipping_charge" name="shipping_charge" value="" />
+                                            <td id="shipping_charge">
+                                                {{--  <input type="text" readonly  class="form-control"
+                                                id="shipping_charge" name="shipping_charge" value="" />  --}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -237,9 +237,10 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
-                        var shippingChargeInput = $('<input readonly type="text" class="form-control" id="shipping_charge" name="shipping_charge"/>');
-                        shippingChargeInput.val(data.shipping_charge);
-                        $('#shipping_charge').parent('td').empty().append(shippingChargeInput);
+                       //console.log(data);
+                        var shippingCharge = data[0].shipping_charge;
+                        //console.log(shippingCharge);
+                        $('#shipping_charge').html(shippingCharge+' TK');
                     },
                 });
             }
