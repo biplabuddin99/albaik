@@ -10,7 +10,7 @@
                 <form action="{{ route('customer.placeorder') }}" method='post'>
                     @csrf
                     <div class="row">
-                        <div class="col-8 w-50 mt-1">
+                        <div class="col-7 w-50 mt-1">
                             <h3>Shipping Details</h3>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"
@@ -123,7 +123,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-4 ms-3">
+                        <div class="col-5 ms-3">
                             <div class="order-area">
                                 <table class="table">
                                     <thead>
@@ -141,27 +141,18 @@
 
                                         @if (Session::has('coupon'))
                                         <tr>
-                                            <td>Discount</td>
-                                            <td> (-) {{ Session::get('coupon')['discount'] }} TK</td>
+                                            <td>Subtotal</td>
+                                            <td> {{ $total_price }} BDT</td>
                                         </tr>
                                         <tr>
-                                            <td>Shipping</td>
-                                            <td id="shipping_charge">
-                                                {{--  <input readonly type="text" class="form-control" id="shipping_charge" name="shipping_charge" value=""/>  --}}
-                                            </td>
+                                            <td>Discount</td>
+                                            <td> (-) {{ Session::get('coupon')['discount'] }} TK</td>
                                         </tr>
                                         <tr>
                                             <td>Total</td>
                                             <td> {{ Session::get('coupon')['balance'] }} TK<del class="text-danger"> ৳{{ Session::get('coupon')['cart_total'] }} TK</del></td>
                                         </tr>
                                         @else
-                                        <tr>
-                                            <td>Shipping</td>
-                                            <td id="shipping_charge">
-                                                {{--  <input type="text" readonly  class="form-control"
-                                                id="shipping_charge" name="shipping_charge" value="" />  --}}
-                                            </td>
-                                        </tr>
                                         <tr>
                                             <td>Subtotal</td>
                                             <td> {{ $total_price }} BDT</td>

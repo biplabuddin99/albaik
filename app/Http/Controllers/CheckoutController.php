@@ -44,13 +44,11 @@ class CheckoutController extends Controller
         if (Session::has('coupon')){
             $return="<tr>
                 <td>Discount</td>
-                <td> (-) ". Session::get('coupon')['discount'] ." TK</td>
+                <td> (-) ". Session::get('coupon')['discount'] ." BDT</td>
             </tr>
             <tr>
                 <td>Shipping</td>
-                <td id='shipping_charge'>".
-                $shippingcharge
-                ."</td>
+                <td id='shipping_charge'>"."(+) ".$shippingcharge." BDT</td>
             </tr>
             <tr>
                 <td>Total</td>
@@ -58,16 +56,16 @@ class CheckoutController extends Controller
             </tr>";
         }else{
             $return="<tr>
-                        <td>Shipping</td>
-                        <td id='shipping_charge'>".$shippingcharge."</td>
-                    </tr>
-                    <tr>
                         <td>Subtotal</td>
                         <td> ".Cart::subtotal()." BDT</td>
                     </tr>
                     <tr>
+                        <td>Shipping</td>
+                        <td id='shipping_charge'>"."(+) ".$shippingcharge." BDT</td>
+                    </tr>
+                    <tr>
                         <td>Total</td>
-                        <td> ".(Cart::subtotal()+$shippingcharge)." BDT</td>
+                        <td> ".(str_replace(",", "", Cart::subtotal())+$shippingcharge)." BDT</td>
                     </tr>";
         }
         return response()->json($return,200);

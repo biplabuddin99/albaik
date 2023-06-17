@@ -44,6 +44,8 @@ class CartController extends Controller
                 'product_image' => $product->item_image
             ]
         ]);
+
+        $this->couponCheck();
         return back();
 
     }
@@ -51,13 +53,59 @@ class CartController extends Controller
     public function removeFromCart($cart_id)
     {
         Cart::remove($cart_id);
+        $this->couponCheck();
         // Toastr::info('Product Removed from Cart!!');
         return back();
     }
 
+    public function couponCheck()
+    {
+        //dd($request->all());
+        if (Session::has('coupon')){
+            $cuponcode=Session::get('coupon')['cupon_code'];
+        }else{
+            return false;
+        }
+        $check=Coupon::where('cupon_code',$cuponcode)->first();
+        // print_r($check->discount);
+        // print_r(Cart::subtotal());
+        $cartsubtotal=str_replace(",", "", Cart::subtotal());
+
+
+        //if valid coupon found
+        if($check !=null){
+            //check coupon validity
+            $check_validity=$check->finish_date>Carbon::now()->format('Y-m-d');
+            //if coupon date is not expried
+            if($check_validity && $check->discount_type==0){
+                Session::put('coupon',[
+                    'cupon_code'=>$check->cupon_code,
+                    'discount'=>($cartsubtotal * $check->discount)/100,
+                    'cart_total'=> $cartsubtotal,
+                    'balance'=> $cartsubtotal - ($cartsubtotal * $check->discount)/100
+                ]);
+                return true;
+            }else if($check_validity && $check->discount_type==1){
+                Session::put('coupon',[
+                    'cupon_code'=>$check->cupon_code,
+                    'discount'=>$check->discount,
+                    'cart_total'=> $cartsubtotal,
+                    'balance'=> $cartsubtotal - $check->discount
+                ]);
+                return true;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+
+
     public function couponApply(Request $request)
     {
         //dd($request->all());
+
         $check=Coupon::where('cupon_code',$request->cupon_code)->first();
         // print_r($check->discount);
         // print_r(Cart::subtotal());
