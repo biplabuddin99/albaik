@@ -100,6 +100,7 @@ class CheckoutController extends Controller
         $shippingcharge= $_SESSION['s_charge'];
         // die();
         // dd($request->all());
+        DB::beginTransaction();
         try {
             $billing = new Billing;
             $billing->name=$request->full_name;
@@ -133,8 +134,9 @@ class CheckoutController extends Controller
                         // StockEntry::findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
                         // DB::table('db_stockentry')->findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
                         if($orderdetails->save()){
+                            DB::commit();
                             // Toastr::success('Your Order placed successfully!!!!','Success');
-                            // return redirect()->route('home');
+                            return redirect()->route('home');
                         }else{
                             return back();
                         }
@@ -152,6 +154,7 @@ class CheckoutController extends Controller
             }
 
         }catch(Exception $e){
+            DB::rollback();
             // dd($e);
         }
     }
