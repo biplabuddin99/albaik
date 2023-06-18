@@ -98,9 +98,14 @@ class CheckoutController extends Controller
     {
         session_start();
         $shippingcharge= $_SESSION['s_charge'];
+        if(Session::get('coupon'))
+        $cuponbalance=Session::get('coupon')['balance'];
+        else
+        $cuponbalance=str_replace(",", "", Cart::subtotal());
+
         // die();
         // dd($request->all());
-        DB::beginTransaction();
+        // DB::beginTransaction();
         try {
             $billing = new Billing;
             $billing->name=$request->full_name;
@@ -115,11 +120,11 @@ class CheckoutController extends Controller
                 $order=new Order;
                 $order->user_id=$request->session()->get('userId');
                 $order->billing_id=$billing->id;
-                $order->sub_total=Session::get('coupon')['cart_total']??Cart::subtotal();
+                $order->sub_total=Session::get('coupon')['cart_total']??str_replace(",", "", Cart::subtotal());
                 $order->discount_amount=Session::get('coupon')['discount']?? 0;
                 $order->cupon_code=Session::get('coupon')['cupon_code']?? '';
                 $order->shipping_charge=$shippingcharge?? 0;
-                $order->total=(Session::get('coupon')['balance'])+$shippingcharge?? Cart::subtotal()+$shippingcharge;
+                $order->total=$cuponbalance+$shippingcharge??str_replace(",", "", Cart::subtotal())+$shippingcharge;
                 $order->status=0;
                 if($order->save()){
 
@@ -134,9 +139,12 @@ class CheckoutController extends Controller
                         // StockEntry::findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
                         // DB::table('db_stockentry')->findOrFail($cart_item->id)->decrement('qty', $cart_item->qty);
                         if($orderdetails->save()){
-                            DB::commit();
+                            Cart::destroy();
+                            Session::forget('coupon');
+                            Session::forget('shipping');
+
                             // Toastr::success('Your Order placed successfully!!!!','Success');
-                            return redirect()->route('home');
+                            return view('product.order-complete-message');
                         }else{
                             return back();
                         }
@@ -145,6 +153,7 @@ class CheckoutController extends Controller
                     Session::forget('coupon');
                     Session::forget('shipping');
                     return redirect()->route('home');
+                    // DB::commit();
                 }else{
                     return back();
                 }
@@ -154,8 +163,8 @@ class CheckoutController extends Controller
             }
 
         }catch(Exception $e){
-            DB::rollback();
-            // dd($e);
+            // DB::rollback();
+            dd($e);
         }
     }
 }
