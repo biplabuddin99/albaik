@@ -33,14 +33,15 @@ class CheckoutController extends Controller
     }
     public function ShippingAjax($district_id)
     {
-        Session::forget('shipping');
+          $total_price=str_replace(",", "", Cart::subtotal());
         // $shipcheck=Shippingcharge::where('district_id',$district_id);
         $shippingcharge=Shippingcharge::where('district_id',$district_id);
-        if($shippingcharge->count() >0)
+        if($shippingcharge->count() >0 && $total_price<=10000)
             $shippingcharge= $shippingcharge->pluck('shipping_charge')[0];
         else
             $shippingcharge=0;
-         Session::put('shipping',['amount'=> $shippingcharge]);
+
+
         if (Session::has('coupon')){
             $return="
             <tr>
@@ -85,12 +86,19 @@ class CheckoutController extends Controller
                     </td>
                 </tr>";
         }
+
+        session_start();
+        unset($_SESSION['s_charge']);
+        $_SESSION['s_charge']=$shippingcharge;
         return response()->json($return,200);
     }
 
 
     public function placeOrder(Request $request)
     {
+        session_start();
+        $shippingcharge= $_SESSION['s_charge'];
+        // die();
         // dd($request->all());
         try {
             $billing = new Billing;
@@ -108,9 +116,9 @@ class CheckoutController extends Controller
                 $order->billing_id=$billing->id;
                 $order->sub_total=Session::get('coupon')['cart_total']??Cart::subtotal();
                 $order->discount_amount=Session::get('coupon')['discount']?? 0;
-                $order->coupon_name=Session::get('coupon')['cupon_code']?? '';
-                $order->shipping_charge=Session::get('shipping')['amount']?? 0;
-                $order->total=(Session::get('coupon')['balance'])+(Session::get('shipping')['amount'])?? Cart::subtotal()+(Session::get('shipping')['amount']);
+                $order->cupon_code=Session::get('coupon')['cupon_code']?? '';
+                $order->shipping_charge=$shippingcharge?? 0;
+                $order->total=(Session::get('coupon')['balance'])+$shippingcharge?? Cart::subtotal()+$shippingcharge;
                 $order->status=0;
                 if($order->save()){
 
@@ -133,6 +141,7 @@ class CheckoutController extends Controller
                     }
                     Cart::destroy();
                     Session::forget('coupon');
+                    Session::forget('shipping');
                     return redirect()->route('home');
                 }else{
                     return back();

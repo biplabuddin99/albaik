@@ -15,6 +15,7 @@
         $first_number = 10000.00;
         $second_number = str_replace(",", "", $total_price);
         $sum_total = is_numeric($second_number) ? $first_number - $second_number : 0;
+        $progressbar=(100/$first_number)*$second_number;
         @endphp
 
     @if ($second_number > $first_number)
@@ -31,7 +32,7 @@
             class="progress-bar bg-warning"
             role="progressbar"
             aria-label="Basic example"
-            style="width: 25%"
+            style="width: {{ $progressbar }}%"
             aria-valuenow="25"
             aria-valuemin="0"
             aria-valuemax="100"
@@ -45,6 +46,8 @@
               <table class="table">
                 <thead>
                   <tr>
+
+                   {{--  @php print_r(Session::get('shipp'))@endphp  --}}
                     <th scope="col">Image</th>
                     <th scope="col">Product</th>
                     <th scope="col">Price</th>

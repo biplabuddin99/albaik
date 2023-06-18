@@ -9,6 +9,7 @@ use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
+use App\Models\Order;
 use App\Http\Traits\ResponseTrait;
 
 class CartController extends Controller
@@ -105,7 +106,10 @@ class CartController extends Controller
     public function couponApply(Request $request)
     {
         //dd($request->all());
-
+        $oldcupon=Order::where('user_id',Session::get('userId'))->where('cupon_code',$request->cupon_code)->count();
+        if($oldcupon > 0){
+            return redirect()->back()->with($this->resMessageHtml(false, 'error','ইতিমধ্যেই কুপন প্রয়োগ করা হয়েছে !'));
+        }
         $check=Coupon::where('cupon_code',$request->cupon_code)->first();
         // print_r($check->discount);
         // print_r(Cart::subtotal());
