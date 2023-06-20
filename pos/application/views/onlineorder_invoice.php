@@ -223,17 +223,17 @@
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">Discount </td>
-                            <td colspan="2"> (-)<?php echo $orders->discount_amount ; ?> BDT</td>
+                            <td colspan="2"> (-)<?php echo $orders?->discount_amount ; ?> BDT</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">SUBTOTAL</td>
-                            <td><?php echo $orders->total ; ?> BDT</td>
+                            <td><?php echo $orders?->total ; ?> BDT</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">GRAND TOTAL</td>
-                            <td><?php echo $orders->total ; ?> BDT</td>
+                            <td><?php echo $orders?->total ; ?> BDT</td>
                         </tr>
                     </tfoot>
                 </table>

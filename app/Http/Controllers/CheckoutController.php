@@ -14,6 +14,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\PlaceOrderRequest;
 use Exception;
 
 class CheckoutController extends Controller
@@ -81,7 +82,7 @@ class CheckoutController extends Controller
                     </tr>
                     <tr>
                     <td>
-                        <input id='delivery' name='payment_method' value='1' type='checkbox'>
+                        <input id='delivery' name='payment_method' value='COD' type='checkbox'>
                         <label for='delivery'>Cash on Delivery</label>
                     </td>
                 </tr>";
@@ -94,7 +95,7 @@ class CheckoutController extends Controller
     }
 
 
-    public function placeOrder(Request $request)
+    public function placeOrder(PlaceOrderRequest $request)
     {
         session_start();
         $shippingcharge= $_SESSION['s_charge'];

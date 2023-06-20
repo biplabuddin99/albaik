@@ -68,8 +68,8 @@
                                 <label for="exampleInputEmail1" class="form-label"
                                 >District</label
                                 >
-                                <select id="district_id" name="district_id" class="form-select js-example-basic-single">
-                                    <option value="0">Select a district</option>
+                                <select id="district_id" name="district_id" class="form-select js-example-basic-single @error('district_id') is-invalid @enderror">
+                                    <option value="">Select a district</option>
                                     @foreach ($districts as $district)
                                     <option value="{{ $district->id }}">{{ $district->name }}</option>
                                     @endforeach
@@ -176,7 +176,7 @@
                                         </tr> --}}
                                         <tr>
                                             <td>
-                                                <input id="delivery" name="payment_method" value="1" type="checkbox">
+                                                <input id="delivery" name="payment_method" value="COD" type="checkbox">
                                                 <label for="delivery">Cash on Delivery</label>
                                             </td>
                                         </tr>
