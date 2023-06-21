@@ -130,7 +130,7 @@
 							<tr> 
 								<td class='text-center'></td>
 								<td class='text-center' style="text-align:right;font-size:16px">
-									<strong>Total Revenue</strong>
+									<strong>Total Online Sales</strong>
 								</td>
 								<td class='text-center'></td>
 								<td class='text-center'>
