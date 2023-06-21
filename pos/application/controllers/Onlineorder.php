@@ -108,13 +108,13 @@ class Onlineorder extends MY_Controller {
 											</li>';
 
 											if($this->permissions('items_category_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_order('.$order->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
+											// $str2.='<li>
+											// 	<a style="cursor:pointer" title="Delete Record ?" onclick="delete_order('.$order->id.')">
+											// 		<i class="fa fa-fw fa-trash text-red"></i>Delete
+											// 	</a>
+											// </li>';
 
-										</ul>
+										$str2.='</ul>
 									</div>';
 
 			$row[] = $str2;

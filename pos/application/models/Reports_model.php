@@ -1354,6 +1354,7 @@ class Reports_model extends CI_Model {
 		$dataty=$dataty->dataid;
 		//echo "<pre>";print_r($data);echo "<pre/>";exit;
 		$result = [
+			'order_payments'=>[],
 			'sales_payments'=>[],
 			'sales_paymentsreturn'=>[],
 			'purchase_payments'=>[],
@@ -1371,6 +1372,16 @@ class Reports_model extends CI_Model {
 		if($sales_payments->num_rows()>0){
 			$result['sales_payments'] = $sales_payments->result();
 		}
+		$this->db->select('order_payments.id,order_payments.payment_date,order_payments.payment,orders.invoice_no');
+		$this->db->from('order_payments');
+		$this->db->join('orders', 'orders.id = order_payments.order_id');
+		$this->db->where_in('order_payments.payment_type',$datatype);
+		$this->db->where("order_payments.payment_date BETWEEN '$startDate' and  '$endDate'");
+		$order_payments = $this->db->get();
+		if($order_payments->num_rows()>0){
+			$result['order_payments'] = $order_payments->result();
+		}
+
 		// getting sales payment return
 		$this->db->select('dsr.id,dsr.payment_date,dsr.payment,db_sales.sales_code');
 		$this->db->from('db_salespaymentsreturn as dsr');
@@ -1435,12 +1446,14 @@ class Reports_model extends CI_Model {
 	public function lastOpenningBalanceData($dataty,$lastDate,$datatype,$type){
 	    $datatype=implode("','",$datatype);
 		//return $lastDate;
+		$orderPayments = $this->db->query("SELECT sum(payment) as order_payment FROM order_payments WHERE DATE(payment_date) < DATE('$lastDate') and payment_type in ('$datatype')");
+		
 		$salesPayments = $this->db->query("SELECT sum(payment) as sales_payment FROM db_salespayments WHERE DATE(payment_date) < DATE('$lastDate') and payment_type in ('$datatype')");
 		$salesPaymentsReturn = $this->db->query("SELECT sum(payment) as sales_paymentr FROM db_salespaymentsreturn WHERE DATE(payment_date) < DATE('$lastDate') and payment_type in ('$datatype')");
 		
 		$purchasePayments = $this->db->query("SELECT sum(payment) as purchase_payment FROM db_purchasepayments WHERE DATE(payment_date) < DATE('$lastDate') and payment_type in ('$datatype')");
 		$purchasePaymentsReturn = $this->db->query("SELECT sum(payment) as purchase_paymentr FROM db_purchasepaymentsreturn WHERE DATE(payment_date) < DATE('$lastDate') and payment_type in ('$datatype')");
-		
+		$expenses = 0;
 		if($type==1)
 		    $expenses = $this->db->query("SELECT sum(expense_amt) as expense_amount FROM db_expense WHERE DATE(expense_date) < DATE('$lastDate')")->row()->expense_amount;
 		
@@ -1456,6 +1469,7 @@ class Reports_model extends CI_Model {
 		
 		$firstOpenningBalance = $this->db->query("SELECT sum(amount) as first_cash FROM db_openning_balance_info WHERE bank_id in ($dataty)");
 		
+		$orderPayments = $orderPayments->row()->order_payment;
 		$salesPayments = $salesPayments->row()->sales_payment;
 		$salesPaymentsReturn = $salesPaymentsReturn->row()->sales_paymentr;
 		$purchasePayments = $purchasePayments->row()->purchase_payment;
@@ -1483,10 +1497,10 @@ class Reports_model extends CI_Model {
 		print_r($transactionsDeposit);
 		echo "<pre/>";*/
 		if($type==1){
-    		$totalPlusFigure  = ($salesPayments+$transactionsWithdraw+$firstOpenningBalance+$purchasePaymentsReturn);
+    		$totalPlusFigure  = ($orderPayments+$salesPayments+$transactionsWithdraw+$firstOpenningBalance+$purchasePaymentsReturn);
     		$totalMinusFigure = ($purchasePayments+$expenses+$transactionsDeposit+$salesPaymentsReturn);
 		}else{
-    		$totalPlusFigure  = ($salesPayments+$transactionsDeposit+$firstOpenningBalance+$purchasePaymentsReturn);
+    		$totalPlusFigure  = ($orderPayments+$salesPayments+$transactionsDeposit+$firstOpenningBalance+$purchasePaymentsReturn);
     		$totalMinusFigure = ($purchasePayments+$expenses+$transactionsWithdraw+$salesPaymentsReturn);
 		}
 		

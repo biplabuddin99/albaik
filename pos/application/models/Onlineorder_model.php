@@ -128,8 +128,27 @@ class Onlineorder_model extends CI_Model {
     		    			);
     		                $qtoentry = $this->db->insert('db_stockentry', $to_entry);
                         }
+						$orderdata=$this->db->query("select * from orders where id=$q_id")->row();
+						$billing=$this->db->query("select * from billings where id='".$orderdata->billing_id."'")->row();
+						$customer_payment = array(
+							'order_id' 			=> $orderdata->id,
+							'customer_id' 		=> $orderdata->user_id,
+							'payment_date' 		=> date("Y-m-d"),
+							'payment_type' 		=> $billing->payment_method,
+							'payment' 			=> $orderdata->total,
+							'payment_note' 		=> "Full Pay",
+							'created_date' 		=> $CUR_DATE,
+							'created_time' 		=> $CUR_TIME,
+							'created_by' 		=> $CUR_USERNAME,
+							'system_ip' 		=> $SYSTEM_IP,
+							'system_name' 		=> $SYSTEM_NAME,
+							'status' 			=> 1,
+						);
+						$q1=$this->db->insert("order_payments",$customer_payment);
                     }
                 }else{
+
+                    $this->db->query("delete from order_payments where order_id=$q_id");// delete if old data found under this order
                     $this->db->query("delete from db_stockentry where order_id=$q_id");// delete if old data found under this order
                 }
 
@@ -137,21 +156,18 @@ class Onlineorder_model extends CI_Model {
                 return "success";
 			}
 			else{
-			        return "failed";
+			    return "failed";
 			}
 
 	}
 
 	public function delete_order_from_table($ids){
-
-			$query1="delete from orders where id in($ids)";
-	        if ($this->db->simple_query($query1)){
-	            echo "success";
-	        }
-	        else{
-	            echo "failed";
-	        }
-
+		$this->db->query("delete from order_payments where order_id in ($ids)");// delete if old data found under this order
+		$query1="delete from orders where id in($ids)";
+		if ($this->db->simple_query($query1))
+			echo "success";
+		else
+			echo "failed";
 	}
 
 

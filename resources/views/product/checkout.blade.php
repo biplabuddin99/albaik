@@ -176,7 +176,7 @@
                                         </tr> --}}
                                         <tr>
                                             <td>
-                                                <input id="delivery" name="payment_method" value="COD" type="checkbox">
+                                                <input id="delivery" name="payment_method" value="Cash" type="checkbox">
                                                 <label for="delivery">Cash on Delivery</label>
                                             </td>
                                         </tr>

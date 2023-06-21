@@ -98,11 +98,11 @@ class CheckoutController extends Controller
     public function placeOrder(PlaceOrderRequest $request)
     {
         session_start();
-        $shippingcharge= $_SESSION['s_charge'];
+        $shippingcharge= isset($_SESSION['s_charge'])?$_SESSION['s_charge']:0;
         if(Session::get('coupon'))
-        $cuponbalance=Session::get('coupon')['balance'];
+            $cuponbalance=Session::get('coupon')['balance'];
         else
-        $cuponbalance=str_replace(",", "", Cart::subtotal());
+            $cuponbalance=str_replace(",", "", Cart::subtotal());
 
         // die();
         // dd($request->all());
@@ -121,6 +121,7 @@ class CheckoutController extends Controller
                 $order=new Order;
                 $order->user_id=$request->session()->get('userId');
                 $order->billing_id=$billing->id;
+                $order->invoice_no="AB_".str_pad($billing->id,8,"0",STR_PAD_LEFT);
                 $order->sub_total=Session::get('coupon')['cart_total']??str_replace(",", "", Cart::subtotal());
                 $order->discount_amount=Session::get('coupon')['discount']?? 0;
                 $order->cupon_code=Session::get('coupon')['cupon_code']?? '';
