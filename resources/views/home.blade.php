@@ -86,7 +86,7 @@
         <div class="container product-row-1 my-4">
           <div class="product-heading">
             <div class="row">
-              <div class="col">
+              <div class="col-8">
                 <p class="h6">
                   <img
                     class="body-title-icon"
@@ -96,7 +96,7 @@
                   /><strong>আমাদের জনপ্রিয় পণ্য</strong>
                 </p>
               </div>
-              <div class="col d-flex justify-content-end">
+              <div class="col-4 d-flex justify-content-end">
                 <p class="view">
                   <a href="{{ route('product.populer') }}">View All</a>
                 </p>
@@ -145,7 +145,7 @@
         <div class="container product-row-1 my-5">
           <div class="product-heading">
             <div class="row">
-              <div class="col">
+              <div class="col-8">
                 <p class="h6">
                   <img
                     class="body-title-icon"
@@ -154,7 +154,7 @@
                   /><strong>আমাদের অফার পণ্য</strong>
                 </p>
               </div>
-              <div class="col d-flex justify-content-end">
+              <div class="col-4 d-flex justify-content-end">
                 <p class="view">
                   <a href="{{ route('product.index') }}">View All</a>
                 </p>
@@ -207,7 +207,7 @@
 
             @forelse ($category as $cat)
                 <div class="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                <div class="catagory-card shadow">
+                  <div class="catagory-card shadow">
                     <div class="row">
                     <div class="col-2">
                         <img
@@ -216,11 +216,11 @@
                         alt=""
                         />
                     </div>
-                    <div class="col-7">
+                    <div class="col-10">
                         <p>{{ $cat->category_name }}</p>
                     </div>
                     </div>
-                </div>
+                  </div>
                 </div>
             @empty
               <p>no category</p>
@@ -230,7 +230,7 @@
         <!-- Product Catagory Section end -->
         <!-- Our Offers Section start -->
         <div class="our-offers">
-          <p class="mb-4">Our Offers</p>
+          <p class="mb-4">আমাদের অফার</p>
           <div class="m-3 slider">
             <div
               id="carouselExampleCaptionsa"
@@ -309,7 +309,7 @@
         </div>
         <!--  Our Offers Section end -->
         <div class="container faq my-5">
-          <p>FAQ</p>
+          <p>প্রশ্ন</p>
           <div class="row faq-body">
               @forelse ($faq as $f)
             <div class="col-sm-6">

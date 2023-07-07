@@ -288,7 +288,7 @@ footer {
   margin: 10px;
 }
 .footer-logo {
-  background-color: var(--brand-color);
+  background-color: #FFF;
   max-width: 315px;
   text-align: center;
   padding: 10px;
