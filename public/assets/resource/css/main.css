@@ -340,10 +340,10 @@ footer {
     display: none;
   }
   .carousel-item {
-    height: auto;
+    height: 150px;
   }
   .carousel-item img {
-    height: auto;
+    height: 150px;
     border-radius: 10px;
   }
   .brand-color{

@@ -27,7 +27,7 @@ function leftNavC() {
 
 // scroll nav
 window.onscroll = function () {
-  if (window.pageYOffset >= nav.offsetTop) {
+  if (window.pageYOffset >= 300) {
     navLogo.style.display = "block";
   } else {
     navLogo.style.display = "none";
