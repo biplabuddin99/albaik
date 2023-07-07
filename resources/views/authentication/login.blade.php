@@ -19,7 +19,7 @@
             @endif
             <p>Login</p>
             <hr />
-            <div class="m-auto my-3 w-50">
+            <div class="m-auto my-3 w-75">
             <form action="{{route('login.check')}}" method="post">
                 @csrf
                 <div class="mb-3">
@@ -59,7 +59,7 @@
                 >
                 </div>
                 <button type="submit" class="submit shadow">{{__('Log in')}}</button> OR
-                <a class="submit shadow" href="{{ route('register') }}">Registration</a>
+                <a class="submit shadow" href="{{ route('register') }}">{{__('Registration')}}</a>
                 {{-- <a class="submit shadow" href="#">Submit</a> --}}
             </form>
 
