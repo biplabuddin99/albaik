@@ -37,7 +37,6 @@ body {
     width: 144px;
     height: 50px;
     margin: 53px;
-
 }
 .romadan_img{
     padding: 0 45px;
@@ -341,12 +340,18 @@ footer {
     display: none;
   }
   .carousel-item {
-    height: 250px;
+    height: auto;
   }
   .carousel-item img {
-    height: 250px;
+    height: auto;
     border-radius: 10px;
   }
+  .brand-color{
+    height:auto;
+  }
+  .middle_logo{
+    margin: 15px;
+}
 }
 
 .categorybutton.show{
