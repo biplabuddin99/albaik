@@ -27,7 +27,7 @@
                     >Phone Number</label
                 >
                 <input
-                    type="number"
+                    type="text"
                     class="form-control"
                     id="exampleInputEmail1"
                     name="mobile"

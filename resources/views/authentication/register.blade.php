@@ -15,7 +15,7 @@
             </ul>
         </div>
         @endif
-        <div class="m-auto my-3 w-50">
+        <div class="m-auto my-3 w-75">
           <form action="{{ route('customer.store') }}" method='post'>
                 @csrf
                 <div class="mb-3">
@@ -58,7 +58,7 @@
                     >Mobile Number</label
                     >
                     <input
-                    type="number"
+                    type="text"
                     class="form-control @error('mobile') is-invalid @enderror"
                     id="exampleInputEmail1"
                     name="mobile" value="{{ old('mobile') }}" placeholder="Enter Your Phone Number"

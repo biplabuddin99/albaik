@@ -181,7 +181,7 @@
                         <br />
                         <br />
                         <i class="bi bi-envelope-fill"></i>
-                        <p>{{ \App\Models\FrontSettings::first()->email }}</p>
+                        <p style="font-family: 'bootstrap-icons';">{{ \App\Models\FrontSettings::first()->email }}</p>
                     </div>
                 </div>
             </div>
