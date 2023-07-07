@@ -10,6 +10,8 @@ use App\Models\ChildCategory;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\HeaderSlider;
+use App\Models\FooterSlider;
+use App\Models\FrontSettings;
 use App\Models\OurOffer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,16 +24,21 @@ class FrontendController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $faq=Faq::all();
         $slide=HeaderSlider::all();
-        $offer=OurOffer::all();
-        $product = DB::table('db_items')->where('is_feature', '1')->select('id','item_name','sales_price','item_image','is_feature')->paginate(12);
-        $offer_product = DB::table('db_items')->where('is_top', '1')->select('id','item_name','sales_price','item_image','is_top')->paginate(12);
+        $footslider=FooterSlider::all();
+        $frontsettt=FrontSettings::first();
+        $product = DB::table('db_items')->where('is_feature', '1')->select('id','item_name','sales_price','item_image','is_feature')->inRandomOrder()->orderBy('item_name')->paginate(6);
+        $offer_product = DB::table('db_items')->where('is_top', '1')->select('id','item_name','sales_price','item_image','is_top')->inRandomOrder()->orderBy('item_name')->paginate(6);
+        return view('home',compact('faq','slide','footslider','product','offer_product','frontsettt'));
+    }
+    public function Search(Request $request)
+    {
         if($request->item_name)
         $product=DB::table('db_items')->where('item_name','like','%'.$request->item_name.'%')->get();
-        return view('home',compact('faq','slide','offer','product','offer_product'));
+        return view('product.search',compact('product'));
     }
 
     public function CustomerDasboard()

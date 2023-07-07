@@ -20,7 +20,7 @@
                 <thead>
                   <tr>
                     <th scope="col"> #SL</th>
-                    {{--  <th scope="col">Date</th>  --}}
+                    <th scope="col">Date</th>
                     <th scope="col">Bill Id</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
@@ -31,12 +31,13 @@
                   @foreach ($allorder as $list)
                     <tr>
                       <td>{{ ++$loop->index }}</td>
-                      {{--  <td>{{ $list->created_at->format('d/m/Y') }}</td>  --}}
+                      <td>{{ $list->created_at->format('d/m/Y') }}</td>
                       <td>{{ str_pad($list->billing_id,4,'0',STR_PAD_LEFT) }}</td>
                       <td>৳{{ $list->total}}</td>
-                      <td>@if($list->status==0) Processing
-                          @elseif($list->status==1) Shipped
+                      <td>@if($list->status==0) Pending
+                          @elseif($list->status==1) Processing
                           @elseif($list->status==2) Delivered
+                          @elseif($list->status==3) Cancel
                           @endif
                       </td>
                       <td><a href="{{ route('invoice',$list->id) }}">View</a></td>

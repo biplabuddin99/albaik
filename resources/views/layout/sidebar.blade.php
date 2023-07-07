@@ -2,13 +2,13 @@
   <nav class="navbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#"
+        <a class="nav-link" href="{{ route('product.index') }}"
           >অফার প্যাকেজ
           <i class="bi bi-arrow-right"></i>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href=""
+        <a class="nav-link" href="{{ route('product.populer') }}"
           >আপনার প্রিয় পণ্য
           <i class="bi bi-arrow-right"></i>
         </a>
@@ -19,8 +19,8 @@
     </div>
   </nav>
 
-  <div class="left-bottom-div bg-light">
-    <div class="navbar left-bottom-nav bg-light">
+  <div class="left-bottom-div">
+    <div class="navbar left-bottom-nav">
           @php
             $category =\App\Models\Category::all();
         @endphp

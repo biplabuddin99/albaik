@@ -51,13 +51,16 @@
               <table id="example2" class="table table-bordered table-striped" width="100%">
                 <thead class="bg-primary ">
                 <tr>
-                  <th class="text-center">
+                  <!-- <th class="text-center">
                     <input type="checkbox" class="group_check checkbox" >
-                  </th>
+                  </th> -->
                   <th><?= $this->lang->line('cupon_code'); ?></th>
                   <th><?= $this->lang->line('cupon_name'); ?></th>
-                  <th><?= $this->lang->line('description'); ?></th>
-                  <th><?= $this->lang->line('status'); ?></th>
+                  <th><?= $this->lang->line('number_of'); ?></th>
+                  <th><?= $this->lang->line('start_date'); ?></th>
+                  <th><?= $this->lang->line('finish_date'); ?></th>
+                  <th><?= $this->lang->line('discount_type'); ?></th>
+                  <th><?= $this->lang->line('discount'); ?></th>
                   <th><?= $this->lang->line('action'); ?></th>
                 </tr>
                 </thead>
@@ -108,11 +111,11 @@ $(document).ready(function() {
                     multi_delete();
                 }
             },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
+            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
+            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
+            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
+            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
+            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
             { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },
 
             ]
@@ -147,7 +150,7 @@ $(document).ready(function() {
         //Set column definition initialisation properties.
         "columnDefs": [
         {
-            "targets": [ 0,5 ], //first column / numbering column
+            "targets": [ 0,7], //first column / numbering column
             "orderable": false, //set not orderable
         },
         {

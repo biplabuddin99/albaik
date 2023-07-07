@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/cart.css" />
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/single.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <!-- Bootstrp 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -44,7 +45,7 @@
         </div>
         <div class="col-sm-4 text-center">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('assets/resource') }}/img/logo1-01.png" alt="Your Image" class="img-fluid float-middle middle_logo">
+                <img src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}" alt="Your Image" class="img-fluid float-middle middle_logo">
             </a>
         </div>
         <div class="col-sm-4 text-center">
@@ -70,11 +71,11 @@
             </div>
             </div>
 
-            <a href="#">
+            <a href="{{ route('home') }}">
             <div class="nav-logo">
                 <img
-                class="navbar-brand img-fluid bg-dark rounded"
-                src="{{ asset('assets/resource') }}/img/logo1-01.png"
+                class="navbar-brand img-fluid rounded height-40"
+                src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}"
                 alt="logo"
                 />
             </div>
@@ -113,11 +114,11 @@
             </div>
             <div class="ms-auto customer-seciton mobile-bg p-1">
                 <div class="dropdown">
-                    <a class="" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"  style="background-color: #FFFF66;">
-                        @if(Session::get('userId'))                       
+                        @if(Session::get('userId'))
                         <li><a class="dropdown-item" href="{{ route('customer.dashboard') }}">Dashboard</a></li>
                         <li><a class="dropdown-item" href="{{ route('logOut') }}">Logout</a></li>
                         @else
@@ -202,6 +203,9 @@ src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.j
 integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 crossorigin="anonymous"
 ></script>
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{{--  {!! Toastr::message() !!}  --}}
 <!-- Apps JS -->
 <script src="{{ asset('assets/resource') }}/js/apps.js"></script>
 <script src="{{ asset('assets/resource') }}/js/jquery-3.6.3.min.js"></script>

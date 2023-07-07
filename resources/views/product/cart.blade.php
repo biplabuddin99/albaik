@@ -11,27 +11,28 @@
         </ol>
       </nav>
       <div class="cart-condition shadow">
-        {{--  @php
-        $first_number = 5000.00;
-        $second_number = $total_price;
+        @php
+        $first_number = 10000.00;
+        $second_number = str_replace(",", "", $total_price);
         $sum_total = is_numeric($second_number) ? $first_number - $second_number : 0;
+        $progressbar=(100/$first_number)*$second_number;
         @endphp
-    
+
     @if ($second_number > $first_number)
         <p>Free shipping available!</p>
     @else
-    <p>Add <span>${{ number_format($sum_total, 2) }}</span> to your cart and get free shipping!</p>
+    <p>Add <span>{{ number_format($sum_total, 2) }} TK</span> to your cart and get free shipping!</p>
 
-    @endif  --}}
-    
-    
-        <p>Add <span>${{ $total_price }}</span> to cart and get free shipping!</p>
+    @endif
+
+
+        {{--  <p>You Add <span>{{ $total_price }} TK</span> in cart !</p>  --}}
         <div class="progress mb-3">
           <div
             class="progress-bar bg-warning"
             role="progressbar"
             aria-label="Basic example"
-            style="width: 25%"
+            style="width: {{ $progressbar }}%"
             aria-valuenow="25"
             aria-valuemin="0"
             aria-valuemax="100"
@@ -45,6 +46,8 @@
               <table class="table">
                 <thead>
                   <tr>
+
+                   {{--  @php print_r(Session::get('shipp'))@endphp  --}}
                     <th scope="col">Image</th>
                     <th scope="col">Product</th>
                     <th scope="col">Price</th>
@@ -60,11 +63,11 @@
                           <img class="img-fluid" src="{{ asset('./../pos/') }}/{{ $cartitem->options->product_image }}" alt=""/>
                         </td>
                         <td>{{ $cartitem->name }}</td>
-                        <td>${{ $cartitem->price }}</td>
+                        <td>{{ $cartitem->price }} TK</td>
                         <td>
                             <strong class="ps-2">{{ $cartitem->qty }}</strong>
                         </td>
-                        <td>${{ $cartitem->price*$cartitem->qty  }}</td>
+                        <td>{{ $cartitem->price*$cartitem->qty  }} TK</td>
                         <td>
                             <a href="{{ route('removefrom.cart',['cart_id' => $cartitem->rowId]) }}">
                                 <i class="ms-3 text-danger bi bi-x-circle-fill"></i>
@@ -79,20 +82,22 @@
               </table>
             </div>
             <div class="rounded bg-white my-3 shadow p-3">
-              <div class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default"
-                />
-                <span
-                  class="input-group-text"
-                  id="inputGroup-sizing-default"
-                  >Apply Cupon</span
-                >
-              </div>
-              <div class="input-group mb-3">
+                @if(Session::has('response'))
+                {!!Session::get('response')['message']!!}
+                @endif
+                <form action="{{ route('customer.couponapply') }}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <input type="text" name="cupon_code" placeholder="Cupon Code" class="form-control">
+                        </div>
+                        <div class="col-sm-5">
+                            <button type="submit" class="btn btn-warning">Apply Coupon</button>
+
+                        </div>
+                    </div>
+                </form>
+              <div class="input-group mb-3 mt-3">
                 <a class="btn btn-warning" href="{{ route('product.index') }}">Continue Shopping</a>
               </div>
             </div>
@@ -102,9 +107,27 @@
               <div class="cart-detaits p-3">
                 <p>CART TOTALS</p>
                 <hr />
-                <p>Shipping Charge :<span>$1000.00</span></p>
-                <p>Discount :<span>$1000.00</span></p>
-                <p>Grant Total :<span>${{ $total_price }}</span></p>
+                @if(Session::has('coupon'))
+                <div class="row">
+                    <b>Total Price :<span class="m-5">{{ $total_price }} TK</span></b>
+                </div>
+                <div class="row">
+                    <b>Discount :<span class="m-5">{{ Session::get('coupon')['discount'] }} TK</span></b>
+                </div>
+                <div class="row">
+                    <b>Grant Total :<span class="ms-5">{{ Session::get('coupon')['balance'] }} TK</span> <del class="text-danger">{{ Session::get('coupon')['cart_total'] }} TK</del></b>
+                </div>
+                @else
+                <div class="row">
+                    <b>Total Price :<span class="m-5">{{ $total_price }} TK</span></b>
+                </div>
+                <div class="row">
+                    <b>Discount : <span class="m-5"> 0.00 TK</span></b>
+                </div>
+                <div class="row">
+                    <b>Grant Total :<span class="m-5">{{ $total_price }} TK</span></b>
+                </div>
+                @endif
                 <hr />
                 <a class="submit shadow" href="{{ route('customer.checkoutpage') }}">Process to Chackout</a>
               </div>

@@ -36,10 +36,10 @@
             </div>
             <div class="carousel-inner">
               @forelse ($slide as $s)
-              <div class="carousel-item active">
+                <div class="carousel-item active">
                   <a href="#"
                     ><img
-                      src="{{ asset('uploads/slider') }}/{{ $s->slider_image }}"
+                      src="{{ asset('./../pos/uploads/slider_image') }}/{{ $s->slider_image }}"
                       class="d-block w-100"
                       alt="..."
                   /></a>
@@ -90,14 +90,15 @@
                 <p class="h6">
                   <img
                     class="body-title-icon"
-                    src="{{ asset('assets/resource') }}/img/icon/image 49.png"
+                    src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ $frontsettt->popular_icon }}"
+                    //src="{{ asset('assets/resource') }}/img/icon/image 49.png"
                     alt=""
                   /><strong>আমাদের জনপ্রিয় পণ্য</strong>
                 </p>
               </div>
               <div class="col d-flex justify-content-end">
                 <p class="view">
-                  <a href="{{ route('product.index') }}">View All</a>
+                  <a href="{{ route('product.populer') }}">View All</a>
                 </p>
               </div>
             </div>
@@ -116,19 +117,26 @@
                       <div class="card-body">
                         <p class="card-title text-center">{{ $p->item_name }}</p>
                         <p class="card-title text-center m-0 p-0">{{ $p->sales_price .' '.'TK' }}</p>
-                        <div class="card-button">
-                          <a href="{{ route('product_details.singleProduct',$p->id) }}">+ Add to Card</a>
-                          <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>
-                        </div>
+                        <form class="" action="{{ route('add-to.cart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $p->id }}">
+                            <input type="hidden" id="qtyBox" placeholder="1" value="1" name="order_qty" />
+                            <div class="card-button">
+                                <input class="cartsubmit" type="submit" value="+Add To Cart" />
+                                {{--  <a href="{{ route('product_details.singleProduct',$p->id) }}">+ Add to Card</a>  --}}
+                                <a href="#"></a>
+                                {{--  <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>  --}}
+                              </div>
+                        </form>
                       </div>
                     </div>
                 </div>
                 @empty
                     <p>no Product</p>
                 @endforelse
-                <div class="pt-2">
+                {{--  <div class="pt-2">
                     {{$product->links()}}
-                </div>
+                </div>  --}}
             </div>
           </div>
         </div>
@@ -141,14 +149,14 @@
                 <p class="h6">
                   <img
                     class="body-title-icon"
-                    src="{{ asset('assets/resource') }}/img/icon/image 49.png"
+                    src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ $frontsettt->offer_icon }}"
                     alt=""
                   /><strong>আমাদের অফার পণ্য</strong>
                 </p>
               </div>
               <div class="col d-flex justify-content-end">
                 <p class="view">
-                  <a href="#">View All</a>
+                  <a href="{{ route('product.index') }}">View All</a>
                 </p>
               </div>
             </div>
@@ -166,19 +174,26 @@
                       <div class="card-body">
                         <p class="card-title text-center">{{ $off->item_name }}</p>
                         <p class="card-title text-center m-0 p-0">{{ $off->sales_price .' '.'TK' }}</p>
-                        <div class="card-button">
-                          <a href="{{ route('product_details.singleProduct',$off->id) }}">+ Add to Card</a>
-                          <a href="#"><i class="bi bi-heart-fill"></i></a>
-                        </div>
+                        <form class="" action="{{ route('add-to.cart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $off->id }}">
+                            <input type="hidden" id="qtyBox" placeholder="1" value="1" name="order_qty" />
+                            <div class="card-button">
+                                <input class="cartsubmit" type="submit" value="+Add To Cart" />
+                                {{--  <a href="{{ route('product_details.singleProduct',$p->id) }}">+ Add to Card</a>  --}}
+                                <a href="#"></a>
+                                {{--  <a href="{{ route('addwishlist',$p->id) }}"><i class="bi bi-heart-fill"></i></a>  --}}
+                              </div>
+                        </form>
                       </div>
                     </div>
                   </div>
                 @empty
                     <p>no Product</p>
                 @endforelse
-                <div class="pt-2">
+                {{--  <div class="pt-2">
                     {{$offer_product->links()}}
-                </div>
+                </div>  --}}
             </div>
           </div>
         </div>
@@ -245,11 +260,11 @@
                 ></button>
               </div>
               <div class="carousel-inner">
-                    @forelse ($offer as $of)
+                    @forelse ($footslider as $of)
                     <div class="carousel-item active">
                         <a href="#"
                         ><img
-                            src="{{ asset('uploads/offer') }}/{{ $of->offer_image }}"
+                            src="{{ asset('./../pos/uploads/fslider_image') }}/{{ $of->fslider_image }}"
                             class="d-block w-100"
                             alt="..."
                         /></a>
@@ -296,30 +311,30 @@
         <div class="container faq my-5">
           <p>FAQ</p>
           <div class="row faq-body">
+              @forelse ($faq as $f)
             <div class="col-sm-6">
-                @forelse ($faq as $f)
                 <div
                 class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
+                id="fid{{ $f->id }}"
                 >
                 <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
+                <h2 class="accordion-header" id="f{{ $f->id }}">
                     <button
                     class="accordion-button collapsed rounded"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne"
+                    data-bs-target="#fls{{ $f->id }}"
                     aria-expanded="false"
-                    aria-controls="flush-collapseOne"
+                    aria-controls="fls{{ $f->id }}"
                     >
                     {{ $f->question }}
                     </button>
                 </h2>
                 <div
-                    id="flush-collapseOne"
+                    id="fls{{ $f->id }}"
                     class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
+                    aria-labelledby="f{{ $f->id }}"
+                    data-bs-parent="#fid{{ $f->id }}"
                 >
                     <div class="accordion-body">
                     {{ $f->description }}
@@ -328,172 +343,10 @@
                 </div>
                 </div>
 
+            </div>
                 @empty
                 <p>No Faq </p>
-                @endforelse
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseTwo"
-                    >
-                      How does the site work?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseTwo"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseThree"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseThree"
-                    >
-                      How much do deliveries cost?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseThree"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseFour"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseFour"
-                    >
-                      What are your delivery hours?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseFour"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseFive"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseFive"
-                    >
-                      My order is wrong. What do I do?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseFive"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="accordion accordion-flush shadow mb-4"
-                id="accordionFlushExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed rounded"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseSix"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseSix"
-                    >
-                      Do you serve my area?
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseSix"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div class="accordion-body">
-                      Placeholder content for this accordion, which is
-                      intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the first
-                      item's accordion body.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @endforelse
           </div>
         </div>
           <!-- Footer -->

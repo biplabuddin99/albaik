@@ -5,7 +5,7 @@ class Cupon extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load_global();
-		$this->load->model('cupon_model','cupon');
+		$this->load->model('Cupon_model','cupon');
 	}
 
 	public function add(){
@@ -16,34 +16,33 @@ class Cupon extends MY_Controller {
 	}
 
 	//ITS FROM POP UP MODAL
-	  public function add_cupon_modal(){
-	    $this->form_validation->set_rules('cupon', 'Cupon Name', 'trim|required');
-	    if ($this->form_validation->run() == TRUE) {
-	      $result=$this->cupon->verify_and_save();
-	      //fetch latest item details
-	      $res=array();
-	      $query=$this->db->query("select id,cupon_name from db_cupon order by id desc limit 1");
-	      $res['id']=$query->row()->id;
-	      $res['cupon']=$query->row()->cupon_name;
-	      $res['result']=$result;
+	//   public function add_cupon_modal(){
+	//     $this->form_validation->set_rules('cupon_name', 'Cupon Name', 'trim|required');
+	//     if ($this->form_validation->run() == TRUE) {
+	//       $result=$this->cupon->verify_and_save();
+	//       //fetch latest item details
+	//       $res=array();
+	//       $query=$this->db->query("select id,cupon_name from db_cupon order by id desc limit 1");
+	//       $res['id']=$query->row()->id;
+	//       $res['cupon']=$query->row()->cupon_name;
+	//       $res['result']=$result;
 
-	      echo json_encode($res);
+	//       echo json_encode($res);
 
-	    }
-	    else {
-	      echo "Please Fill Compulsory(* marked) Fields.";
-	    }
-	  }
+	//     }
+	//     else {
+	//       echo "Please Fill Compulsory(* marked) Fields.";
+	//     }
+	//   }
 	  //END
 
 	public function newCupon(){
-		$this->form_validation->set_rules('cupon', 'Cupon', 'trim|required');
+		$this->form_validation->set_rules('cupon_name', 'Cupon Name', 'trim|required');
 
 
 		if ($this->form_validation->run() == TRUE) {
 
-			$this->load->model('cupon_model');
-			$result=$this->cupon_model->verify_and_save();
+			$result=$this->cupon->verify_and_save();
 			echo $result;
 		} else {
 			echo "Please Enter cupon name.";
@@ -53,24 +52,17 @@ class Cupon extends MY_Controller {
 		$this->permission_check('items_cupon_edit');
 		$data=$this->data;
 
-		$this->load->model('cupon_model');
-		$result=$this->cupon_model->get_details($id,$data);
+		$result=$this->cupon->get_details($id,$data);
 		$data=array_merge($data,$result);
 		$data['page_title']=$this->lang->line('cupon');
 		$this->load->view('cupon', $data);
 	}
 	public function update_cupon(){
-		$this->form_validation->set_rules('cupon', 'Cupon', 'trim|required');
+		$this->form_validation->set_rules('cupon_name', 'Cupon Name', 'trim|required');
 		$this->form_validation->set_rules('q_id', '', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE) {
-			/*$data=$this->data;
-			$category=$this->input->post('category');
-			$description=$this->input->post('description');
-			$q_id=$this->input->post('q_id');*/
-
-			$this->load->model('cupon_model');
-			$result=$this->cupon_model->update_cupon();
+			$result=$this->cupon->update_cupon();
 			echo $result;
 		} else {
 			echo "Please Enter cupon name.";
@@ -79,7 +71,7 @@ class Cupon extends MY_Controller {
 	public function view(){
 		$this->permission_check('items_cupon_view');
 		$data=$this->data;
-		$data['page_title']=$this->lang->line('categories_list');
+		$data['page_title']=$this->lang->line('cupon_list');
 		$this->load->view('cupon-view', $data);
 	}
 
@@ -88,21 +80,26 @@ class Cupon extends MY_Controller {
 		$list = $this->cupon->get_datatables();
 
 		$data = array();
-		$no = $_POST['start'];
+		// $no = $_POST['start'];
 		foreach ($list as $cupon) {
-			$no++;
+			// $no++;
 			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$cupon->id.' class="checkbox column_checkbox" >';
+			// $row[] = '<input type="checkbox" name="checkbox[]" value='.$cupon->id.' class="checkbox column_checkbox" >';
 			$row[] = $cupon->cupon_code;
 			$row[] = $cupon->cupon_name;
-			$row[] = $cupon->description;
-
-                if($cupon->status==1){
-                    $str= "<span onclick='update_status(".$cupon->id.",0)' id='span_".$cupon->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
+			$row[] = $cupon->number_of;
+			$row[] = $cupon->start_date;
+			$row[] = $cupon->finish_date;
+			if($cupon->discount_type==0){
+                    $strs= "<span class='label label-success' style='cursor:pointer'>% </span>";}
                 else{
-                    $str = "<span onclick='update_status(".$cupon->id.",1)' id='span_".$cupon->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
+                    $strs = "<span class='label label-success' style='cursor:pointer'> BDT </span>";
                 }
-			$row[] = $str;
+			$row[] = $strs;
+
+			$row[] = $cupon->discount;
+
+
 					$str2 = '<div class="btn-group" title="View Account">
                                 <a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
                                     Action <span class="caret"></span>
@@ -140,25 +137,11 @@ class Cupon extends MY_Controller {
 		echo json_encode($output);
 	}
 
-	public function update_status(){
-		$this->permission_check_with_msg('items_cupon_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-
-		$this->load->model('cupon_model');
-		$result=$this->cupon_model->update_status($id,$status);
-		return $result;
-	}
-
 	public function delete_cupon(){
+        $this->load->model('cupon_model');
 		$this->permission_check_with_msg('items_cupon_delete');
 		$id=$this->input->post('q_id');
-		return $this->cupon->delete_cupons_from_table($id);
-	}
-	public function multi_delete(){
-		$this->permission_check_with_msg('items_cupon_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->cupon->delete_cupons_from_table($ids);
+		return $this->cupon_model->delete_cupon_from_table($id);
 	}
 
 }

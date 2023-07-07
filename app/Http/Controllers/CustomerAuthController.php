@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Crypt;
 use Exception;
 use Session;
@@ -24,16 +25,15 @@ class CustomerAuthController extends Controller
 
     public function signUpStore(CustomerSignupRequest $request)
     {
+        // dd($request->all());
         try {
             $customer = new CustomerAuth;
-            $customer->first_name=$request->first_name;
-            $customer->last_name=$request->last_name;
-            $customer->contact=$request->contact;
-            $customer->shipping_address=$request->shipping_address;
-            $customer->email=$request->email;
+            $customer->customer_name=$request->customer_name;
+            $customer->mobile=$request->mobile;
+            // $customer->address=$request->address;
+            // $customer->email=$request->email;
             $customer->image='avater.jpg';
             $customer->password=Crypt::encryptString($request->password);
-            $customer->check_me_out=$request->check_me_out;
             if($customer->save()){
             return redirect(route('login'));
             }else{
@@ -41,6 +41,7 @@ class CustomerAuthController extends Controller
             }
 
         }catch(Exception $e){
+            // Toastr::primary('Please try Again!');
             dd($e);
         }
     }
@@ -76,8 +77,8 @@ class CustomerAuthController extends Controller
            $wishlist->user_id=$user_id;
            $wishlist->save();
            return redirect()->back();
-           
-           
+
+
        }else{
         return redirect()->route('login');
        }
@@ -91,7 +92,7 @@ class CustomerAuthController extends Controller
     }
 
     public function WishlistDelete($id)
-    { 
+    {
         $wishlist=Wishlist::findOrFail($id);
         $wishlist->delete();
         return redirect()->back();
@@ -103,10 +104,10 @@ class CustomerAuthController extends Controller
         try {
             $id=Session::get('userId');
             $customer=CustomerAuth::findOrFail($id);
-            $customer->first_name=$request->first_name;
-            $customer->last_name=$request->last_name;
-            $customer->contact=$request->contact;
-            $customer->shipping_address=$request->shipping_address;
+            $customer->customer_name=$request->customer_name;
+            // $customer->mobile=$request->mobile;
+            $customer->address=$request->address;
+            $customer->email=$request->email;
             if($request->hasFile('image')){
                 $imageName = rand(111,999).time().'.'.$request->image->extension();
                 $request->image->move(public_path('uploads/customer_img'), $imageName);
@@ -116,14 +117,14 @@ class CustomerAuthController extends Controller
             request()->session()->put(
                 [
                     'userId'=>$customer->id,
-                    'userName'=>$customer->first_name." ".$customer->last_name,
-                    'shippingAddress'=>$customer->shipping_address,
-                    'Phone'=>$customer->contact,
+                    'userName'=>$customer->customer_name,
+                    'shippingAddress'=>$customer->address,
+                    'email'=>$customer->email,
                     'Image'=>$customer->image?$customer->image:'avater.jpg'
                 ]);
             return redirect()->route('customer.dashboard');
         } catch (Exception $e) {
-            Toastr::info('Please try Again!');
+            // Toastr::info('Please try Again!');
             // dd($e);
         }
     }
@@ -135,7 +136,7 @@ class CustomerAuthController extends Controller
     public function customerLoginCheck(CustomerSigninRequest $request)
     {
         try {
-            $customer = CustomerAuth::where('email', $request->email)->first();
+            $customer = CustomerAuth::where('mobile', $request->mobile)->first();
             if ($customer) {
                 if ($request->password === Crypt::decryptString($customer->password)) {
                     $this->setSession($customer);
@@ -146,7 +147,8 @@ class CustomerAuthController extends Controller
                 return redirect()->route('login')->with($this->resMessageHtml(false, 'error', 'wrong cradential!. Or no user found!'));
             }
         } catch (Exception $error) {
-            dd($error);
+            // dd($error);
+            // Toastr::info('Please try Again!');
             return redirect()->route('login')->with($this->resMessageHtml(false, 'error', 'wrong cradential!'));
         }
     }
@@ -155,10 +157,10 @@ class CustomerAuthController extends Controller
         return request()->session()->put(
                 [
                     'userId'=>$customer->id,
-                    'userName'=>$customer->first_name." ".$customer->last_name,
+                    'userName'=>$customer->customer_name,
                     'userEmail'=>$customer->email,
-                    'shippingAddress'=>$customer->shipping_address,
-                    'Phone'=>$customer->contact,
+                    'shippingAddress'=>$customer->address,
+                    'Phone'=>$customer->mobile,
                     'language'=>$customer->language,
                     'Image'=>$customer->image?$customer->image:'no-image.png'
                 ]

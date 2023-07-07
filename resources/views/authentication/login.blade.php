@@ -24,18 +24,18 @@
                 @csrf
                 <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"
-                    >Email address</label
+                    >Phone Number</label
                 >
                 <input
-                    type="email"
+                    type="number"
                     class="form-control"
                     id="exampleInputEmail1"
-                    name="email"
+                    name="mobile"
                     aria-describedby="emailHelp"
                 />
-                <div id="emailHelp" class="form-text">
-                    We'll never share your email with anyone else.
-                </div>
+                {{--  <div id="emailHelp" class="form-text">
+                    We'll never share your mobile with anyone else.
+                </div>  --}}
                 </div>
                 <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label"
@@ -58,9 +58,11 @@
                     >Check me out</label
                 >
                 </div>
-                <button type="submit" class="submit shadow">{{__('Log in')}}</button>
+                <button type="submit" class="submit shadow">{{__('Log in')}}</button> OR
+                <a class="submit shadow" href="{{ route('register') }}">Registration</a>
                 {{-- <a class="submit shadow" href="#">Submit</a> --}}
             </form>
+
             </div>
         </div>
         </div>

@@ -24,11 +24,10 @@ class CustomerSignupRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'=>'required|max:255',
-            'last_name'=>'required|max:255',
-            'contact'=>'required|unique:customer_auths,contact,except,id',
-            'shipping_address'=>'required',
-            'email'=>'nullable',
+            'customer_name'=>'required|max:255',
+            'mobile'=>'required|unique:db_customers,mobile,except,id',
+            // 'address'=>'required',
+            // 'email'=>'required',
             'password'=>'required|min:3',
         ];
     }

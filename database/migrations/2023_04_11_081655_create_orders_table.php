@@ -17,13 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('customer_auths')->onDelete('cascade');
             $table->foreignId('billing_id')->constrained('billings')->onDelete('cascade');
-            $table->string('sub_total');
-            // $table->decimal('sub_total', 8, 2);
-            // $table->decimal('discount_amount', 8, 2)->default(0);
-            $table->string('discount_amount')->default(0);
-            $table->string('coupon_name')->nullable();
-            // $table->decimal('total', 8, 2);
-            $table->string('total');
+             $table->decimal('sub_total', 10, 2);
+             $table->decimal('discount_amount', 10, 2)->default(0);
+            $table->string('cupon_code')->nullable();
+            $table->decimal('shipping_charge', 10, 2)->nullable();
+             $table->decimal('total', 10, 2);
             $table->string('status')->default(0);
             $table->timestamps();
             $table->softDeletes();

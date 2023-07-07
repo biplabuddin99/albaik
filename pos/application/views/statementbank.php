@@ -58,13 +58,13 @@
 						<div class="col-md-3"> 
 							<div class="form-group">
 								<label>Start Date</label>
-								<input type="date" class="form-control"  placeholder="mm/dd/yyyy" value="<?= $_GET['start_date']?$_GET['start_date']:'' ?>" name="start_date" required />
+								<input type="date" class="form-control"  placeholder="mm/dd/yyyy" value="<?= isset($_GET['start_date'])?$_GET['start_date']:'' ?>" name="start_date" required />
 							 </div>
 						</div>
 						<div class="col-md-3"> 
 							<div class="form-group">
 								<label for="exampleInputEmail1">End Date</label>
-								<input type="date" class="form-control"  placeholder="mm/dd/yyyy" value="<?= $_GET['end_date']?$_GET['end_date']:'' ?>" name="end_date" required />
+								<input type="date" class="form-control"  placeholder="mm/dd/yyyy" value="<?= isset($_GET['end_date'])?$_GET['end_date']:'' ?>" name="end_date" required />
 							</div>
 						</div>
 						
@@ -103,9 +103,8 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
-					<?php 
-					?>
-					<p class="text-right" style="width:60%;margin:0 auto">Date : <?=$_GET['start_date']." To ".$_GET['end_date']?></p>
+					
+					<p class="text-right" style="width:60%;margin:0 auto">Date : <?= isset($_GET['start_date'])?$_GET['start_date']:"" ?> To <?= isset($_GET['end_date'])?$_GET['end_date']:"" ?></p>
 					<table class="table table-bordered" style="width:60%;margin:0 auto" id="statementTable"> 
 						<thead>
 							<tr>
@@ -128,6 +127,36 @@
 								<td></td>
 								<td>
 									<?php echo $lastOpenningBalance = $statement['last_openning_balance'];?>
+								</td>
+							</tr>
+							<tr> 
+								<td></td>
+								<td class="revenue-headline">
+									<strong>Online Sales</strong>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<?php
+								$totalPaymentonlone = 0;
+								foreach($statement['order_payments'] as $order_payments){
+									$totalPaymentonlone+=$order_payments->payment;
+							?>
+							<tr> 
+								<td class='text-center'><?=$order_payments->payment_date?></td>
+								<td class='invoice-td'><?=$order_payments->invoice_no?></td>
+								<td class='text-center'><?=$order_payments->payment?></td>
+								<td class='text-center'></td>
+							</tr>
+							<?php }?>
+							<tr> 
+								<td class='text-center'></td>
+								<td class='text-center' style="text-align:right;font-size:16px">
+									<strong>Total Revenue</strong>
+								</td>
+								<td class='text-center'></td>
+								<td class='text-center'>
+									<strong><?=$totalPaymentonlone?></strong>
 								</td>
 							</tr>
 							<tr> 
@@ -324,7 +353,7 @@
 						</tbody>
 						<tfoot>
 							<?php
-								$netcashBalance = ($lastOpenningBalance+$totalPayments+$totalDeposit+$totalExpenseReturn)-($totalPaymentsReturn+$totalExpense+$totalWithDraw);
+								$netcashBalance = ($lastOpenningBalance+$totalPaymentonlone+$totalPayments+$totalDeposit+$totalExpenseReturn)-($totalPaymentsReturn+$totalExpense+$totalWithDraw);
 							?>
 							<tr> 
 								<td class='text-center' style="text-align:right;font-size:16px" colspan="2">

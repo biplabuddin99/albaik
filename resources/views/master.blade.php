@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/cart.css" />
     <link rel="stylesheet" href="{{ asset('assets/resource') }}/css/single.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <!-- Bootstrp 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -44,7 +45,7 @@
         </div>
         <div class="col-sm-4 text-center">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('assets/resource') }}/img/logo1-01.png" alt="Your Image" class="img-fluid float-middle middle_logo">
+                <img src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}" alt="Your Image" class="img-fluid float-middle middle_logo">
             </a>
         </div>
         <div class="col-sm-4 text-center">
@@ -70,11 +71,11 @@
             </div>
             </div>
 
-            <a href="#">
+            <a href="{{ route('home') }}">
             <div class="nav-logo">
                 <img
                 class="navbar-brand img-fluid rounded height-40"
-                src="{{ asset('assets/resource') }}/img/logo1-01.png"
+                src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}"
                 alt="logo"
                 />
             </div>
@@ -96,7 +97,7 @@
             class="collapse mobile-bg navbar-collapse p-3"
             id="navbarSupportedContent"
             >
-            <form action="" method="get">
+            <form action="{{ route('search_product') }}" method="get">
                 <div class="nav-search mobile-bg">
                     <div class="input-group input-group-sm my-3">
                         <input
@@ -128,7 +129,7 @@
                         @endif
                     </ul>
                     <a href="#"><i class="bi bi-truck"></i></a>
-                    <a href="#"><i class="bi bi-heart"></i></a>
+                    {{--  <a href="#"><i class="bi bi-heart"></i></a>  --}}
                     <a href="{{ route('cart.page') }}"><i class="bi bi-basket"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }}
@@ -153,19 +154,15 @@
             <div class="row">
                 <div class="col-sm-6 p-5">
                     <div class="footer-logo">
-                        <img class="img-fluid" src="{{ asset('assets/resource') }}/img/logo1-01.png" alt="" />
+                        <img class="img-fluid" src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}" alt="sorry no image found" />
                     </div>
-                    <p class="footer-about-footer text-white">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Nesciunt soluta ipsam dolorum perferendis at nihil autem
-                        iusto perspiciatis laudantium quia, nobis aliquid voluptas
-                        possimus doloremque non voluptatibus nam voluptates ullam.
+                    <p class="footer-about-footer text-white">{{ \App\Models\FrontSettings::first()->description }}
                     </p>
                     <div class="social-icon">
-                        <i class="bi bi-facebook"></i>
-                        <i class="bi bi-twitter"></i>
-                        <i class="bi bi-linkedin"></i>
-                        <i class="bi bi-youtube"></i>
+                        <a href="{{ \App\Models\FrontSettings::first()->facebooklink }}"><i class="bi bi-facebook"></i></a>
+                        <a href="{{ \App\Models\FrontSettings::first()->twitterlink }}"><i class="bi bi-twitter"></i></a>
+                        <a href="{{ \App\Models\FrontSettings::first()->linkdinlink }}"><i class="bi bi-linkedin"></i></a>
+                        <a href="{{ \App\Models\FrontSettings::first()->youtubelink }}"><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
                 <div class="col-sm-6 p-5">
@@ -175,18 +172,16 @@
                     </div>
                     <div class="address text-white">
                         <i class="bi bi-geo-alt-fill"> </i>
-                        <p>
-                        3100 Danforth Avenue <br />
-                        Torento, Canada
+                        <p>{{ \App\Models\FrontSettings::first()->address }}
                         </p>
                         <br />
                         <br />
                         <i class="bi bi-telephone-fill"></i>
-                        <p>647-352-5009</p>
+                        <p>{{ \App\Models\FrontSettings::first()->phone }}</p>
                         <br />
                         <br />
                         <i class="bi bi-envelope-fill"></i>
-                        <p>support@chowkbazaarhalalmeat.com</p>
+                        <p>{{ \App\Models\FrontSettings::first()->email }}</p>
                     </div>
                 </div>
             </div>
@@ -203,6 +198,9 @@ src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.j
 integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 crossorigin="anonymous"
 ></script>
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{{--  {!! Toastr::message() !!}  --}}
 <!-- Apps JS -->
 <script src="{{ asset('assets/resource') }}/js/apps.js"></script>
 <script src="{{ asset('assets/resource') }}/js/jquery-3.6.3.min.js"></script>

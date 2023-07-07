@@ -318,11 +318,33 @@
             <li class="cupon-active-li"><a href="<?php echo $base_url; ?>cupon/add"><i class="fa fa-plus-square-o "></i> <span><?= $this->lang->line('new_cupon'); ?></span></a></li>
             <?php } ?>
             <?php if($CI->permissions('items_cupon_view')) { ?>
-            <li class="cupon-view-active-li"><a href="<?php echo $base_url; ?>cupon/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('cupons_list'); ?></span></a></li>
+            <li class="cupon-view-active-li"><a href="<?php echo $base_url; ?>cupon/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('cupon_list'); ?></span></a></li>
             <?php } ?>
 
 
           </ul>
+        </li>
+        <?php } ?>
+
+        <!--<li class="header">Online e-commerce order</li>-->
+        <?php if($change_password=true) { ?>
+		<li class=" company-profile-active-li site-settings-active-li  change-pass-active-li dbbackup-active-li warehouse-active-li warehouse-list-active-li tax-active-li currency-view-active-li currency-active-li  database_updater-active-li tax-list-active-li units-list-active-li unit-active-li payment_types_list-active-li payment_types-active-li treeview">
+          <a href="#">
+            <i class="fa fa-gears text-aqua"></i> <span><?= $this->lang->line('online_order'); ?></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>onlineorder/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('online_order_list'); ?></span></a></li>
+            <?php } ?>
+
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>shippingcharge/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('shippingcharge_list'); ?></span></a></li>
+            <?php } ?>
+
+		   </ul>
         </li>
         <?php } ?>
 
@@ -560,6 +582,32 @@
 
             <?php if($CI->permissions('database_backup')) { ?>
             <li class="dbbackup-active-li"><a href="<?php echo $base_url; ?>users/dbbackup"><i class="fa fa-database "></i> <span><?= $this->lang->line('database_backup'); ?></span></a></li>
+            <?php } ?>
+
+		   </ul>
+        </li>
+        <?php } ?>
+		<!--<li class="header">WEBsite SETTINGS</li>-->
+        <?php if($change_password=true) { ?>
+		<li class=" company-profile-active-li site-settings-active-li  change-pass-active-li dbbackup-active-li warehouse-active-li warehouse-list-active-li tax-active-li currency-view-active-li currency-active-li  database_updater-active-li tax-list-active-li units-list-active-li unit-active-li payment_types_list-active-li payment_types-active-li treeview">
+          <a href="#">
+            <i class="fa fa-gears text-aqua"></i> <span><?= $this->lang->line('front settings'); ?></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>headslider/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('Headslider'); ?></span></a></li>
+            <?php } ?>
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>footslider/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('footslider'); ?></span></a></li>
+            <?php } ?>
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>faq/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('faq_list'); ?></span></a></li>
+            <?php } ?>
+            <?php if($CI->permissions('items_view')) { ?>
+            <li class="items-list-active-li"><a href="<?php echo $base_url; ?>frontsettings/view"><i class="fa fa-list "></i> <span><?= $this->lang->line('frontsettings'); ?></span></a></li>
             <?php } ?>
 
 		   </ul>
