@@ -51,7 +51,7 @@ nav {
   width: 100px;
   margin: 0 10px;
   display: none;
-  transition: 0.5s;
+  /*transition: 0.5s;*/
 }
 .nav-search input[type="text"]:focus {
   outline: none;

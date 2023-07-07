@@ -40,7 +40,7 @@
     <section class="header brand-color w-100">
       <!-- logo div -->
       <div class="row m-0 p-0">
-        <div class="col-sm-4 text-center">
+        <div class="col-sm-4 text-center d-none d-sm-block">
           <img src="{{ asset('assets/resource') }}/img/left-logo.png" alt="Your Image" class="img-fluid float-start romadan_img">
         </div>
         <div class="col-sm-4 text-center">
@@ -48,7 +48,7 @@
                 <img src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}" alt="Your Image" class="img-fluid float-middle middle_logo">
             </a>
         </div>
-        <div class="col-sm-4 text-center">
+        <div class="col-sm-4 text-center d-none d-sm-block">
           <img src="{{ asset('assets/resource') }}/img/right-logo.png" alt="Your Image" class="img-fluid float-end romadan_img">
         </div>
       </div>
@@ -59,26 +59,26 @@
     <nav class="navbar navbar-expand-lg bgcolor shadow sticky-top">
         <div class="container">
             <div class="mobile-nav-btn">
-            <div class="start-btn">
-                <button type="button" onclick="leftNavS()" class="btn btn-light">
-                <i class="bi bi-list"></i>
-                </button>
-            </div>
-            <div class="close-btn">
-                <button type="button" onclick="leftNavC()" class="btn btn-light">
-                <i class="bi bi-x-lg"></i>
-                </button>
-            </div>
+                <div class="start-btn">
+                    <button type="button" onclick="leftNavS()" class="btn btn-light">
+                    <i class="bi bi-list"></i>
+                    </button>
+                </div>
+                <div class="close-btn">
+                    <button type="button" onclick="leftNavC()" class="btn btn-light">
+                    <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
             </div>
 
             <a href="{{ route('home') }}">
-            <div class="nav-logo">
-                <img
-                class="navbar-brand img-fluid rounded height-40"
-                src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}"
-                alt="logo"
-                />
-            </div>
+                <div class="nav-logo">
+                    <img
+                    class="navbar-brand img-fluid rounded height-40"
+                    src="{{ asset('./../pos/uploads/fsettings_image') }}/{{ \App\Models\FrontSettings::first()->logo_img }}"
+                    alt="logo"
+                    />
+                </div>
             </a>
 
             <button
