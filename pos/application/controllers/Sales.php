@@ -19,7 +19,7 @@ class Sales extends MY_Controller {
 		//echo $_POST;exit;
 		$this->permission_check('sales_view');
 		$data=$this->data;
-		
+
 		if(isset($_GET['customerId'])){
 			$customerId = $_GET['customerId'];
 			$data['page_title']="All Sales Of ".$_GET['customerName'];
@@ -39,18 +39,18 @@ class Sales extends MY_Controller {
 		$this->load->view('sales-list',$data);
 	}
 	public function add()
-	{	
+	{
 		$this->permission_check('sales_add');
 		$data=$this->data;
 		$data['page_title']=$this->lang->line('sales');
 		$this->load->view('sales',$data);
 	}
-	
+
 
 	public function sales_save_and_update(){
 		$this->form_validation->set_rules('sales_date', 'Sales Date', 'trim|required');
 		$this->form_validation->set_rules('customer_id', 'Customer Name', 'trim|required');
-		
+
 		if ($this->form_validation->run() == TRUE) {
 	    	$result = $this->sales->verify_save_and_update();
 	    	echo $result;
@@ -58,8 +58,8 @@ class Sales extends MY_Controller {
 			echo "Please Fill Compulsory(* marked) Fields.";
 		}
 	}
-	
-	
+
+
 	public function update($id){
 		$this->permission_check('sales_edit');
 		$data=$this->data;
@@ -67,16 +67,16 @@ class Sales extends MY_Controller {
 		$data['page_title']=$this->lang->line('sales');
 		$this->load->view('sales', $data);
 	}
-	
+
 
 	public function ajax_list()
 	{
 		$list = $this->sales->get_datatables(@$_GET['customerId']);
-		
+
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $sales) {
-			
+
 			$no++;
 			$row = array();
 			$row[] = '<input type="checkbox" name="checkbox[]" value='.$sales->id.' class="checkbox column_checkbox" >';
@@ -173,9 +173,9 @@ class Sales extends MY_Controller {
 													<i class="fa fa-fw fa-trash text-red"></i>Delete
 												</a>
 											</li>
-											
+
 										</ul>
-									</div>';			
+									</div>';
 
 			$row[] = $str2;
 
@@ -196,7 +196,7 @@ class Sales extends MY_Controller {
 		$id=$this->input->post('id');
 		$status=$this->input->post('status');
 
-		
+
 		$result=$this->sales->update_status($id,$status);
 		return $result;
 	}
@@ -220,14 +220,14 @@ class Sales extends MY_Controller {
 	}
 	public function find_item_details(){
 		$id=$this->input->post('id');
-		
+
 		$result=$this->sales->find_item_details($id);
 		echo $result;
 	}
 
 	//sales invoice form
 	public function invoice($id)
-	{	
+	{
 		if(!$this->permissions('sales_add') && !$this->permissions('sales_edit')){
 			$this->show_access_denied_page();
 		}
@@ -236,8 +236,8 @@ class Sales extends MY_Controller {
 		$data['page_title']=$this->lang->line('sales_invoice');
 		$this->load->view('sal-invoice',$data);
 	}
-	
-	//Print sales invoice 
+
+	//Print sales invoice
 	public function print_invoice($sales_id)
 	{
 		if(!$this->permissions('sales_add') && !$this->permissions('sales_edit')){
@@ -257,7 +257,7 @@ class Sales extends MY_Controller {
 		}
 	}
 
-	//Print sales POS invoice 
+	//Print sales POS invoice
 	public function print_invoice_pos($sales_id)
 	{
 		if(!$this->permissions('sales_add') && !$this->permissions('sales_edit')){
@@ -272,7 +272,7 @@ class Sales extends MY_Controller {
 		if(!$this->permissions('sales_add') && !$this->permissions('sales_edit')){
 			$this->show_access_denied_page();
 		}
-		
+
 		$data=$this->data;
 		$data['page_title']=$this->lang->line('sales_invoice');
         $data=array_merge($data,array('sales_id'=>$sales_id));
@@ -285,29 +285,29 @@ class Sales extends MY_Controller {
 		else{
 			$this->load->view('print-sales-invoice',$data);
 		}
-       
+
 
         // Get output html
         $html = $this->output->get_output();
         // Load pdf library
         $this->load->library('pdf');
-        
+
         // Load HTML content
         $this->dompdf->loadHtml($html);
-        
+
         // (Optional) Setup the paper size and orientation
         $this->dompdf->setPaper('A4', 'portrait');/*landscape or portrait*/
-        
+
         // Render the HTML as PDF
         $this->dompdf->render();
-        
+
         // Output the generated PDF (1 = download and 0 = preview)
         $this->dompdf->stream("Sales_invoice_$sales_id", array("Attachment"=>0));
 	}
-	
-	
 
-	
+
+
+
 	/*v1.1*/
 	public function return_row_with_data($rowcount,$item_id,$stock){
 		echo $this->sales->get_items_info($rowcount,$item_id,$stock);
@@ -334,7 +334,7 @@ class Sales extends MY_Controller {
 		$sales_id=$this->input->post('sales_id');
 		echo $this->sales->view_payments_modal($sales_id);
 	}
-	
+
 	public function add_payment_row(){
 		return $this->load->view('modals_pos_payment/sales_multi_payment');
 	}

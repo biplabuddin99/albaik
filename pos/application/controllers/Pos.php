@@ -12,7 +12,7 @@ class Pos extends MY_Controller {
 	public function is_sms_enabled(){
 		return is_sms_enabled();
 	}
-	
+
 	public function index()
 	{
 		$this->permission_check('sales_add');
@@ -25,22 +25,23 @@ class Pos extends MY_Controller {
 
 	//adding new item from Modal
 	public function newcustomer(){
-	
+
 		$this->form_validation->set_rules('customer_name', 'Customer Name', 'trim|required');
-		
+
 		if ($this->form_validation->run() == TRUE) {
 			$this->load->model('customers_model');
 			$result=$this->customers_model->verify_and_save();
 			//fetch latest item details
 			$res=array();
-			$query=$this->db->query("select id,customer_name from db_customers order by id desc limit 1");
+			$query=$this->db->query("select id,customer_name,mobile from db_customers order by id desc limit 1");
 			$res['id']=$query->row()->id;
 			$res['customer_name']=$query->row()->customer_name;
+			$res['mobile']=$query->row()->mobile;
 			$res['result']=$result;
-			
+
 			echo json_encode($res);
 
-		} 
+		}
 		else {
 			echo "Please Fill Compulsory(* marked) Fields.";
 		}
@@ -65,7 +66,7 @@ class Pos extends MY_Controller {
 			$data['tot_count']=$q1->num_rows();
 		    $result =$result."<<<###>>>".$q1->num_rows();
 	    }
-	    
+
 	    echo $result;exit();
 	}
 	public function edit($sales_id){
@@ -111,7 +112,7 @@ class Pos extends MY_Controller {
 	public function add_payment_row(){
 		return $this->load->view('modals_pos_payment/modal_payments_multi_sub');
 	}
-	//Print sales POS invoice 
+	//Print sales POS invoice
 	public function print_invoice_pos($sales_id){
 		if(!$this->permissions('sales_add') && !$this->permissions('sales_edit')){
 			$this->show_access_denied_page();

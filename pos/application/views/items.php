@@ -27,7 +27,7 @@
       <?php
          if(!isset($item_name)){
          $custom_barcode ='';
-         $item_name=$opening_stock=$item_code=$brand_id=$category_id=$subcategory_id=$childcategory_id=$gst_percentage=$tax_type=
+         $item_name=$opening_stock=$item_code=$brand_id=$category_id=$subcategory_id=$childcategory_id=$gst_percentage=$tax_type=$warehouse_id=
          $sales_price=$purchase_price=$profit_margin=$unit_id=$price=$alert_qty=
          $lot_number=$wholesale_price=$item_image=$item_image_two=
          $item_image_three=$item_image_four=$item_image_five=$weight=$is_feature=$is_latest=$is_top=$is_review=$short_description=$long_description="";
@@ -455,7 +455,8 @@
                                         $q1=$this->db->query($query1);
                                         if($q1->num_rows($q1)>0){  echo '<option value="">-Select-</option>';
                                             foreach($q1->result() as $res1){
-                                                echo "<option value='".$res1->id."'>".$res1->warehouse_name."</option>";
+                                                $selected = ($res1->id==$warehouse_id)? 'selected' : '';
+                                                echo "<option $selected value='".$res1->id."'>".$res1->warehouse_name."</option>";
                                             }
                                         } else {
                                     ?>

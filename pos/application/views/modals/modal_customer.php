@@ -112,7 +112,7 @@
                                   $q2=$this->db->query($query2);
                                   if($q2->num_rows()>0)
                                    {
-                                    echo '<option value="">-Select-</option>'; 
+                                    echo '<option value="">-Select-</option>';
                                     foreach($q2->result() as $res1)
                                      {
                                        echo "<option value='".$res1->id."'>".$res1->state."</option>";
@@ -158,7 +158,7 @@
                           </div>
 
                         </div>
-                       
+
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>

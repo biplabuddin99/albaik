@@ -31,8 +31,8 @@ $(".add_customer").click(function(e){
     //Validate Input box or selection box should not be blank or empty
 	check_field("customer_name");
 	//check_field("state");
-	
-	
+
+
     if(flag==false)
     {
 		toastr["warning"]("You have Missed Something to Fillup!");
@@ -50,14 +50,14 @@ $(".add_customer").click(function(e){
         }
     var this_id=this.id;
 
-    
+
 
 			if(confirm("Are you Sure ?")){
 				e.preventDefault();
 				data = new FormData($('#customer-form')[0]);//form name
 				/*Check XSS Code*/
 				if(!xss_validation(data)){ return false; }
-				
+
 				$(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
 				$("#"+this_id).attr('disabled',true);  //Enable Save or Update button
 				$.ajax({
@@ -71,9 +71,9 @@ $(".add_customer").click(function(e){
       				//alert(result);//return;
       				var data = jQuery.parseJSON(result);
 					if(data.result=="success")
-					{   
+					{
 						$('#customer-modal').modal('toggle');
-					   	var newOption = '<option value='+data.id+' selected>'+data.customer_name+'</option>';
+					   	var newOption = '<option value='+data.id+' selected>'+data.customer_name+'-'+data.mobile+'</option>';
 					    $('#customer_id').append(newOption).trigger('change');
 					    //$("#amount").val(data.advance);
 					     $('#customer-form')[0].reset();
@@ -99,7 +99,7 @@ $(".add_customer").click(function(e){
 			   }
 			   });
 		} //confirmation sure
-		
+
 
 		//e.preventDefault
 });
@@ -127,8 +127,8 @@ $(".add_supplier").click(function(e){
     //Validate Input box or selection box should not be blank or empty
 	check_field("supplier_name");
 	//check_field("state");
-	
-	
+
+
     if(flag==false)
     {
 		toastr["warning"]("You have Missed Something to Fillup!");
@@ -146,15 +146,15 @@ $(".add_supplier").click(function(e){
         }
     var this_id=this.id;
 
-    
+
 
 			if(confirm("Are you Sure ?")){
-				
+
 				e.preventDefault();
 				data = new FormData($('#supplier-form')[0]);//form name
 				/*Check XSS Code*/
 				if(!xss_validation(data)){ return false; }
-				
+
 				$(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
 				$("#"+this_id).attr('disabled',true);  //Enable Save or Update button
 				$.ajax({
@@ -168,7 +168,7 @@ $(".add_supplier").click(function(e){
       				//alert(result);//return;
       				var data = jQuery.parseJSON(result);
 					if(data.result=="success")
-					{   
+					{
 						$('#supplier-modal').modal('toggle');
 					   	var newOption = '<option value='+data.id+' selected>'+data.supplier_name+'</option>';
 					    $('#supplier_id').append(newOption).trigger('change');
@@ -196,7 +196,7 @@ $(".add_supplier").click(function(e){
 			   }
 			   });
 		} //confirmation sure
-		
+
 
 		//e.preventDefault
 });
@@ -224,14 +224,14 @@ $(".add_brand").click(function(e){
   }
     //Validate Input box or selection box should not be blank or empty
   check_field("brand");
-  
-  
+
+
     if(flag==false)
     {
     toastr["warning"]("You have Missed Something to Fillup!");
     return;
     }
-   
+
     var this_id=this.id;
 
       if(confirm("Are you Sure ?")){
@@ -239,7 +239,7 @@ $(".add_brand").click(function(e){
         data = new FormData($('#brand_form')[0]);//form name
         /*Check XSS Code*/
         if(!xss_validation(data)){ return false; }
-        
+
         $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
         $("#"+this_id).attr('disabled',true);  //Enable Save or Update button
         $.ajax({
@@ -253,7 +253,7 @@ $(".add_brand").click(function(e){
               //alert(result);//return;
               var data = jQuery.parseJSON(result);
           if(data.result=="success")
-          {   
+          {
             $('#brand_modal').modal('toggle');
               var newOption = '<option value='+data.id+' selected>'+data.brand+'</option>';
               $('#brand_id').append(newOption).trigger('change');
@@ -281,7 +281,7 @@ $(".add_brand").click(function(e){
          }
          });
     } //confirmation sure
-    
+
 
     //e.preventDefault
 });
@@ -308,14 +308,14 @@ $(".add_category").click(function(e){
   }
     //Validate Input box or selection box should not be blank or empty
   check_field("category");
-  
-  
+
+
     if(flag==false)
     {
     toastr["warning"]("You have Missed Something to Fillup!");
     return;
     }
-   
+
     var this_id=this.id;
 
       if(confirm("Are you Sure ?")){
@@ -323,7 +323,7 @@ $(".add_category").click(function(e){
         data = new FormData($('#category_form')[0]);//form name
         /*Check XSS Code*/
         if(!xss_validation(data)){ return false; }
-        
+
         $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
         $("#"+this_id).attr('disabled',true);  //Enable Save or Update button
         $.ajax({
@@ -337,7 +337,7 @@ $(".add_category").click(function(e){
               //alert(result);//return;
               var data = jQuery.parseJSON(result);
           if(data.result=="success")
-          {   
+          {
             $('#category_modal').modal('toggle');
               var newOption = '<option value='+data.id+' selected>'+data.category+'</option>';
               $('#category_id').append(newOption).trigger('change');
@@ -365,7 +365,7 @@ $(".add_category").click(function(e){
          }
          });
     } //confirmation sure
-    
+
 
     //e.preventDefault
 });
@@ -391,14 +391,14 @@ $(".add_unit").click(function(e){
   }
     //Validate Input box or selection box should not be blank or empty
   check_field("unit_name");
-  
-  
+
+
     if(flag==false)
     {
     toastr["warning"]("You have Missed Something to Fillup!");
     return;
     }
-   
+
     var this_id=this.id;
 
       if(confirm("Are you Sure ?")){
@@ -406,7 +406,7 @@ $(".add_unit").click(function(e){
         data = new FormData($('#unit_form')[0]);//form name
         /*Check XSS Code*/
         if(!xss_validation(data)){ return false; }
-        
+
         $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
         $("#"+this_id).attr('disabled',true);  //Enable Save or Update button
         $.ajax({
@@ -420,7 +420,7 @@ $(".add_unit").click(function(e){
               //alert(result);//return;
               var data = jQuery.parseJSON(result);
           if(data.result=="success")
-          {   
+          {
             $('#unit_modal').modal('toggle');
               var newOption = '<option value='+data.id+' selected>'+data.unit+'</option>';
               $('#unit_id').append(newOption).trigger('change');
@@ -448,7 +448,7 @@ $(".add_unit").click(function(e){
          }
          });
     } //confirmation sure
-    
+
 
     //e.preventDefault
 });
@@ -476,14 +476,14 @@ $(".add_tax").click(function(e){
     //Validate Input box or selection box should not be blank or empty
   check_field("tax_name");
   check_field("tax");
-  
-  
+
+
     if(flag==false)
     {
     toastr["warning"]("You have Missed Something to Fillup!");
     return;
     }
-   
+
     var this_id=this.id;
 
       if(confirm("Are you Sure ?")){
@@ -491,7 +491,7 @@ $(".add_tax").click(function(e){
         data = new FormData($('#tax_form')[0]);//form name
         /*Check XSS Code*/
         if(!xss_validation(data)){ return false; }
-        
+
         $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
         $("#"+this_id).attr('disabled',true);  //Enable Save or Update button
         $.ajax({
@@ -505,7 +505,7 @@ $(".add_tax").click(function(e){
               //alert(result);//return;
               var data = jQuery.parseJSON(result);
           if(data.result=="success")
-          {   
+          {
             $('#tax_modal').modal('toggle');
               var newOption = '<option data-tax='+data.tax+' value='+data.id+' selected>'+data.tax_name+'('+data.tax+')</option>';
               $('#tax_id').append(newOption).trigger('change');
@@ -533,7 +533,7 @@ $(".add_tax").click(function(e){
          }
          });
     } //confirmation sure
-    
+
 
     //e.preventDefault
 });

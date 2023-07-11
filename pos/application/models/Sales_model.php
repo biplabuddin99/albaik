@@ -5,8 +5,8 @@ class Sales_model extends CI_Model {
 
 	//Datatable start
 	var $table = 'db_sales as a';
-	var $column_order = array( 'a.return_bit','a.id','a.sales_date','a.sales_code','a.reference_no','a.grand_total','a.payment_status','a.created_by','b.customer_name','b.mobile','a.paid_amount','a.sales_status','a.pos'); //set column field database for datatable orderable
-	var $column_search = array('sales_due','a.return_bit','a.id','a.sales_date','a.sales_code','a.reference_no','a.grand_total','a.payment_status','a.created_by','b.customer_name','b.mobile','a.paid_amount','a.sales_status','a.pos'); //set column field database for datatable searchable
+	var $column_order = array( 'a.return_bit','a.id','a.sales_date','a.sales_code','a.reference_no','a.grand_total','a.payment_status','a.created_by','b.customer_name','b.mobile','c.warehouse_name','a.paid_amount','a.sales_status','a.pos'); //set column field database for datatable orderable
+	var $column_search = array('sales_due','a.return_bit','a.id','a.sales_date','a.sales_code','a.reference_no','a.grand_total','a.payment_status','a.created_by','b.customer_name','b.mobile','c.warehouse_name','a.paid_amount','a.sales_status','a.pos'); //set column field database for datatable searchable
 	var $order = array('a.id' => 'desc'); // default order
 
 	public function __construct()
@@ -623,6 +623,7 @@ class Sales_model extends CI_Model {
 			$info['item_id'] = $res1->item_id;
 			$info['description'] = $res1->description;
 			$info['item_name'] = $q2->row()->item_name;
+			$info['item_code'] = $q2->row()->item_code;
 			//$info['description'] = $res1->description;
 			$info['item_sales_qty'] = $res1->sales_qty;
 			$info['item_available_qty'] = $q2->row()->stock+$info['item_sales_qty'];

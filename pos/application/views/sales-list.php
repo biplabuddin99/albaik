@@ -10,10 +10,10 @@
 <div class="wrapper">
 
   <!-- Left side column. contains the logo and sidebar -->
-  
+
   <?php include"sidebar.php"; ?>
 
-  <?php 
+  <?php
       /*Total Invoices*/
       $total_invoice=$this->db->query("SELECT COUNT(*) as total FROM db_sales")->row()->total;
       /*Total Invoices Total*/
@@ -24,7 +24,7 @@
 
       $sales_due_total=$this->db->query("SELECT COALESCE(SUM(sales_due),0) AS sales_due FROM db_customers")->row()->sales_due;
       //$sales_due_total = $sal_total - $sal_return_total;
-     
+
   ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -150,7 +150,7 @@
                 </tr>
                 </thead>
                 <tbody>
-				
+
                 </tbody>
                <tfoot>
                   <tr class="bg-gray">
@@ -201,7 +201,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     //datatables
-   var table = $('#example2').DataTable({ 
+   var table = $('#example2').DataTable({
 
       /* FOR EXPORT BUTTONS START*/
   dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
@@ -215,12 +215,12 @@ $(document).ready(function() {
                     multi_delete();
                 }
             },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8,9]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8,9]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8,9]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8,9]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8,9]} },
-            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },  
+            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [2,3,4,5,6,7,8,9,10,11]} },
+            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [2,3,4,5,6,7,8,9,10,11]} },
+            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [2,3,4,5,6,7,8,9,10,11]} },
+            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [2,3,4,5,6,7,8,9,10,11]} },
+            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [2,3,4,5,6,7,8,9,10,11]} },
+            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },
 
             ]
         },
@@ -252,15 +252,15 @@ $(document).ready(function() {
 
         //Set column definition initialisation properties.
         "columnDefs": [
-        { 
-            "targets": [ 0,11], //first column / numbering column
+        {
+            "targets": [ 0,1,11,12], //first column / numbering column
             "orderable": false, //set not orderable
         },
         {
             "targets" :[0],
             "className": "text-center",
         },
-        
+
         ],
         /*Start Footer Total*/
         "footerCallback": function ( row, data, start, end, display ) {
@@ -290,12 +290,12 @@ $(document).ready(function() {
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-           
+
             //$( api.column( 0 ).footer() ).html('Total');
             $( api.column( 6 ).footer() ).html(app_number_format(total));
             $( api.column( 7 ).footer() ).html(app_number_format(paid));
             $( api.column( 8 ).footer() ).html(app_number_format(due));
-           
+
         },
         /*End Footer Total*/
     });
@@ -310,6 +310,6 @@ $(document).ready(function() {
 </script>
 <!-- Make sidebar menu hughlighter/selector -->
 <script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-		
+
 </body>
 </html>

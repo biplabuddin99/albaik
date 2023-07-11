@@ -136,9 +136,10 @@ padding-right: 2px;
                          </div>
                       </div>
                       <div class="form-group">
-                         <label for="salesman_id" class="col-sm-2 control-label"><?= $this->lang->line('salesman_name'); ?><label class="text-danger">*</label></label>
+                         <!-- <label for="salesman_id" class="col-sm-2 control-label"><?= $this->lang->line('salesman_name'); ?><label class="text-danger">*</label></label> -->
+                         <input type="hidden" name="salesman_id" value="1">
                          <div class="col-sm-3">
-                            <div class="input-group">
+                            <!-- <div class="input-group">
                                <select class="form-control select2" id="salesman_id" name="salesman_id"  style="min-width:150px;width: 100%;" onkeyup="shift_cursor(event,'mobile')">
                                   <?php
                                      $q1=$this->db->query("select * from db_users");
@@ -155,7 +156,7 @@ padding-right: 2px;
                                   <?php } ?>
                                </select>
                             </div>
-                            <span id="salesman_id_msg" style="display:none" class="text-danger"></span>
+                            <span id="salesman_id_msg" style="display:none" class="text-danger"></span> -->
                          </div>
                       </div>
                       <div class="form-group hidden">
