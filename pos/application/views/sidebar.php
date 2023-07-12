@@ -392,16 +392,16 @@
         </li>
         <?php } ?>
 
-        <?php if($CI->permissions('expense_view')) { ?>
+        <!-- <?php if($CI->permissions('expense_view')) { ?>
        <li class=" expense-list-active-li expense-active-li expense-category-active-li expense-category-list-active-li">
           <a href="<?php echo $base_url; ?>accounts/accounts">
             <i class="fa fa-minus-circle text-aqua"></i> <span><?= $this->lang->line('accounts'); ?></span>
           </a>
         </li>
-        <?php } ?>
+        <?php } ?> -->
 
 
-		<?php if($CI->permissions('places_add') || $CI->permissions('places_view')) { ?>
+		<!-- <?php if($CI->permissions('places_add') || $CI->permissions('places_view')) { ?>
 		<li class="country-active-li city-list-active-li country-list-active-li state-active-li state-list-active-li city-active-li treeview">
           <a href="#">
             <i class="fa fa-paper-plane-o text-aqua"></i> <span><?= $this->lang->line('places'); ?></span>
@@ -424,7 +424,7 @@
             <?php } ?>
     </ul>
         </li>
-    <?php } ?>
+    <?php } ?> -->
 
 
 		<!--<li class="header">REPORTS</li>-->
@@ -570,9 +570,9 @@
             <li class="payment_types_list-active-li payment_types-active-li"><a href="<?php echo $base_url; ?>payment_types/"><i class="fa fa-list "></i> <span><?= $this->lang->line('payment_types_list'); ?></span></a></li>
             <?php } ?>
 
-            <?php if($CI->permissions('currency_view')) { ?>
+            <!-- <?php if($CI->permissions('currency_view')) { ?>
             <li class="currency-view-active-li currency-active-li"><a href="<?php echo $base_url; ?>currency/view"><i class="fa fa-gg "></i> <span><?= $this->lang->line('currency_list'); ?></span></a></li>
-            <?php } ?>
+            <?php } ?> -->
 
             <?php if($CI->permissions('warehouse_view')) { ?>
             <li class="currency-view-active-li currency-active-li"><a href="<?php echo $base_url; ?>warehouse/"><i class="fa fa-gg "></i> <span><?= $this->lang->line('warehouse'); ?></span></a></li>

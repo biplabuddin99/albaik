@@ -10,13 +10,13 @@
             }
 table, th, td {
     border: 0.5pt solid #0070C0;
-    border-collapse: collapse;   
+    border-collapse: collapse;
 
 }
 th, td {
     /*padding: 5px;*/
-    text-align: left;   
-    vertical-align:top 
+    text-align: left;
+    vertical-align:top
 }
 body{
   word-wrap: break-word;
@@ -89,7 +89,7 @@ body { margin: 5px; }
     $res4=$q4->row();
     $sales_invoice_footer_text=$res4->sales_invoice_footer_text;
     $currency_id=$res4->currency_id;
-    
+
     $q3=$this->db->query("SELECT a.id,a.customer_name,a.mobile,a.phone,a.gstin,a.tax_number,a.email,
                            a.opening_balance,a.country_id,a.state_id,a.city,
                            a.postcode,a.address,b.sales_date,b.created_time,b.reference_no,
@@ -108,14 +108,14 @@ body { margin: 5px; }
                            b.payment_status
 
                            FROM db_customers a,
-                           db_sales b 
-                           WHERE 
-                           a.`id`=b.`customer_id` AND 
-                           b.`id`='$sales_id' 
+                           db_sales b
+                           WHERE
+                           a.`id`=b.`customer_id` AND
+                           b.`id`='$sales_id'
                            ");
-                           /*GROUP BY 
+                           /*GROUP BY
                            b.`customer_code`*/
-    
+
     $res3=$q3->row();
     $customer_name=$res3->customer_name;
     $customer_mobile=$res3->mobile;
@@ -140,7 +140,7 @@ body { margin: 5px; }
     $sales_status=$res3->sales_status;
     $customer_id=$res3->id;
 
-    
+
     $subtotal=$res3->subtotal;
     $grand_total=$res3->grand_total;
     $other_charges_input=$res3->other_charges_input;
@@ -153,14 +153,14 @@ body { margin: 5px; }
     $tot_discount_to_all_amt=$res3->tot_discount_to_all_amt;
     $round_off=$res3->round_off;
     $payment_status=$res3->payment_status;
-    
+
     if(!empty($customer_country)){
-      $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;  
+      $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;
     }
     if(!empty($customer_state)){
-      $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;  
+      $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;
     }
-    
+
 
     ?>
 
@@ -174,7 +174,7 @@ body { margin: 5px; }
 
 <table autosize="1" style="overflow: wrap" id='mytable' align="center" width="100%" height='100%'  cellpadding="0" cellspacing="0"  >
 <!-- <table align="center" width="100%" height='100%'   > -->
-  
+
     <thead>
 
       <tr>
@@ -192,7 +192,7 @@ body { margin: 5px; }
                     <?php echo $this->lang->line('mobile').":".$company_mobile; ?><br/>
                     <?php echo $this->lang->line('address')." : ".$company_address; ?><br/>
                    <!--  <?php echo $company_country; ?><br/> -->
-                    
+
                     <?php echo (!empty(trim($company_email))) ? $this->lang->line('email').": ".$company_email."<br>" : '';?>
                     <?php echo (!empty(trim($company_gst_no))) ? $this->lang->line('gst_number').": ".$company_gst_no."<br>" : '';?>
                     <!-- <?php echo (!empty(trim($company_vat_no))) ? $this->lang->line('tax_number').": ".$company_vat_no."<br>" : '';?> -->
@@ -203,7 +203,7 @@ body { margin: 5px; }
                 <td colspan="8" rowspan="1">
                   <span>
                     <table style="width: 100%;" class="style_hidden fixed_table">
-                    
+
                         <tr>
                           <td colspan="4">
                             Invoice No.<br>
@@ -225,9 +225,9 @@ body { margin: 5px; }
                               <b><?php echo "$reference_no"; ?></b>
                             </span>
                           </td>
-                          
+
                         </tr>
-                        
+
                         <tr>
                           <td colspan="8">
                             <span>
@@ -258,14 +258,14 @@ body { margin: 5px; }
                             <b><?= $this->lang->line('pay_by_upi'); ?></b><br/>
 
                             <img width="35%" src="<?= $upi_code;?>"><br>
-                            
+
                           </td>
                         </tr>
                         <?php } ?>
                         <!-- UPI Image show end -->
 
 
-                    
+
                     </table>
                   </span>
                 </td>
@@ -278,7 +278,7 @@ body { margin: 5px; }
                   <span style="font-size: 10px;">
                       <?php echo $this->lang->line('name').": ".$customer_name; ?><br/>
                         <?php echo (!empty(trim($customer_mobile))) ? $this->lang->line('mobile').": ".$customer_mobile."<br>" : '';?>
-                        <?php 
+                        <?php
                                 if(!empty($customer_address)){
                                   echo $customer_address;
                                 }
@@ -309,7 +309,7 @@ body { margin: 5px; }
                               <span style="font-size: 10px;">
                               <?php echo $this->lang->line('name').": ".$customer_name; ?><br/>
                                 <?php echo (!empty(trim($customer_mobile))) ? $this->lang->line('mobile').": ".$customer_mobile."<br>" : '';?>
-                                <?php 
+                                <?php
                                         if(!empty($customer_address)){
                                           echo $customer_address;
                                         }
@@ -337,7 +337,7 @@ body { margin: 5px; }
 
 
 
-            
+
           </table>
       </th>
       </tr>
@@ -377,9 +377,9 @@ body { margin: 5px; }
                                   a.price_per_unit, b.tax,b.tax_name,a.tax_amt,
                                   a.discount_input,a.discount_amt, a.unit_total_cost,
                                   a.total_cost , d.unit_name,c.sku,c.hsn
-                                  FROM 
+                                  FROM
                                   db_salesitems AS a,db_tax AS b,db_items AS c , db_units as d
-                                  WHERE 
+                                  WHERE
                                   d.id = c.unit_id and
                                   c.id=a.item_id AND b.id=a.tax_id AND a.sales_id='$sales_id'");
               foreach ($q2->result() as $res2) {
@@ -388,8 +388,8 @@ body { margin: 5px; }
                   $before_tax=$res2->unit_total_cost;// * $res2->sales_qty;
                   $tot_cost_before_tax=$before_tax * $res2->sales_qty;
 
-                  
-                  echo "<tr>";  
+
+                  echo "<tr>";
                   echo "<td colspan='2' class='text-center'>".$i++."</td>";
                   echo "<td colspan='4'>";
                   echo $res2->item_name;
@@ -397,18 +397,18 @@ body { margin: 5px; }
                   echo "</td>";
                   echo "<td colspan='2' class='text-left'>".$res2->hsn."</td>";
                   echo "<td colspan='2' class='text-right'>".$res2->price_per_unit."</td>";
-                  
+
                   echo "<td class='text-center'>".$res2->sales_qty."</td>";
                   echo "<td colspan='1' class='text-right'>".$res2->tax."%</td>";
                   echo "<td style='text-align: right;'>".$res2->tax_amt."</td>";
                   //echo "<td style='text-align: right;'>".$discount."</td>";
                   echo "<td style='text-align: right;'>".$discount_amt."</td>";
- 
+
                   //echo "<td colspan='2' class='text-right'>".number_format($before_tax,2)."</td>";
                   //echo "<td class='text-right'>".$res2->price_per_unit."</td>";
-                  
+
                   echo "<td colspan='2' class='text-right'>".number_format($res2->total_cost,2)."</td>";
-                  echo "</tr>";  
+                  echo "</tr>";
                   $tot_qty +=$res2->sales_qty;
                   $tot_sales_price +=$res2->price_per_unit;
                   $tot_tax_amt +=$res2->tax_amt;
@@ -425,7 +425,7 @@ body { margin: 5px; }
 
 
 <tfoot>
- 
+
 
   <tr class="bg-sky">
     <td colspan="8" class='text-center text-bold'><?= $this->lang->line('total'); ?></td>
@@ -446,12 +446,12 @@ body { margin: 5px; }
     <td colspan="14" class='text-right'><b><?= $this->lang->line('other_charges'); ?></b></td>
     <td colspan="2" class='text-right' ><b><?php echo number_format($other_charges_amt,2); ?></b></td>
   </tr>
-  
+
   <tr>
     <td colspan="14" class='text-right'><b><?= $this->lang->line('discount_on_all'); ?>(<?= $discount_to_all_input." ".$discount_to_all_type; ?>)</b></td>
     <td colspan="2" class='text-right' ><b><?php echo number_format($tot_discount_to_all_amt,2); ?></b></td>
   </tr>
-  
+
   <tr>
     <td colspan="14" class='text-right'><b><?= $this->lang->line('grand_total'); ?></b></td>
     <td colspan="2" class='text-right' ><b><?php echo number_format($grand_total,2); ?></b></td>
@@ -473,13 +473,13 @@ body { margin: 5px; }
   <tr>
     <td colspan="16">
 <?php
-     
+
       $currency_code = $this->db->select("currency_code")->where('id',$currency_id)->get("db_currency")->row()->currency_code;
 
       echo "<span class='amt-in-word'>Amount in words: <i style='font-weight:bold;'>".$currency_code." ".no_to_words($grand_total)." Only</i></span>";
 
       ?>
-  
+
 </td>
   </tr>
   <tr>
@@ -488,7 +488,7 @@ body { margin: 5px; }
         echo "<span class='amt-in-word'>Note: <i style=''>".$sales_note."</i></span>";
 
         ?>
-    
+
   </td>
     </tr>
 
@@ -498,12 +498,12 @@ body { margin: 5px; }
       <tr>
         <td colspan="16">
           <table width="100%" class="style_hidden fixed_table">
-           
+
               <tr>
                 <td colspan="16">
                   <span>
                     <table style="width: 100%;" class="style_hidden fixed_table">
-                    
+
                         <!-- T&C & Bank Details -->
                         <tr>
                           <td colspan="16">
@@ -520,12 +520,12 @@ body { margin: 5px; }
                             <span><b> <?= $this->lang->line('authorised_signatory'); ?></b></span>
                           </td>
                         </tr>
-                     
+
                     </table>
                   </span>
                 </td>
               </tr>
-           
+
           </table>
       </td>
       </tr>
@@ -550,9 +550,9 @@ body { margin: 5px; }
 </caption> -->
 </body>
 </html>
-<?php 
+<?php
  function no_to_words($no)
-      {   
+      {
        $words = array('0'=> '' ,'1'=> 'One' ,'2'=> 'Two' ,'3' => 'Three','4' => 'Four','5' => 'Five','6' => 'Six','7' => 'Seven','8' => 'Eight','9' => 'Nine','10' => 'Ten','11' => 'Eleven','12' => 'Twelve','13' => 'Thirteen','14' => 'Fouteen','15' => 'Fifteen','16' => 'Sixteen','17' => 'Seventeen','18' => 'Eighteen','19' => 'Nineteen','20' => 'Twenty','30' => 'Thirty','40' => 'Fourty','50' => 'Fifty','60' => 'Sixty','70' => 'Seventy','80' => 'Eighty','90' => 'Ninty','100' => 'Hundred &','1000' => 'Thousand','100000' => 'Lakh','10000000' => 'Crore');
         if($no == 0)
           return ' ';
@@ -561,7 +561,7 @@ body { margin: 5px; }
         $highno=$no;
         $remainno=0;
         $value=100;
-        $value1=1000;       
+        $value1=1000;
             while($no>=100)    {
               if(($value <= $no) &&($no  < $value1))    {
               $novalue=$words["$value"];
@@ -571,12 +571,12 @@ body { margin: 5px; }
               }
               $value= $value1;
               $value1 = $value * 100;
-            }       
+            }
             if(array_key_exists("$highno",$words))
               return $words["$highno"]." ".$novalue." ".no_to_words($remainno);
             else {
              $unit=$highno%10;
-             $ten =(int)($highno/10)*10;            
+             $ten =(int)($highno/10)*10;
              return $words["$ten"]." ".$words["$unit"]." ".$novalue." ".no_to_words($remainno);
              }
         }

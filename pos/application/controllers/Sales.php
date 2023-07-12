@@ -143,7 +143,7 @@ class Sales extends MY_Controller {
 											</li>';
 
 											if($this->permissions('sales_add') || $this->permissions('sales_edit'))
-											$str2.='<li>
+											$str2.='<!--<li>
 												<a title="Update Record ?" target="_blank" href="sales/print_invoice/'.$sales->id.'">
 													<i class="fa fa-fw fa-print text-blue"></i>Print
 												</a>
@@ -153,7 +153,7 @@ class Sales extends MY_Controller {
 												<a title="Update Record ?" target="_blank" href="sales/pdf/'.$sales->id.'">
 													<i class="fa fa-fw fa-file-pdf-o text-blue"></i>PDF
 												</a>
-											</li>
+											</li>-->
 											<li>
 												<a style="cursor:pointer" title="Print POS Invoice ?" onclick="print_invoice('.$sales->id.')">
 													<i class="fa fa-fw fa-file-text text-blue"></i>POS Invoice

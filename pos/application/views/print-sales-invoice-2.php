@@ -12,8 +12,8 @@ table, th, td {
 }
 th, td {
     padding: 5px;
-    text-align: left;   
-    vertical-align:top 
+    text-align: left;
+    vertical-align:top
 }
 .dashed_top{
   border-top-style: dashed;
@@ -56,7 +56,7 @@ body{
     $q4=$this->db->query("select sales_invoice_footer_text from db_sitesettings where id=1");
     $res4=$q4->row();
     $sales_invoice_footer_text=$res4->sales_invoice_footer_text;
-    
+
 
     $q3=$this->db->query("SELECT a.customer_name,a.mobile,a.phone,a.gstin,a.tax_number,a.email,
                            a.opening_balance,a.country_id,a.state_id,a.created_by,
@@ -75,14 +75,14 @@ body{
                            b.payment_status
 
                            FROM db_customers a,
-                           db_sales b 
-                           WHERE 
-                           a.`id`=b.`customer_id` AND 
-                           b.`id`='$sales_id' 
+                           db_sales b
+                           WHERE
+                           a.`id`=b.`customer_id` AND
+                           b.`id`='$sales_id'
                            ");
-                           /*GROUP BY 
+                           /*GROUP BY
                            b.`customer_code`*/
-    
+
     $res3=$q3->row();
     $customer_name=$res3->customer_name;
     $customer_mobile=$res3->mobile;
@@ -103,7 +103,7 @@ body{
     $sales_status=$res3->sales_status;
     $created_by=$res3->created_by;
 
-    
+
     $subtotal=$res3->subtotal;
     $grand_total=$res3->grand_total;
     $other_charges_input=$res3->other_charges_input;
@@ -116,14 +116,14 @@ body{
     $tot_discount_to_all_amt=$res3->tot_discount_to_all_amt;
     $round_off=$res3->round_off;
     $payment_status=$res3->payment_status;
-    
+
     if(!empty($customer_country)){
-      $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;  
+      $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;
     }
     if(!empty($customer_state)){
-      $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;  
+      $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;
     }
-    
+
 
     ?>
 
@@ -150,14 +150,14 @@ body{
               <th colspan="6" style="text-align: right;">
                 <img src="<?= base_url('uploads/company/'.$company_logo);?>" width='auto' height='150px'>
               </th>
-              
+
             </tr>
             <tr class=" ">
               <td colspan="6" style="border: 1px solid;" >
               <center><?= $this->lang->line('customer_details'); ?></center>
               <?php echo $this->lang->line('name').": ".$customer_name; ?><br/>
                 <?php echo $this->lang->line('mobile').": ".$customer_mobile; ?>
-                <?php 
+                <?php
                         if(!empty($customer_address)){
                           echo $customer_address;
                         }
@@ -176,7 +176,7 @@ body{
                 <?php echo (!empty(trim($customer_gst_no))) ? $this->lang->line('gst_number').": ".$customer_gst_no."<br>" : '';?>
                 <?php echo (!empty(trim($customer_tax_number))) ? $this->lang->line('tax_number').": ".$customer_tax_number."<br>" : '';?>
             </td>
-              
+
               <td colspan="6" style="border: 1px solid;" >
                       <?= $this->lang->line('invoice_no'); ?> : <?php echo "$sales_code"; ?><br>
                       <?= $this->lang->line('reference_no'); ?> : <?php echo "$reference_no"; ?><br>
@@ -187,13 +187,13 @@ body{
           </table>
         </th>
     </tr>
-     
-  
 
 
-      
-  
-    
+
+
+
+
+
   <tr style=''>
     <th style='border-right: 1px solid;border-top: 1px solid;' rowspan='2' style=''>#</th>
     <th style='border-right: 1px solid;border-top: 1px solid;' rowspan='2' colspan='3'><?= $this->lang->line('description'); ?></th>
@@ -219,9 +219,9 @@ body{
                                   a.price_per_unit, b.tax,b.tax_name,a.tax_amt,
                                   a.discount_input,a.discount_amt, a.unit_total_cost,
                                   a.total_cost,c.hsn
-                                  FROM 
-                                  db_salesitems AS a,db_tax AS b,db_items AS c 
-                                  WHERE 
+                                  FROM
+                                  db_salesitems AS a,db_tax AS b,db_items AS c
+                                  WHERE
                                   c.id=a.item_id AND b.id=a.tax_id AND a.sales_id='$sales_id'");
               foreach ($q2->result() as $res2) {
                   $discount = (empty($res2->discount_input)||$res2->discount_input==0)? '-':$res2->discount_input."%";
@@ -229,7 +229,7 @@ body{
 
                   $unit_price= number_format($res2->price_per_unit,2,'.','');
                   $tax_amt= number_format($res2->tax_amt,2,'.','');
-                  echo "<tr>";  
+                  echo "<tr>";
                   echo "<td style='border-right: 1px solid;border-top: 1px solid;'>".++$i."</td>";
                   echo "<td style='border-right: 1px solid;border-top: 1px solid;' colspan='3'>".$res2->item_name."</td>";
                   echo "<td style='border-right: 1px solid;border-top: 1px solid;'>".$res2->hsn."</td>";
@@ -238,7 +238,7 @@ body{
                   echo "<td style='text-align: right;border-right: 1px solid;border-top: 1px solid;'>".$tax_amt."</td>";
                   echo "<td style='text-align: right;border-right: 1px solid;border-top: 1px solid;'>".$discount_amt."</td>";
                   echo "<td style='text-align: right;border-right: 1px solid;border-top: 1px solid;'>".$res2->total_cost."</td>";
-                  echo "</tr>";  
+                  echo "</tr>";
                   $tot_qty +=$res2->sales_qty;
                   $tot_sales_price +=$res2->price_per_unit;
                   $tot_tax_amt +=$res2->tax_amt;
@@ -268,7 +268,7 @@ body{
     <td colspan="9" style="text-align: right;"><b><?= $this->lang->line('subtotal'); ?></b></td>
     <td colspan="1" style="text-align: right;" ><b><?php echo number_format(round($subtotal),2,'.',''); ?></b></td>
   </tr> -->
-  
+
   <tr>
     <td colspan="9" style="text-align: right;"><b><?= $this->lang->line('other_charges'); ?></b></td>
     <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($other_charges_amt),2,'.',''); ?></b></td>
@@ -292,7 +292,7 @@ body{
     <td colspan="10">
 <?php
       function no_to_words($no)
-      {   
+      {
        $words = array('0'=> '' ,'1'=> 'One' ,'2'=> 'Two' ,'3' => 'Three','4' => 'Four','5' => 'Five','6' => 'Six','7' => 'Seven','8' => 'Eight','9' => 'Nine','10' => 'Ten','11' => 'Eleven','12' => 'Twelve','13' => 'Thirteen','14' => 'Fouteen','15' => 'Fifteen','16' => 'Sixteen','17' => 'Seventeen','18' => 'Eighteen','19' => 'Nineteen','20' => 'Twenty','30' => 'Thirty','40' => 'Fourty','50' => 'Fifty','60' => 'Sixty','70' => 'Seventy','80' => 'Eighty','90' => 'Ninty','100' => 'Hundred &','1000' => 'Thousand','100000' => 'Lakh','10000000' => 'Crore');
         if($no == 0)
           return ' ';
@@ -301,7 +301,7 @@ body{
         $highno=$no;
         $remainno=0;
         $value=100;
-        $value1=1000;       
+        $value1=1000;
             while($no>=100)    {
               if(($value <= $no) &&($no  < $value1))    {
               $novalue=$words["$value"];
@@ -311,12 +311,12 @@ body{
               }
               $value= $value1;
               $value1 = $value * 100;
-            }       
+            }
             if(array_key_exists("$highno",$words))
               return $words["$highno"]." ".$novalue." ".no_to_words($remainno);
             else {
              $unit=$highno%10;
-             $ten =(int)($highno/10)*10;            
+             $ten =(int)($highno/10)*10;
              return $words["$ten"]." ".$words["$unit"]." ".$novalue." ".no_to_words($remainno);
              }
         }
@@ -324,7 +324,7 @@ body{
      /* echo "<span class='amt-in-word'>Amount in words: <i style='font-weight:bold;'>".no_to_words(round($grand_total))." Only</i></span>";*/
 
       ?>
-  
+
 </td>
   </tr>
 
