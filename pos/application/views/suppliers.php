@@ -4,23 +4,23 @@
 <head>
 <!-- TABLES CSS CODE -->
 <?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
+<!-- </copy> -->
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
- 
+
  <?php include"sidebar.php"; ?>
- 
+
   <?php
-	
+
 	if(!isset($supplier_name)){
     $supplier_name=$mobile=$phone=$email=$country_id=$state_id=$city=
     $postcode=$address=$supplier_code=$gstin=$pan=$state_code=
     $company_name=$company_mobile=$tax_number=$country_id=$state_id=$opening_balance='';
 	}
  ?>
- 
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -47,12 +47,12 @@
         <div class="col-md-12">
           <!-- Horizontal Form -->
           <div class="box box-info ">
-           
+
 
             <!-- form start -->
               <?= form_open('#', array('class' => 'form-horizontal', 'id' => 'suppliers-form', 'enctype'=>'multipart/form-data', 'method'=>'POST', 'accept-charset'=>'UTF-8', 'novalidate'=>'novalidate' ));?>
 
-              
+
               <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
               <div class="box-body">
                 <div class="row">
@@ -65,9 +65,9 @@
           <span id="supplier_name_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
-                  
 
-                
+
+
                   <div class="form-group">
                       <label for="mobile" class="col-sm-4 control-label"><?= $this->lang->line('mobile'); ?></label>
 
@@ -77,34 +77,34 @@
                   </div>
                   </div>
                   <div class="form-group">
-                  <label for="email" class="col-sm-4 control-label"><?= $this->lang->line('email'); ?></label>
+                  <!-- <label for="email" class="col-sm-4 control-label"><?= $this->lang->line('email'); ?></label> -->
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?php print $email; ?>" >
+                    <input type="hidden" class="form-control" id="email" name="email" placeholder="" value="demo@gmail.com" >
           <span id="email_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
 
                   <div class="form-group">
-                  <label for="phone" class="col-sm-4 control-label"><?= $this->lang->line('phone'); ?></label>
+                  <!-- <label for="phone" class="col-sm-4 control-label"><?= $this->lang->line('phone'); ?></label> -->
 
                   <div class="col-sm-8">
-                    <input type="text" class="form-control no_special_char_no_space" id="phone" name="phone" placeholder="" value="<?php print $phone; ?>" >
+                    <input type="hidden" class="form-control no_special_char_no_space" id="phone" name="phone" placeholder="" value="1" >
           <span id="phone_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
-                  
-                   
+
+
                    <div class="form-group">
-                  <label for="gstin" class="col-sm-4 control-label"><?= $this->lang->line('gst_number'); ?></label>
+                  <!-- <label for="gstin" class="col-sm-4 control-label"><?= $this->lang->line('gst_number'); ?></label> -->
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" id="gstin" name="gstin" placeholder="" value="<?php print $gstin; ?>" >
+                    <input type="hidden" class="form-control" id="gstin" name="gstin" placeholder="" value="1" >
           <span id="gstin_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
                    <div class="form-group">
-                  <label for="tax_number" class="col-sm-4 control-label"><?= $this->lang->line('tax_number'); ?></label>
+                  <!-- <label for="tax_number" class="col-sm-4 control-label"><?= $this->lang->line('tax_number'); ?></label> -->
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" id="tax_number" name="tax_number" placeholder="" value="<?php print $tax_number; ?>" >
+                    <input type="hidden" class="form-control" id="tax_number" name="tax_number" placeholder="" value="1" >
           <span id="tax_number_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
@@ -121,10 +121,18 @@
                   </div>
                   </div>
                   <div class="form-group">
-                  <label for="country" class="col-sm-4 control-label"><?= $this->lang->line('country'); ?></label>
+                  <label for="address" class="col-sm-4 control-label"><?= $this->lang->line('address'); ?></label>
+                  <div class="col-sm-8">
+                    <textarea type="text" class="form-control" id="address" name="address" placeholder="" ><?php print $address; ?></textarea>
+          <span id="address_msg" style="display:none" class="text-danger"></span>
+                  </div>
+                  </div>
+                  <div class="form-group">
+                  <!-- <label for="country" class="col-sm-4 control-label"><?= $this->lang->line('country'); ?></label> -->
 
                   <div class="col-sm-8">
-          <select class="form-control select2" id="country" name="country"  style="width: 100%;" >
+                  <input type="hidden" class="form-control" id="tax_number" name="country" placeholder="" value="1" >
+          <!-- <select class="form-control select2" id="country" name="country"  style="width: 100%;" >
             <?php
             $query1="select * from db_country where status=1";
             $q1=$this->db->query($query1);
@@ -143,21 +151,22 @@
                 <?php
              }
             ?>
-                  </select>
+                  </select> -->
           <span id="country_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
                    <div class="form-group">
-                   <label for="state" class="col-sm-4 control-label"><?= $this->lang->line('state'); ?> </label>
-                  
+                   <!-- <label for="state" class="col-sm-4 control-label"><?= $this->lang->line('state'); ?> </label> -->
+
           <div class="col-sm-8">
-                    <select class="form-control select2" id="state" name="state"  style="width: 100%;" >
+          <input type="hidden" class="form-control" id="tax_number" name="state" placeholder="" value="1" >
+                    <!-- <select class="form-control select2" id="state" name="state"  style="width: 100%;" >
             <?php
             $query2="select * from db_states where status=1";
             $q2=$this->db->query($query2);
             if($q2->num_rows()>0)
              {
-              echo '<option value="">-Select-</option>'; 
+              echo '<option value="">-Select-</option>';
               foreach($q2->result() as $res1)
                {
                  $selected = ($state_id==$res1->id)? 'selected' : '';
@@ -171,41 +180,33 @@
                 <?php
              }
             ?>
-                  </select>
+                  </select> -->
           <span id="state_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
-                  
+
                   <div class="form-group">
-                  <label for="city" class="col-sm-4 control-label"><?= $this->lang->line('city'); ?></label>
+                  <!-- <label for="city" class="col-sm-4 control-label"><?= $this->lang->line('city'); ?></label> -->
                   <div class="col-sm-8">
-                    <input type="text" class="form-control " id="city" name="city" placeholder="" value="<?php print $city; ?>" >
+                    <input type="hidden" class="form-control " id="city" name="city" placeholder="" value="1" >
           <span id="city_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
 
                    <div class="form-group">
-                  <label for="postcode" class="col-sm-4 control-label"><?= $this->lang->line('postcode'); ?></label>
+                  <!-- <label for="postcode" class="col-sm-4 control-label"><?= $this->lang->line('postcode'); ?></label> -->
                   <div class="col-sm-8">
-                    <input type="text" class="form-control no_special_char_no_space" id="postcode" name="postcode" placeholder="" value="<?php print $postcode; ?>" >
+                    <input type="hidden" class="form-control no_special_char_no_space" id="postcode" name="postcode" placeholder="" value="1" >
           <span id="postcode_msg" style="display:none" class="text-danger"></span>
                   </div>
                   </div>
 
-                   <div class="form-group">
-                  <label for="address" class="col-sm-4 control-label"><?= $this->lang->line('address'); ?></label>
-                  <div class="col-sm-8">
-                    <textarea type="text" class="form-control" id="address" name="address" placeholder="" ><?php print $address; ?></textarea>
-          <span id="address_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                  </div>
-                   
                 </div>
                   <!-- ########### -->
 </div>
-              
-				
-				
+
+
+
               </div>
               <!-- /.box-body -->
 
@@ -224,7 +225,7 @@
                                                   $btn_name="Save";
                                                   $btn_id="save";
                                               }
-                                    
+
                                               ?>
                                  <div class="col-md-3 col-md-offset-3">
                                     <button type="button" id="<?php echo $btn_id;?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name;?></button>
@@ -239,18 +240,18 @@
             <?= form_close(); ?>
           </div>
           <!-- /.box -->
-          
+
         </div>
         <!--/.col (right) -->
         <div class="col-md-12">
-         
+
                     <div class="box">
                       <div class="box-header">
                         <h3 class="box-title text-blue"><?= $this->lang->line('opening_balance_payments'); ?></h3>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body table-responsive no-padding">
-                        
+
                         <table class="table table-bordered table-hover " id="report-data" >
                           <thead>
                           <tr class="bg-gray">
@@ -263,7 +264,7 @@
                           </tr>
                           </thead>
                           <tbody>
-                              <?php 
+                              <?php
                                 if(isset($q_id)){
                                   //sop - Supplier Opening Balance
                                   $q3 = $this->db->query("select * from db_sobpayments where supplier_id=$q_id");
@@ -297,8 +298,8 @@
                               ?>
                            </tbody>
                         </table>
-                        
-                        
+
+
                       </div>
                       <!-- /.box-body -->
                     </div>
@@ -310,10 +311,10 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
  <?php include"footer.php"; ?>
 
- 
+
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
