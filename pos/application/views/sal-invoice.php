@@ -107,12 +107,12 @@
     $payment_status=$res3->payment_status;
     $pos=$res3->pos;
 
-    if(!empty($customer_country)){
-      $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;
-    }
-    if(!empty($customer_state)){
-      $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;
-    }
+    // if(!empty($customer_country)){
+    //   $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;
+    // }
+    // if(!empty($customer_state)){
+    //   $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;
+    // }
 
     ?>
 
@@ -156,25 +156,25 @@
               if(!empty($customer_address)){
                 echo $customer_address;
               }
-              if(!empty($customer_country)){
-                echo $customer_country;
-              }
-              if(!empty($customer_state)){
-                echo ",".$customer_state;
-              }
-              if(!empty($customer_city)){
-                echo ",".$customer_city;
-              }
-              if(!empty($customer_postcode)){
-                echo "-".$customer_postcode;
-              }
+            //   if(!empty($customer_country)){
+            //     echo $customer_country;
+            //   }
+            //   if(!empty($customer_state)){
+            //     echo ",".$customer_state;
+            //   }
+            //   if(!empty($customer_city)){
+            //     echo ",".$customer_city;
+            //   }
+            //   if(!empty($customer_postcode)){
+            //     echo "-".$customer_postcode;
+            //   }
             ?>
             <br>
             <?php echo (!empty(trim($customer_mobile))) ? $this->lang->line('mobile').": ".$customer_mobile."<br>" : '';?>
-            <?php echo (!empty(trim($customer_phone))) ? $this->lang->line('phone').": ".$customer_phone."<br>" : '';?>
+            <!-- <?php echo (!empty(trim($customer_phone))) ? $this->lang->line('phone').": ".$customer_phone."<br>" : '';?>
             <?php echo (!empty(trim($customer_email))) ? $this->lang->line('email').": ".$customer_email."<br>" : '';?>
             <?php echo (!empty(trim($customer_gst_no))) ? $this->lang->line('gst_number').": ".$customer_gst_no."<br>" : '';?>
-            <?php echo (!empty(trim($customer_tax_number))) ? $this->lang->line('tax_number').": ".$customer_tax_number."<br>" : '';?>
+            <?php echo (!empty(trim($customer_tax_number))) ? $this->lang->line('tax_number').": ".$customer_tax_number."<br>" : '';?> -->
           </address>
         </div>
         <!-- /.col -->

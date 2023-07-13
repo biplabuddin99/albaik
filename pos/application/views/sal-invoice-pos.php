@@ -28,7 +28,7 @@
     $company_logo		=$res1->company_logo;
     $company_mobile		=$res1->mobile;
     $company_phone		=$res1->phone;
-    $company_email		=$res1->email;
+   // $company_email		=$res1->email;
     $company_country	=$res1->country;
     $company_state		=$res1->state;
     $company_city		=$res1->city;
@@ -104,12 +104,12 @@
     	$str="(Fixed)";
     }
 
-    if(!empty($customer_country)){
-      $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;
-    }
-    if(!empty($customer_state)){
-      $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;
-    }
+    // if(!empty($customer_country)){
+    //   $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;
+    // }
+    // if(!empty($customer_state)){
+    //   $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;
+    // }
 
 
     ?>
