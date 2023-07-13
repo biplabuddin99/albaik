@@ -4,7 +4,7 @@
 <head>
 <!-- FORM CSS CODE -->
 <?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
+<!-- </copy> -->
 <style type="text/css">
   .inner-div-2{
       margin-top: 0.5in !important;
@@ -24,10 +24,10 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
- 
- 
+
+
  <?php include"sidebar.php"; ?>
- 
+
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -47,23 +47,23 @@
     <!-- Main content -->
      <section class="content">
                <div class="row">
-               
+
                   <!-- right column -->
                   <div class="col-md-12">
                      <!-- Horizontal Form -->
-                     
+
                         <!-- style="background: #68deac;" -->
-                        
+
                         <!-- form start -->
                          <!-- OK START -->
                         <?= form_open('#', array('class' => 'form-horizontal', 'id' => 'labels-form', 'enctype'=>'multipart/form-data', 'method'=>'POST'));?>
-                           <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
+                           <input type="hidden" id="base_url" value="<?php echo $base_url; ?>">
                            <input type="hidden" value='1' id="hidden_rowcount" name="hidden_rowcount">
                            <input type="hidden" value='0' id="hidden_update_rowid" name="hidden_update_rowid">
 
                            <div class="row">
                               <div class="col-xs-12 ">
-                                 
+
                                     <div class="box box-info">
                                        <!-- /.box-header -->
                                        <div class="box-body ">
@@ -74,29 +74,29 @@
                                           <option value='20'>20 Lables 8"x11"</option>
                                           <option value='30'>30 Lables 8"x11"</option>
                                        </select>
-                                   
+
                                     <span id="customer_id_msg" style="display:none" class="text-danger"></span>
                                  </div>
-                                 
+
                               </div> -->
                                           <style type="text/css">
                                              table.table-bordered > thead > tr > th {
                                              /* border:1px solid black;*/
                                              text-align: center;
                                              }
-                                             .table > tbody > tr > td, 
-                                             .table > tbody > tr > th, 
-                                             .table > tfoot > tr > td, 
-                                             .table > tfoot > tr > th, 
-                                             .table > thead > tr > td, 
-                                             .table > thead > tr > th 
+                                             .table > tbody > tr > td,
+                                             .table > tbody > tr > th,
+                                             .table > tfoot > tr > td,
+                                             .table > tfoot > tr > th,
+                                             .table > thead > tr > td,
+                                             .table > thead > tr > th
                                              {
                                              padding-left: 2px;
-                                             padding-right: 2px;  
+                                             padding-right: 2px;
 
                                              }
                                           </style>
-                                          
+
                                             <div class="col-md-8 col-md-offset-2 d-flex justify-content" >
                                               <div class="input-group">
                                                 <span class="input-group-addon" title="Select Items"><i class="fa fa-barcode"></i></span>
@@ -105,8 +105,8 @@
                                             </div>
                                             <br>
                                             <br>
-                                          
-                                          
+
+
                                           <table class="table table-hover table-bordered col-md-8 col-md-offset-2 d-flex justify-content" style="width:67%" id="sales_table">
                                              <thead class="custom_thead">
                                                 <tr class="bg-primary" >
@@ -116,15 +116,15 @@
                                                 </tr>
                                              </thead>
                                              <tbody>
-                                               
+
                                              </tbody>
-                                             
+
                                           </table>
                                           <div class="col-md-6">
                                               <div class="row">
                                                   <div class="col-md-12">
                                                      <div class="form-group">
-                                                        <label for="" class="col-sm-4 control-label"><?= $this->lang->line('total_labels'); ?></label>    
+                                                        <label for="" class="col-sm-4 control-label"><?= $this->lang->line('total_labels'); ?></label>
                                                         <div class="col-sm-4">
                                                            <label class="control-label total_quantity text-success" style="">0</label>
                                                         </div>
@@ -138,7 +138,7 @@
                                        <!-- /.box-body -->
                                        <div class="box-footer col-sm-12">
                                           <center>
-                                           
+
                                              <div class="col-md-3 col-md-offset-3">
                                                 <button type="button" id="preview" class="btn bg-maroon btn-block btn-flat btn-lg payments_modal" title="Preview Labels">Preview</button>
                                              </div>
@@ -149,7 +149,7 @@
                                           </center>
                                        </div>
                                     </div>
-                                 
+
                                  <!-- /.box -->
                               </div>
 
@@ -160,31 +160,31 @@
                                        <!-- /.box-body -->
                                        <div class="box-footer col-sm-12">
                                           <span id="preview_data" class=" col-md-offset-1 col-sm-10" style="overflow: auto;" >
-                                            
+
                                           </span>
                                           <div class="col-sm-1">
                                             <input type="button" class="btn btn-primary btn-flat" id="print" value="Print">
                                           </div>
                                        </div>
                                     </div>
-                                 
+
                                  <!-- /.box -->
                               </div>
 
                            </div>
                            <?= form_close(); ?>
                            <!-- OK END -->
-                     
+
                   </div>
                   <!-- /.box-footer -->
-                 
+
                </div>
                <!-- /.box -->
              </section>
             <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
  <?php include"footer.php"; ?>
 <!-- SOUND CODE -->
 <?php include"comman/code_js_sound.php"; ?>
@@ -197,33 +197,33 @@
 </div>
 <!-- ./wrapper -->
 
-      <script src="<?php echo $theme_link; ?>js/labels.js"></script>  
+      <script src="<?php echo $theme_link; ?>js/labels.js"></script>
       <script>
-       
-        
+
+
          /* ---------- Final Description of amount ------------*/
          function final_total(){
           var rowcount=$("#hidden_rowcount").val();
            var total_quantity=0;
-         
+
            for(i=1;i<=rowcount;i++){
-         
+
              if(document.getElementById("td_data_"+i+"_1")){
                //customer_id must exist
                if($("#td_data_"+i+"_1").val()!=null && $("#td_data_"+i+"_1").val()!=''){
-                     
+
                     total_quantity +=parseInt($("#td_data_"+i+"_3").val().trim());
                 }
-                   
+
              }//if end
            }//for end
           //Show total Sales Quantitys
            $(".total_quantity").html(total_quantity);
          }
          /* ---------- Final Description of amount end ------------*/
-          
+
          function removerow(id){//id=Rowid
-           
+
          $("#row_"+id).remove();
          final_total();
          failed.currentTime = 0;
@@ -233,7 +233,7 @@
          /*Print Div*/
          $("#print").click(function(event) {
             PrintMe("preview_data");
-            
+
          });
 
          function PrintMe(DivID) {
@@ -276,7 +276,7 @@
                     $(".overlay").remove();
                 });
           <?php }
-          ?>  
+          ?>
         });
       </script>
       <!-- Purchase List Barcode end-->
