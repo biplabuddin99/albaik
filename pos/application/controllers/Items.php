@@ -7,7 +7,7 @@ class Items extends MY_Controller {
 		$this->load_global();
 		$this->load->model('items_model','items');
 	}
-	
+
 	public function index()
 	{
 		$this->permission_check('items_view');
@@ -25,15 +25,21 @@ class Items extends MY_Controller {
 
 	public function newitems(){
 		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required');
+		$this->form_validation->set_rules('brand_id', 'Brand Name', 'trim|required');
 		$this->form_validation->set_rules('category_id', 'Category Name', 'trim|required');
+		$this->form_validation->set_rules('subcategory_id', 'Sub Category Name', 'trim|required');
+		$this->form_validation->set_rules('childcategory_id', 'Child Category Name', 'trim|required');
 		$this->form_validation->set_rules('unit_id', 'Unit', 'trim|required');
+		//$this->form_validation->set_rules('item_image', 'Image', 'trim|required');
 		$this->form_validation->set_rules('price', 'Item Price', 'trim|required');
-		$this->form_validation->set_rules('tax_id', 'Tax', 'trim|required');
+		$this->form_validation->set_rules('warehouse_id', 'Warehouse', 'trim|required');
+		$this->form_validation->set_rules('weight', 'weight', 'trim|required');
+		//$this->form_validation->set_rules('tax_id', 'Tax', 'trim|required');
 		$this->form_validation->set_rules('purchase_price', 'Purchase Price', 'trim|required');
 		//$this->form_validation->set_rules('profit_margin', 'Profit Margin', 'trim|required');
 		$this->form_validation->set_rules('sales_price', 'Sales Price', 'trim|required');
 
-		
+
 		if ($this->form_validation->run() == TRUE) {
 			$result=$this->items->verify_and_save();
 			echo $result;
@@ -52,6 +58,7 @@ class Items extends MY_Controller {
 	}
 	public function update_items(){
 		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required');
+        $this->form_validation->set_rules('brand_id', 'Brand', 'trim|required');
 		$this->form_validation->set_rules('category_id', 'Category Name', 'trim|required');
 		$this->form_validation->set_rules('unit_id', 'Unit', 'trim|required');
 		$this->form_validation->set_rules('price', 'Item Price', 'trim|required');
@@ -77,15 +84,15 @@ class Items extends MY_Controller {
 	public function ajax_list()
 	{
 		$list = $this->items->get_datatables();
-		
+
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $items) {
-			
+
 			$no++;
 			$row = array();
 			$row[] = '<input type="checkbox" name="checkbox[]" value='.$items->id.' class="checkbox column_checkbox" >';
-						
+
 /*
 			$row[] = (!empty($items->item_image) && file_exists($items->item_image)) ? "
 						<a title='Click for Bigger!' href='".base_url($items->item_image)."' data-toggle='lightbox'>
@@ -106,12 +113,12 @@ class Items extends MY_Controller {
 			$row[] = app_number_format($items->final_price);
 			$row[] = $items->tax_name."<br>(".$items->tax_type.")";
 
-			 		if($items->status==1){ 
+			 		if($items->status==1){
 			 			$str= "<span onclick='update_status(".$items->id.",0)' id='span_".$items->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
+					else{
 						$str = "<span onclick='update_status(".$items->id.",1)' id='span_".$items->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
 					}
-			$row[] = $str;		
+			$row[] = $str;
 
 			 		$str2 = '<div class="btn-group" title="View Account">
 										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
@@ -127,14 +134,14 @@ class Items extends MY_Controller {
 											</li>';
 
 											if($this->permissions('items_delete'))
-											$str2.='<li>
+											$str2.='<!--<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_items('.$items->id.')">
 													<i class="fa fa-fw fa-trash text-red"></i>Delete
 												</a>
-											</li>
-											
+											</li>-->
+
 										</ul>
-									</div>';			
+									</div>';
 			$row[] = $str2;
 
 			$data[] = $row;
@@ -174,11 +181,16 @@ class Items extends MY_Controller {
 	public function get_json_items_details(){
 		$data = array();
 		$display_json = array();
-		
+
 		$name = strtolower(trim($_GET['name']));
 		$warehouse_id=$_GET['warehouse_id']?$_GET['warehouse_id']:1;
-		$sql =$this->db->query("SELECT id,item_name,item_code,(select sum(qty) from db_stockentry where db_stockentry.item_id=db_items.id and db_stockentry.warehouse_id=$warehouse_id) as stock FROM db_items where  status=1 and  (LOWER(item_name) LIKE '%$name%' or LOWER(item_code) LIKE '%$name%' or LOWER(custom_barcode) LIKE '%$name%')   limit 10");
-		
+		$sql =$this->db->query("SELECT id,item_name,item_code,
+        (select sum(qty) from db_stockentry where db_stockentry.item_id=db_items.id and db_stockentry.warehouse_id=$warehouse_id) as stock
+        FROM db_items where  status=1 and  (LOWER(item_name) LIKE '%$name%' or LOWER(item_code) LIKE '%$name%'
+         or LOWER(custom_barcode) LIKE '%$name%'
+                    or id in (select id from db_brands where (upper(brand_name) like upper('%$name%')))
+        )   limit 10");
+
 		foreach ($sql->result() as $res) {
             $stock=$res->stock>0?$res->stock:0;
             $json_arr["id"] = $res->id;
@@ -188,7 +200,7 @@ class Items extends MY_Controller {
             $json_arr["stock"] = $stock;
             array_push($display_json, $json_arr);
 		}
-		
+
 		echo json_encode($display_json);exit;
 	}
 

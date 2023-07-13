@@ -178,7 +178,7 @@ padding-right: 2px;
                                 <span id="reference_no_msg" style="display:none" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="form-group hidden">
+                        <div class="form-group">
                             <label for="warehouse_id" class="col-sm-2 control-label"><?= $this->lang->line('warehouse'); ?> <label class="text-danger">*</label></label>
                                 <div class="col-sm-3">
                                     <select class="form-control select2" id="warehouse_id" name="warehouse_id"  style="width: 100%;" onkeyup="shift_cursor(event,'mobile')">
@@ -188,7 +188,7 @@ padding-right: 2px;
                                      $q1=$this->db->query($query1);
                                      if($q1->num_rows($q1)>0)
                                         {
-                                          //echo "<option value=''>-Select-</option>";
+                                          echo "<option value=''>-Select-</option>";
                                           foreach($q1->result() as $res1)
                                         {
                                           $selected=($warehouse_id==$res1->id) ? 'selected' : '';

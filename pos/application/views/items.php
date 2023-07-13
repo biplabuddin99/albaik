@@ -202,16 +202,6 @@
                                  <span id="lot_number_msg" style="display:none" class="text-danger"></span>
                               </div>
                               <div class="form-group col-md-4">
-                                 <label for="expire_date" ><?= $this->lang->line('expire_date'); ?></label>
-                                 <div class="input-group date">
-                                  <div class="input-group-addon">
-                                  <i class="fa fa-calendar"></i>
-                                  </div>
-                                  <input type="text" class="form-control pull-right datepicker" id="expire_date" name="expire_date" value="<?= $expire_date;?>">
-                                </div>
-                                 <span id="expire_date_msg" style="display:none" class="text-danger"></span>
-                              </div>
-                              <div class="form-group col-md-4">
                                  <label for="custom_barcode" ><?= $this->lang->line('barcode'); ?></label>
                                  <input type="text" class="form-control" id="custom_barcode" name="custom_barcode" placeholder=""  value="<?php print $custom_barcode; ?>" >
                                  <span id="custom_barcode_msg" style="display:none" class="text-danger"></span>
@@ -225,6 +215,16 @@
                                        <img src="<?= base_url($item_image) ?>" alt="" width="50px">
                                     </a>
                                  <?php } ?>
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <!-- <label for="expire_date" ><?= $this->lang->line('expire_date'); ?></label> -->
+                                 <div class="input-group date">
+                                  <!-- <div class="input-group-addon">
+                                  <i class="fa fa-calendar"></i>
+                                  </div> -->
+                                  <input type="hidden" class="form-control pull-right datepicker" id="expire_date" name="expire_date" value="00-00-0000">
+                                </div>
+                                 <span id="expire_date_msg" style="display:none" class="text-danger"></span>
                               </div>
                               <!-- <div class="form-group col-md-4">
                                  <label for="item_image" class="form-label">Image two</label>
@@ -275,55 +275,9 @@
                                  <span id="price_msg" style="display:none" class="text-danger"></span>
                               </div>
                               <div class="form-group col-md-4">
-                                 <label for="tax_id" ><?= $this->lang->line('tax'); ?><span class="text-danger">*</span></label>
-                                 <div class="input-group">
-                                 <select class="form-control select2" id="tax_id" name="tax_id"  style="width: 100%;" >
-                                    <?php
-                                       $query1="select * from db_tax where status=1";
-                                       $q1=$this->db->query($query1);
-                                       if($q1->num_rows($q1)>0)
-                                        {
-                                            echo '<option data-tax="0" value="">-Select-</option>';
-                                            foreach($q1->result() as $res1)
-                                          {
-                                            $selected = ($tax_id==$res1->id)? 'selected' : '';
-                                            echo "<option $selected data-tax='".$res1->tax."' value='".$res1->id."'>".$res1->tax_name."(".$res1->tax."%)</option>";
-                                          }
-                                        }
-                                        else
-                                        {
-                                           ?>
-                                    <option value="">No Records Found</option>
-                                    <?php
-                                       }
-                                       ?>
-                                 </select>
-                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#tax_modal" title="Add Tax"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
-                                    </div>
-                                 <span id="tax_id_msg" style="display:none" class="text-danger"></span>
-                              </div>
-                              <div class="form-group col-md-4">
                                  <label for="purchase_price"><?= $this->lang->line('purchase_price'); ?><span class="text-danger">*</span></label>
                                  <input type="text" class="form-control only_currency" id="purchase_price" name="purchase_price" placeholder="Total Price with Tax Amount"  value="<?php print $purchase_price; ?>" readonly='' >
                                  <span id="purchase_price_msg" style="display:none" class="text-danger"></span>
-                              </div>
-                           </div>
-                           <!-- /row -->
-                           <div class="row">
-                              <div class="form-group col-md-4">
-                                 <label for="tax_type"><?= $this->lang->line('tax_type'); ?><span class="text-danger">*</span></label>
-                                 <select class="form-control select2" id="tax_type" name="tax_type"  style="width: 100%;" >
-                                  <?php
-                                    $inclusive_selected=$exclusive_selected='';
-                                    if($tax_type =='Inclusive') { $inclusive_selected='selected'; }
-                                    if($tax_type =='Exclusive') { $exclusive_selected='selected'; }
-
-                                  ?>
-                                    <option <?= $exclusive_selected ?> value="Exclusive">Exclusive</option>
-                                    <option <?= $inclusive_selected ?> value="Inclusive">Inclusive</option>
-                                 </select>
-                                 <span id="tax_type_msg" style="display:none" class="text-danger"></span>
-
                               </div>
                               <div class="form-group col-md-4">
                                  <label for="profit_margin"><?= $this->lang->line('profit_margin'); ?>(%) <i class="hover-q " data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $this->lang->line('based_on_purchase_price'); ?>" data-html="true" data-trigger="hover" data-original-title="">
@@ -332,32 +286,29 @@
                                  <input type="text" class="form-control only_currency" id="profit_margin" name="profit_margin" placeholder="Profit in %"  value="<?php print $profit_margin; ?>" >
                                  <span id="profit_margin_msg" style="display:none" class="text-danger"></span>
                               </div>
+                           </div>
+                           <!-- /row -->
+                           <div class="row">
                               <div class="form-group col-md-4">
                                  <label for="sales_price" class="control-label"><?= $this->lang->line('sales_price'); ?><span class="text-danger">*</span></label>
                                  <input type="text" class="form-control only_currency " id="sales_price" name="sales_price" placeholder="Sales Price"  value="<?php print $sales_price; ?>" >
                                  <span id="sales_price_msg" style="display:none" class="text-danger"></span>
                               </div>
-                           </div>
-                           <div class="row">
                               <div class="form-group col-md-4">
                                  <label for="final_price" class="control-label"><?= $this->lang->line('final_price'); ?><span class="text-danger">*</span></label>
                                  <input type="text" class="form-control only_currency " id="final_price" name="final_price" placeholder="Final Price"  value="<?php print $final_price; ?>" readonly >
-                                 <span id="final_price_msg" style="display:none" class="text-danger"></span>
-                              </div>
-
-							         <div class="form-group col-md-4">
-                                 <label for="wholesale_price" class="control-label">Wholesale price<span class="text-danger">*</span></label>
-                                 <input type="text" class="form-control only_currency " id="wholesale_price" name="wholesale_price" placeholder="Whole sale Price"  value="<?php print $wholesale_price; ?>" >
                                  <span id="final_price_msg" style="display:none" class="text-danger"></span>
                               </div>
 							         <div class="form-group col-md-4">
                                  <label for="old_price" class="control-label">Old price (For E-commerce)<span class="text-danger">*</span></label>
                                  <input type="text" class="form-control only_currency " id="old_price" name="old_price" placeholder="Old Price"  value="<?php print $old_price; ?>" >
                               </div>
+                           </div>
+                           <div class="row">
 							         <div class="form-group col-md-4">
                                  <label for="weight" class="control-label">Weight</label>
                                  <input type="text" class="form-control " id="weight" name="weight"   value="<?php print $weight; ?>" >
-                                 <span id="final_price_msg" style="display:none" class="text-danger"></span>
+                                 <span id="weight_msg" style="display:none" class="text-danger"></span>
                               </div>
 							         <div class="form-group col-md-4">
                                  <label for="slied" class="control-label">Is Popular Product<span class="text-danger"></label>
@@ -415,6 +366,57 @@
                                  </select>
                               </div>
                            </div>
+                           <div class="form-group col-md-4">
+                                 <!-- <label for="tax_id" ><?= $this->lang->line('tax'); ?><span class="text-danger">*</span></label> -->
+                                 <div class="input-group">
+                                 <input type="hidden" name="tax_id" value="1">
+                                 <!-- <select class="form-control select2" id="tax_id" name="tax_id"  style="width: 100%;" >
+                                    <?php
+                                       $query1="select * from db_tax where status=1";
+                                       $q1=$this->db->query($query1);
+                                       if($q1->num_rows($q1)>0)
+                                        {
+                                            echo '<option data-tax="0" value="">-Select-</option>';
+                                            foreach($q1->result() as $res1)
+                                          {
+                                            $selected = ($tax_id==$res1->id)? 'selected' : '';
+                                            echo "<option $selected data-tax='".$res1->tax."' value='".$res1->id."'>".$res1->tax_name."(".$res1->tax."%)</option>";
+                                          }
+                                        }
+                                        else
+                                        {
+                                           ?>
+                                    <option value="">No Records Found</option>
+                                    <?php
+                                       }
+                                       ?>
+                                 </select> -->
+                                 <!-- <span class="input-group-addon pointer" data-toggle="modal" data-target="#tax_modal" title="Add Tax"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span> -->
+                                    </div>
+                                 <span id="tax_id_msg" style="display:none" class="text-danger"></span>
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <!-- <label for="tax_type"><?= $this->lang->line('tax_type'); ?><span class="text-danger">*</span></label> -->
+                                 <input type="hidden" name="tax_type" value="Exclusive">
+                                 <!-- <select class="form-control select2" id="tax_type" name="tax_type"  style="width: 100%;" >
+                                  <?php
+                                    $inclusive_selected=$exclusive_selected='';
+                                    if($tax_type =='Inclusive') { $inclusive_selected='selected'; }
+                                    if($tax_type =='Exclusive') { $exclusive_selected='selected'; }
+
+                                  ?>
+                                    <option <?= $exclusive_selected ?> value="Exclusive">Exclusive</option>
+                                    <option <?= $inclusive_selected ?> value="Inclusive">Inclusive</option>
+                                 </select> -->
+                                 <span id="tax_type_msg" style="display:none" class="text-danger"></span>
+
+                              </div>
+
+                              <div class="form-group col-md-4">
+                                 <!-- <label for="wholesale_price" class="control-label">Wholesale price<span class="text-danger">*</span></label> -->
+                                 <input type="hidden" class="form-control only_currency " id="wholesale_price" name="wholesale_price" placeholder="Whole sale Price"  value="0" >
+                                 <span id="wholesale_price_msg" style="display:none" class="text-danger"></span>
+                              </div>
                            <!-- /row -->
                            <div class="row">
                               <div class="form-group col-md-4">

@@ -542,6 +542,7 @@ class Sales_model extends CI_Model {
 	}
 	public function search_item($q){
 		$json_array=array();
+
         $query1="select id,item_name from db_items where (upper(item_name) like upper('%$q%') or upper(item_code) like upper('%$q%'))";
 
         $q1=$this->db->query($query1);

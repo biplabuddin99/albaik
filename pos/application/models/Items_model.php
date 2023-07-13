@@ -8,20 +8,20 @@ class Items_model extends CI_Model {
 	var $column_order = array( 'a.id','a.item_image','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name',
 	                            '(select sum(qty) from db_stockentry where db_stockentry.item_id=a.id) as stock'
 	                            ,'a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.tax_type','a.hsn','a.sku'); //set column field database for datatable orderable
-	var $column_search = array( 'a.id','a.item_image','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name','a.stock','a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.custom_barcode','a.tax_type','a.hsn','a.sku'); //set column field database for datatable searchable 
-	var $order = array('a.id' => 'desc');*/ // default order 
+	var $column_search = array( 'a.id','a.item_image','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name','a.stock','a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.custom_barcode','a.tax_type','a.hsn','a.sku'); //set column field database for datatable searchable
+	var $order = array('a.id' => 'desc');*/ // default order
 	var $table = 'db_items as a';
 	var $column_order = array( 'a.id','a.item_image','a.old_price','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name',
 	                            '(select sum(qty) from db_stockentry where db_stockentry.item_id=a.id) as stock'
 	                            ,'a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.tax_type','a.hsn','a.sku'); //set column field database for datatable orderable
-	var $column_search = array( 'a.id','a.item_image','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name','a.stock','a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.custom_barcode','a.tax_type','a.hsn','a.sku'); //set column field database for datatable searchable 
-	var $order = array('a.id' => 'desc'); // default order 
+	var $column_search = array( 'a.id','a.item_image','a.item_code','a.item_name','b.category_name','sb.subcategory_name','sbc.childcategory_name','c.unit_name','a.stock','a.alert_qty','a.purchase_price','a.final_price','d.tax_name','d.tax','a.status','e.brand_name','a.custom_barcode','a.tax_type','a.hsn','a.sku'); //set column field database for datatable searchable
+	var $order = array('a.id' => 'desc'); // default order
 
 	public function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	private function _get_datatables_query()
 	{
 		$this->db->select($this->column_order);
@@ -47,12 +47,12 @@ class Items_model extends CI_Model {
 
 
 		$i = 0;
-	
-		foreach ($this->column_search as $item) // loop column 
+
+		foreach ($this->column_search as $item) // loop column
 		{
 			if($_POST['search']['value']) // if datatable send POST for search
 			{
-				
+
 				if($i===0) // first loop
 				{
 					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
@@ -68,11 +68,11 @@ class Items_model extends CI_Model {
 			}
 			$i++;
 		}
-		
+
 		if(isset($_POST['order'])) // here order processing
 		{
 			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
+		}
 		else if(isset($this->order))
 		{
 			$order = $this->order;
@@ -111,13 +111,13 @@ class Items_model extends CI_Model {
 		else{
 			return true;
 		}
-	
+
 	}
 	//Save Cutomers
 	public function verify_and_save(){
-		//Filtering XSS and html escape from user inputs 
+		//Filtering XSS and html escape from user inputs
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-		
+
 		$this->db->trans_begin();
 		$this->db->trans_strict(TRUE);
 
@@ -130,14 +130,14 @@ class Items_model extends CI_Model {
 	        $config['max_size']             = 1024;
 	        $config['max_width']            = 1000;
 	        $config['max_height']           = 1000;
-	       
+
 	        $this->load->library('upload', $config);
 
-	        if ( ! $this->upload->do_upload('item_image')){	
+	        if ( ! $this->upload->do_upload('item_image')){
                 $error = array('error' => $this->upload->display_errors());
                 print($error['error']);
                 exit();
-	        }else{		
+	        }else{
 	        	$file_name=$this->upload->data('file_name');
 	        	/*Create Thumbnail*/
 	        	$config['image_library'] = 'gd2';
@@ -159,14 +159,14 @@ class Items_model extends CI_Model {
 	        $config['max_size']             = 1024;
 	        $config['max_width']            = 1000;
 	        $config['max_height']           = 1000;
-	       
+
 	        $this->load->library('upload', $config);
 
-	        if ( ! $this->upload->do_upload('item_image_two')){	
+	        if ( ! $this->upload->do_upload('item_image_two')){
                 $error = array('error' => $this->upload->display_errors());
                 print($error['error']);
                 exit();
-	        }else{		
+	        }else{
 	        	$file_name_two=$this->upload->data('file_name');
 	        	/*Create Thumbnail*/
 	        	$config['image_library'] = 'gd2';
@@ -188,14 +188,14 @@ class Items_model extends CI_Model {
 	        $config['max_size']             = 1024;
 	        $config['max_width']            = 1000;
 	        $config['max_height']           = 1000;
-	       
+
 	        $this->load->library('upload', $config);
 
-	        if ( ! $this->upload->do_upload('item_image_three')){	
+	        if ( ! $this->upload->do_upload('item_image_three')){
                 $error = array('error' => $this->upload->display_errors());
                 print($error['error']);
                 exit();
-	        }else{		
+	        }else{
 	        	$file_name_three=$this->upload->data('file_name');
 	        	/*Create Thumbnail*/
 	        	$config['image_library'] = 'gd2';
@@ -217,14 +217,14 @@ class Items_model extends CI_Model {
 	        $config['max_size']             = 1024;
 	        $config['max_width']            = 1000;
 	        $config['max_height']           = 1000;
-	       
+
 	        $this->load->library('upload', $config);
 
-	        if ( ! $this->upload->do_upload('item_image_four')){	
+	        if ( ! $this->upload->do_upload('item_image_four')){
                 $error = array('error' => $this->upload->display_errors());
                 print($error['error']);
                 exit();
-	        }else{		
+	        }else{
 	        	$file_name_four=$this->upload->data('file_name');
 	        	/*Create Thumbnail*/
 	        	$config['image_library'] = 'gd2';
@@ -246,14 +246,14 @@ class Items_model extends CI_Model {
 	        $config['max_size']             = 1024;
 	        $config['max_width']            = 1000;
 	        $config['max_height']           = 1000;
-	       
+
 	        $this->load->library('upload', $config);
 
-	        if ( ! $this->upload->do_upload('item_image_five')){	
+	        if ( ! $this->upload->do_upload('item_image_five')){
                 $error = array('error' => $this->upload->display_errors());
                 print($error['error']);
                 exit();
-	        }else{		
+	        }else{
 	        	$file_name_five=$this->upload->data('file_name');
 	        	/*Create Thumbnail*/
 	        	$config['image_library'] = 'gd2';
@@ -267,13 +267,13 @@ class Items_model extends CI_Model {
 				//end
 	        }
 		}
-		
+
 		//Validate This items already exist or not
 		/*$query=$this->db->query("select * from db_items where upper(item_name)=upper('$item_name')");
 		if($query->num_rows()>0){
 			return "Sorry! This Items Name already Exist.";
 		}*/
-		
+
 		$qs5="select item_init from db_company";
 		$q5=$this->db->query($qs5);
 		$item_init=$q5->row()->item_init;
@@ -305,7 +305,7 @@ class Items_model extends CI_Model {
 									'$old_price','$price','$tax_id','$purchase_price','$tax_type',$profit_margin,
 									'$sales_price','$custom_barcode','$final_price','$wholesale_price','$weight','$is_feature','$is_latest','$is_top','$is_review','$short_description','$long_description',
 									'$SYSTEM_IP','$SYSTEM_NAME','$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1)";
-		
+
 		$query1=$this->db->simple_query($query1);
 		if(!$query1){
 			return "failed";
@@ -318,13 +318,13 @@ class Items_model extends CI_Model {
 			}
 		}
 		//UPDATE itemS QUANTITY IN itemS TABLE
-		$this->load->model('pos_model');				
+		$this->load->model('pos_model');
 		$q6=$this->pos_model->update_items_quantity($item_id);
 		if(!$q6){
 			return "failed";
 		}
 		if ($query1){
-				
+
 				if(!empty($file_name)){
 					//echo "update db_items set item_image ='$file_name' where id=".$item_id;exit();
 					$q1=$this->db->query("update db_items set item_image ='uploads/items/$file_name' where id=".$item_id);
@@ -343,13 +343,13 @@ class Items_model extends CI_Model {
 				//unlink('uploads/items/'.$file_name);
 		        return "failed";
 		}
-		
+
 	}
 
 	//Get items_details
 	public function get_details($id,$data){
 		//Validate This items already exist or not
-		$query=$this->db->query("select * from db_items where upper(id)=upper('$id')");
+		$query=$this->db->query("select *,(select sum(qty) from db_stockentry where db_stockentry.item_id=db_items.id) as stock from db_items where upper(id)=upper('$id')");
 		if($query->num_rows()==0){
 			show_404();exit;
 		}
@@ -393,14 +393,14 @@ class Items_model extends CI_Model {
 			$data['item_image_four']=$query->item_image_four;
 			$data['item_image_five']=$query->item_image_five;
 			$data['expire_date']=(!empty($query->expire_date)) ? show_date($query->expire_date):'';
-			
+
 			return $data;
 		}
 	}
 	public function update_items(){
-		//Filtering XSS and html escape from user inputs 
+		//Filtering XSS and html escape from user inputs
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-		
+
 		//Validate This items already exist or not
 		$this->db->trans_begin();
 		/*$query=$this->db->query("select * from db_items where upper(item_name)=upper('$item_name') and id<>$q_id");
@@ -419,7 +419,7 @@ class Items_model extends CI_Model {
 		        $config['max_size']             = 1024;
 		        $config['max_width']            = 1000;
 		        $config['max_height']           = 1000;
-		       
+
 		        $this->load->library('upload', $config);
 
 		        if ( ! $this->upload->do_upload('item_image'))
@@ -429,9 +429,9 @@ class Items_model extends CI_Model {
 					exit();
 		        }
 		        else
-		        {		
+		        {
 		        	$file_name=$this->upload->data('file_name');
-		        	
+
 		        	/*Create Thumbnail*/
 		        	$config['image_library'] = 'gd2';
 					$config['source_image'] = 'uploads/items/'.$file_name;
@@ -447,7 +447,7 @@ class Items_model extends CI_Model {
 
 		        }
 			}
-			
+
 			if(!empty($_FILES['item_image_two']['name'])){
 
 				$new_name = time();
@@ -457,7 +457,7 @@ class Items_model extends CI_Model {
 		        $config['max_size']             = 1024;
 		        $config['max_width']            = 1000;
 		        $config['max_height']           = 1000;
-		       
+
 		        $this->load->library('upload', $config);
 
 		        if ( ! $this->upload->do_upload('item_image_two'))
@@ -467,9 +467,9 @@ class Items_model extends CI_Model {
 					exit();
 		        }
 		        else
-		        {		
+		        {
 		        	$file_name=$this->upload->data('file_name');
-		        	
+
 		        	/*Create Thumbnail*/
 		        	$config['image_library'] = 'gd2';
 					$config['source_image'] = 'uploads/items/'.$file_name;
@@ -485,7 +485,7 @@ class Items_model extends CI_Model {
 
 		        }
 			}
-			
+
 			if(!empty($_FILES['item_image_three']['name'])){
 
 				$new_name = time();
@@ -495,7 +495,7 @@ class Items_model extends CI_Model {
 		        $config['max_size']             = 1024;
 		        $config['max_width']            = 1000;
 		        $config['max_height']           = 1000;
-		       
+
 		        $this->load->library('upload', $config);
 
 		        if ( ! $this->upload->do_upload('item_image_three'))
@@ -505,9 +505,9 @@ class Items_model extends CI_Model {
 					exit();
 		        }
 		        else
-		        {		
+		        {
 		        	$file_name=$this->upload->data('file_name');
-		        	
+
 		        	/*Create Thumbnail*/
 		        	$config['image_library'] = 'gd2';
 					$config['source_image'] = 'uploads/items/'.$file_name;
@@ -523,7 +523,7 @@ class Items_model extends CI_Model {
 
 		        }
 			}
-			
+
 			if(!empty($_FILES['item_image_four']['name'])){
 
 				$new_name = time();
@@ -533,7 +533,7 @@ class Items_model extends CI_Model {
 		        $config['max_size']             = 1024;
 		        $config['max_width']            = 1000;
 		        $config['max_height']           = 1000;
-		       
+
 		        $this->load->library('upload', $config);
 
 		        if ( ! $this->upload->do_upload('item_image_four'))
@@ -543,9 +543,9 @@ class Items_model extends CI_Model {
 					exit();
 		        }
 		        else
-		        {		
+		        {
 		        	$file_name=$this->upload->data('file_name');
-		        	
+
 		        	/*Create Thumbnail*/
 		        	$config['image_library'] = 'gd2';
 					$config['source_image'] = 'uploads/items/'.$file_name;
@@ -561,7 +561,7 @@ class Items_model extends CI_Model {
 
 		        }
 			}
-			
+
 			if(!empty($_FILES['item_image_five']['name'])){
 
 				$new_name = time();
@@ -571,7 +571,7 @@ class Items_model extends CI_Model {
 		        $config['max_size']             = 1024;
 		        $config['max_width']            = 1000;
 		        $config['max_height']           = 1000;
-		       
+
 		        $this->load->library('upload', $config);
 
 		        if ( ! $this->upload->do_upload('item_image_five'))
@@ -581,9 +581,9 @@ class Items_model extends CI_Model {
 					exit();
 		        }
 		        else
-		        {		
+		        {
 		        	$file_name=$this->upload->data('file_name');
-		        	
+
 		        	/*Create Thumbnail*/
 		        	$config['image_library'] = 'gd2';
 					$config['source_image'] = 'uploads/items/'.$file_name;
@@ -605,7 +605,7 @@ class Items_model extends CI_Model {
 			$profit_margin = (empty(trim($profit_margin))) ? 'null' : $profit_margin;
 			// $mfg_date= (!empty(trim($mfg_date))) ? date('Y-m-d',strtotime($mfg_date)) : 'null';
 			$expire_date= (!empty(trim($expire_date))) ? date('Y-m-d',strtotime($expire_date)) : 'null';
-			$query1="update db_items set 
+			$query1="update db_items set
 						item_name='$item_name',
 						description='$description',
 						brand_id='$brand_id',
@@ -635,9 +635,9 @@ class Items_model extends CI_Model {
 						is_feature='$is_feature',
 						weight='$weight',
 						wholesale_price='$wholesale_price'
-						$item_image 
+						$item_image
 						where id=$q_id";
-					
+
 			$query1=$this->db->query($query1);
 			if(!$query1){
 				return "failed";
@@ -646,10 +646,10 @@ class Items_model extends CI_Model {
 				$q1=$this->stock_entry($CUR_DATE,$q_id,$new_opening_stock,$warehouse_id,$adjustment_note);
 				if(!$q1){
 					return "failed";
-				}			
+				}
 			}
 			//UPDATE itemS QUANTITY IN itemS TABLE
-			$this->load->model('pos_model');				
+			$this->load->model('pos_model');
 			$q6=$this->pos_model->update_items_quantity($q_id);
 			if(!$q6){
 				return "failed";
@@ -686,7 +686,7 @@ class Items_model extends CI_Model {
         }
         else{
             echo "failed";
-        }	
+        }
 	}
 
 
@@ -718,7 +718,7 @@ class Items_model extends CI_Model {
 
 		$this->return_row_with_data($rowcount,$info);
 	}
-	
+
 
 	public function return_row_with_data($rowcount,$info){
 		extract($info);
@@ -739,7 +739,7 @@ class Items_model extends CI_Model {
                      <button onclick="increment_qty(<?=$rowcount;?>)" type="button" class="btn btn-default btn-flat"><i class="fa fa-plus text-success"></i></button></span>
                   </div>
                </td>
-               
+
                <!-- Remove button -->
                <td id="td_<?=$rowcount;?>_16" style="text-align: center;">
                   <a class=" fa fa-fw fa-minus-square text-red" style="cursor: pointer;font-size: 34px;" onclick="removerow(<?=$rowcount;?>)" title="Delete ?" name="td_data_<?=$rowcount;?>_16" id="td_data_<?=$rowcount;?>_16"></a>
@@ -757,7 +757,7 @@ class Items_model extends CI_Model {
 	public function preview_labels(){
 		//print_r($_POST);exit();
 		$CI =& get_instance();
-		//Filtering XSS and html escape from user inputs 
+		//Filtering XSS and html escape from user inputs
 		$company_name=$this->db->query("select company_name from db_company")->row()->company_name;
 		$rowcount = $this->input->post('hidden_rowcount');
 		?>
@@ -788,22 +788,22 @@ class Items_model extends CI_Model {
     								<b style="font-size:12px">Price:</b>
     								<span style="font-size:12px"><?= $CI->currency($item_price);?></span>
     								<img class="center-block" style="height: 0.25in !important; width: 90%; opacity: 1.0; margin-top:2px;" src="<?php echo base_url();?>barcode/<?php echo $item_code;?>">
-    
+
     							</div>
 							</div>
 							<?php
 							}
 						}
-					
+
 					}//for end
 					?>
-					
-					
+
+
 				</div>
 			</div>
 		</div>
 		<?php
-		
+
 	}
 
 
@@ -815,7 +815,7 @@ class Items_model extends CI_Model {
 			return "failed";
 		}
 		//UPDATE itemS QUANTITY IN itemS TABLE
-		$this->load->model('pos_model');				
+		$this->load->model('pos_model');
 		$q6=$this->pos_model->update_items_quantity($item_id);
 
 		if(!$q6){

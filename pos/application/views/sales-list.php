@@ -273,28 +273,28 @@ $(document).ready(function() {
                         i : 0;
             };
             var total = api
-                .column( 6, { page: 'none'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            var paid = api
                 .column( 7, { page: 'none'} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            var due = api
+            var paid = api
                 .column( 8, { page: 'none'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+            var due = api
+                .column( 9, { page: 'none'} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
 
             //$( api.column( 0 ).footer() ).html('Total');
-            $( api.column( 6 ).footer() ).html(app_number_format(total));
-            $( api.column( 7 ).footer() ).html(app_number_format(paid));
-            $( api.column( 8 ).footer() ).html(app_number_format(due));
+            $( api.column( 7 ).footer() ).html(app_number_format(total));
+            $( api.column( 8 ).footer() ).html(app_number_format(paid));
+            $( api.column( 9 ).footer() ).html(app_number_format(due));
 
         },
         /*End Footer Total*/

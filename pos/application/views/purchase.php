@@ -4,21 +4,21 @@
 <head>
 <!-- TABLES CSS CODE -->
 <?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
+<!-- </copy> -->
 <style type="text/css">
    table.table-bordered > thead > tr > th {
    /* border:1px solid black;*/
    text-align: center;
    }
-   .table > tbody > tr > td, 
-   .table > tbody > tr > th, 
-   .table > tfoot > tr > td, 
-   .table > tfoot > tr > th, 
-   .table > thead > tr > td, 
-   .table > thead > tr > th 
+   .table > tbody > tr > td,
+   .table > tbody > tr > th,
+   .table > tfoot > tr > td,
+   .table > tfoot > tr > th,
+   .table > thead > tr > td,
+   .table > thead > tr > th
    {
    padding-left: 2px;
-   padding-right: 2px;  
+   padding-right: 2px;
 
    }
 </style>
@@ -27,7 +27,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         <?php include"sidebar.php"; ?>
- 
+
  <?php
     if(!isset($purchase_id)){
       $supplier_id  = $pur_date = $purchase_status = $warehouse_id =
@@ -51,10 +51,10 @@
 
       $items_count = $this->db->query("select count(*) as items_count from db_purchaseitems where purchase_id=$purchase_id")->row()->items_count;
     }
-    
+
     ?>
 
- 
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -87,7 +87,7 @@
                      <!-- Horizontal Form -->
                      <div class="box box-info " >
                         <!-- style="background: #68deac;" -->
-                        
+
                         <!-- form start -->
                          <!-- OK START -->
                         <?= form_open('#', array('class' => 'form-horizontal', 'id' => 'purchase-form', 'enctype'=>'multipart/form-data', 'method'=>'POST'));?>
@@ -95,7 +95,7 @@
                            <input type="hidden" value='1' id="hidden_rowcount" name="hidden_rowcount">
                            <input type="hidden" value='0' id="hidden_update_rowid" name="hidden_update_rowid">
 
-                          
+
                            <div class="box-body">
                               <div class="form-group">
                                  <label for="supplier_id" class="col-sm-2 control-label"><?= $this->lang->line('supplier_name'); ?><label class="text-danger">*</label></label>
@@ -103,11 +103,11 @@
                                     <div class="input-group">
                                        <select class="form-control select2" id="supplier_id" name="supplier_id"  style="width: 100%;" onkeyup="shift_cursor(event,'mobile')">
                                           <?php
-                                             
+
                                              $query1="select * from db_suppliers where status=1";
                                              $q1=$this->db->query($query1);
                                              if($q1->num_rows($q1)>0)
-                                                { 
+                                                {
                                                   echo "<option value=''>-Select-</option>";
                                                   foreach($q1->result() as $res1)
                                                 {
@@ -143,10 +143,10 @@
                                  <div class="col-sm-3 hidden">
                                        <select class="form-control select2" id="purchase_status" name="purchase_status"  style="width: 100%;" onkeyup="shift_cursor(event,'mobile')">
                                          	<!-- <option value="">-Select-</option> -->
-                                          <?php 
-                                               $received_select = ($purchase_status=='Received') ? 'selected' : ''; 
-                                               $pending_select = ($purchase_status=='Pending') ? 'selected' : ''; 
-                                               $ordered_select = ($purchase_status=='Ordered') ? 'selected' : ''; 
+                                          <?php
+                                               $received_select = ($purchase_status=='Received') ? 'selected' : '';
+                                               $pending_select = ($purchase_status=='Pending') ? 'selected' : '';
+                                               $ordered_select = ($purchase_status=='Ordered') ? 'selected' : '';
                                           ?>
               							                <option <?= $received_select; ?> value="Received">Received</option>
               							                <option <?= $pending_select; ?> value="Pending">Pending</option>
@@ -159,17 +159,17 @@
                                     <input type="text" value="<?php echo  $reference_no; ?>" class="form-control " id="reference_no" name="reference_no" placeholder="" >
                                     <span id="reference_no_msg" style="display:none" class="text-danger"></span>
                                  </div>
-                                 
+
                               </div>
-                             <div class="form-group hidden">
+                             <div class="form-group">
                                 <label for="warehouse_id" class="col-sm-2 control-label"><?= $this->lang->line('warehouse'); ?> <label class="text-danger">*</label></label>
                                  <div class="col-sm-3">
                                        <select class="form-control select2" id="warehouse_id" name="warehouse_id"  style="width: 100%;" onkeyup="shift_cursor(event,'mobile')">
                                           <?php
-                                             
+
                                              $query1="select * from db_warehouse where status=1";
                                              $q1=$this->db->query($query1);
-                                             if($q1->num_rows($q1)>0){ 
+                                             if($q1->num_rows($q1)>0){
                                                   //echo "<option value=''>-Select-</option>";
                                                   foreach($q1->result() as $res1){
                                                   $selected=($warehouse_id==$res1->id) ? 'selected' : '';
@@ -186,7 +186,7 @@
                               </div>
                            </div>
                            <!-- /.box-body -->
-                           
+
                            <div class="row">
                               <div class="col-md-12">
                                 <div class="col-md-12">
@@ -219,24 +219,24 @@
                                                 </tr>
                                              </thead>
                                              <tbody>
-                                               
+
                                              </tbody>
                                           </table>
                                       </div>
                                       </div>
                                     </div>
                                   </div>
-                                  
+
 
                                 </div>
                               </div>
-                              
-                              
+
+
                               <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
-                                          <label for="" class="col-sm-4 control-label"><?= $this->lang->line('total_quantities'); ?></label>    
+                                          <label for="" class="col-sm-4 control-label"><?= $this->lang->line('total_quantities'); ?></label>
                                           <div class="col-sm-4">
                                              <label class="control-label total_quantity text-success" style="font-size: 15pt;">0</label>
                                           </div>
@@ -246,7 +246,7 @@
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
-                                          <label for="other_charges_input" class="col-sm-4 control-label"><?= $this->lang->line('other_charges'); ?></label>    
+                                          <label for="other_charges_input" class="col-sm-4 control-label"><?= $this->lang->line('other_charges'); ?></label>
                                           <div class="col-sm-4">
                                              <input type="text" class="form-control text-right only_currency" id="other_charges_input" name="other_charges_input" onkeyup="final_total();" value="<?php echo  $other_charges_input; ?>">
                                           </div>
@@ -272,7 +272,7 @@
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
-                                          <label for="discount_to_all_input" class="col-sm-4 control-label"><?= $this->lang->line('discount_on_all'); ?></label>    
+                                          <label for="discount_to_all_input" class="col-sm-4 control-label"><?= $this->lang->line('discount_on_all'); ?></label>
                                           <div class="col-sm-4">
                                              <input type="text" class="form-control  text-right only_currency" id="discount_to_all_input" name="discount_to_all_input" onkeyup="enable_or_disable_item_discount();" value="<?php echo  $discount_input; ?>">
                                           </div>
@@ -295,7 +295,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
-                                          <label for="purchase_note" class="col-sm-4 control-label"><?= $this->lang->line('note'); ?></label>    
+                                          <label for="purchase_note" class="col-sm-4 control-label"><?= $this->lang->line('note'); ?></label>
                                           <div class="col-sm-8">
                                              <textarea class="form-control text-left" id='purchase_note' name="purchase_note"><?=$purchase_note;?></textarea>
                                             <span id="purchase_note_msg" style="display:none" class="text-danger"></span>
@@ -304,15 +304,15 @@
                                     </div>
                                  </div>
 
-                                 
+
                               </div>
-                              
+
 
                               <div class="col-md-6">
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
-                                           
+
                                           <table  class="col-md-9">
                                              <tr>
                                                 <th class="text-right" style="font-size: 17px;"><?= $this->lang->line('subtotal'); ?></th>
@@ -339,11 +339,11 @@
                                              </tr>
                                              <tr style="<?= (!is_enabled_round_off()) ? 'display: none;' : '';?>">
                                                 <th class="text-right" style="font-size: 17px;"><?= $this->lang->line('round_off'); ?>
-                                                  
+
                                                     <i class="hover-q " data-container="body" data-toggle="popover" data-placement="top" data-content="Go to Site Settings-> Site -> Disable the Round Off(Checkbox)." data-html="true" data-trigger="hover" data-original-title="" title="Do you wants to Disable Round Off ?">
                                                       <i class="fa fa-info-circle text-maroon text-black hover-q"></i>
                                                     </i>
-                                                  
+
                                                 </th>
                                                 <th class="text-right" style="padding-left:10%;font-size: 17px;">
                                                    <h4>
@@ -379,7 +379,7 @@
                                                 </tr>
                                              </thead>
                                              <tbody>
-                                                <?php 
+                                                <?php
                                                   if(isset($purchase_id)){
                                                     $q3 = $this->db->query("select * from db_purchasepayments where purchase_id=$purchase_id");
                                                     if($q3->num_rows()>0){
@@ -428,7 +428,7 @@
                                           <div class="box box-solid bg-gray">
                                             <div class="box-body">
                                               <div class="row">
-                                         
+
                                                 <div class="col-md-6">
                                                   <div class="">
                                                   <label for="amount"><?= $this->lang->line('amount'); ?></label>
@@ -457,7 +457,7 @@
                                                   </div>
                                                 </div>
                                             <div class="clearfix"></div>
-                                        </div>  
+                                        </div>
                                         <div class="row">
                                                <div class="col-md-12">
                                                   <div class="">
@@ -466,9 +466,9 @@
                                                     <span id="payment_note_msg" style="display:none" class="text-danger"></span>
                                                   </div>
                                                </div>
-                                                
+
                                             <div class="clearfix"></div>
-                                        </div>   
+                                        </div>
                                         </div>
                                         </div>
                                         </div><!-- col-md-12 -->
@@ -478,10 +478,10 @@
                                  <!-- /.box -->
                               </div>
 
-                              
+
 
                            </div>
-                           
+
                            <!-- /.box-body -->
                            <div class="box-footer col-sm-12">
                               <center>
@@ -506,21 +506,21 @@
                                 </div>
                               </center>
                            </div>
-                           
+
 
                            <?= form_close(); ?>
                            <!-- OK END -->
                      </div>
                   </div>
                   <!-- /.box-footer -->
-                 
+
                </div>
                <!-- /.box -->
              </section>
             <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
  <?php include"footer.php"; ?>
 <!-- SOUND CODE -->
 <?php include"comman/code_js_sound.php"; ?>
@@ -533,7 +533,7 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-<script src="<?php echo $theme_link; ?>js/purchase.js?id=<?= time() ?>"></script>  
+<script src="<?php echo $theme_link; ?>js/purchase.js?id=<?= time() ?>"></script>
 <script>
          $(".close_btn").click(function(){
            if(confirm('Are you sure you want to navigate away from this page?')){
@@ -548,9 +548,9 @@
             format: 'dd-mm-yyyy',
               todayHighlight: true
              });
-          
-       
-         
+
+
+
          /* ---------- CALCULATE TAX -------------*/
          function calculate_tax(i){ //i=Row
            set_tax_value(i);
@@ -558,7 +558,7 @@
            //Find the Tax type and Tax amount
            var tax_type = $("#tr_tax_type_"+i).val();
            var tax_amount = $("#td_data_"+i+"_5").val();
-           
+
 
            var qty=$("#td_data_"+i+"_3").val().trim();
            var purchase_price=parseFloat($("#td_data_"+i+"_4").val().trim());
@@ -585,10 +585,10 @@
            total_amt = (tax_type=='Inclusive') ? total_amt : parseFloat(total_amt) + parseFloat(tax_amount);
            console.log("total_amt=="+total_amt);
            //Set Unit cost
-           
+
            //CAlculate Item wise price and tax and discount
            var tax_each = (tax_type=='Inclusive') ? 0 : calculate_exclusive(purchase_price,tax);
-           
+
            var per_unit_total    = parseFloat(purchase_price)+parseFloat(tax_each);
 
            $("#td_data_"+i+"_10").val('').val(per_unit_total.toFixed(2));
@@ -597,45 +597,45 @@
            $("#td_data_"+i+"_9").val('').val(total_amt.toFixed(2));
            //alert("calculate_tax() end");
            final_total();
-           
+
          }
-        
+
          /* ---------- CALCULATE GST END -------------*/
 
-        
+
          /* ---------- Final Description of amount ------------*/
          function final_total(){
-           
+
 
            var rowcount=$("#hidden_rowcount").val();
            var subtotal=parseFloat(0);
-           
+
            var other_charges_per_amt=parseFloat(0);
            var other_charges_total_amt=0;
            var taxable=0;
           if($("#other_charges_input").val()!=null && $("#other_charges_input").val()!=''){
-             
+
               other_charges_tax_id =$('option:selected', '#other_charges_tax_id').attr('data-tax');
              other_charges_input=$("#other_charges_input").val();
              if(other_charges_tax_id>0){
 
                other_charges_per_amt=(other_charges_tax_id * other_charges_input)/100;
              }
-             
+
              taxable=parseFloat(other_charges_per_amt)+parseFloat(other_charges_input);//Other charges input
              other_charges_total_amt=parseFloat(other_charges_per_amt)+parseFloat(other_charges_input);
            }
            else{
              //$("#other_charges_amt").html('0.00');
            }
-           
-         
+
+
            var tax_amt=0;
            var actual_taxable=0;
            var total_quantity=0;
-         
+
            for(i=1;i<=rowcount;i++){
-         
+
              if(document.getElementById("td_data_"+i+"_3")){
                //supplier_id must exist
                if($("#td_data_"+i+"_3").val()!=null && $("#td_data_"+i+"_3").val()!=''){
@@ -643,32 +643,32 @@
                     subtotal=subtotal+ + +parseFloat($("#td_data_"+i+"_9").val()).toFixed(2);
                     if($("#td_data_"+i+"_7").val()>=0){
                       tax_amt=tax_amt+ + +$("#td_data_"+i+"_7").val();
-                    }   
+                    }
                     total_quantity +=parseFloat($("#td_data_"+i+"_3").val().trim());
                 }
-                   
+
              }//if end
            }//for end
-           
-          
+
+
           //Show total Purchase Quantitys
            $(".total_quantity").html(total_quantity);
 
            //Apply Output on screen
            //subtotal
            if((subtotal!=null || subtotal!='') && (subtotal!=0)){
-             
+
              //subtotal
              $("#subtotal_amt").html(subtotal.toFixed(2));
-             
+
              //other charges total amount
              $("#other_charges_amt").html(parseFloat(other_charges_total_amt).toFixed(2));
-             
+
              //other charges total amount
-            
+
 
              taxable=taxable+subtotal;
-             
+
              //discount_to_all_amt
             // if($("#discount_to_all_input").val()!=null && $("#discount_to_all_input").val()!=''){
                  var discount_input=parseFloat($("#discount_to_all_input").val());
@@ -684,45 +684,45 @@
                      else if(discount_type=='in_percentage'){
                          discount=(taxable*discount_input)/100;
                         taxable-=discount;
-             
+
                      }
                  }
                  else{
                     //discount += $("#")
                  }
                    discount=parseFloat(discount).toFixed(2);
-                   
-                    $("#discount_to_all_amt").html(discount);  
-                    $("#hidden_discount_to_all_amt").val(discount);  
+
+                    $("#discount_to_all_amt").html(discount);
+                    $("#hidden_discount_to_all_amt").val(discount);
              //}
              //subtotal_round=Math.round(taxable);
              subtotal_round=round_off(taxable);//round_off() method custom defined
              subtotal_diff=subtotal_round-taxable;
-         
-             $("#round_off_amt").html(parseFloat(subtotal_diff).toFixed(2)); 
-             $("#total_amt").html(parseFloat(subtotal_round).toFixed(2)); 
-             $("#hidden_total_amt").val(parseFloat(subtotal_round).toFixed(2)); 
+
+             $("#round_off_amt").html(parseFloat(subtotal_diff).toFixed(2));
+             $("#total_amt").html(parseFloat(subtotal_round).toFixed(2));
+             $("#hidden_total_amt").val(parseFloat(subtotal_round).toFixed(2));
            }
            else{
-             $("#subtotal_amt").html('0.00'); 
-             
-             $("#tax_amt").html('0.00'); 
+             $("#subtotal_amt").html('0.00');
+
+             $("#tax_amt").html('0.00');
            }
-           
+
           // adjust_payments();
           //alert("final_total() end");
          }
          /* ---------- Final Description of amount end ------------*/
-          
+
          function removerow(id){//id=Rowid
-           
+
          $("#row_"+id).remove();
          final_total();
          failed.currentTime = 0;
         failed.play();
          }
-               
-     
+
+
 
     function enable_or_disable_item_discount(){
       var discount_input=parseFloat($("#discount_to_all_input").val());
@@ -776,12 +776,12 @@
       var tax_name = ($('option:selected', "#popup_tax_id").attr('data-tax-value'));
       var tax = parseFloat($('option:selected', "#popup_tax_id").attr('data-tax'));
 
-      //Set it into row 
+      //Set it into row
       $("#tr_tax_type_"+row_id).val(tax_type);
       $("#tr_tax_id_"+row_id).val(tax_id);
       $("#tr_tax_value_"+row_id).val(tax);//%
       $("#td_data_"+row_id+"_15").html(tax_name);
-      
+
       calculate_tax(row_id);
       $('#purchase_item').modal('toggle');
     }
@@ -803,7 +803,7 @@
 </script>
       <!-- UPDATE OPERATIONS -->
       <script type="text/javascript">
-         <?php if(isset($purchase_id)){ ?> 
+         <?php if(isset($purchase_id)){ ?>
              $(document).ready(function(){
                 var base_url='<?= base_url();?>';
                 var purchase_id='<?= $purchase_id;?>';
@@ -816,7 +816,7 @@
                   success.play();
                   enable_or_disable_item_discount();
                   $(".overlay").remove();
-              }); 
+              });
              });
          <?php }?>
       </script>
